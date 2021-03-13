@@ -1,0 +1,350 @@
+PROJECT {
+  NAME       = MotorControl.ftl;
+  TITLE      =MotorControl;
+  DATEFORMAT = YYYY.DD.MM;
+  LASTCHANGE = 2009.30.11;
+  CREATED    = 2009.30.11;
+  SHELL      = MCU_MP;
+  SHELLOPTIONS {
+    ONLINE_REFRESHTIME  = 55;
+    ONLINE_TIMEOUTCOUNT = 1100;
+    ONLINE_CODE         = OFF;
+    ONLINE_TRACE_BUFFER = (OFF, PAR(0));
+    COMMENTS            = ON;
+    FTL_BUFFER          = (OFF, PAR(1));
+    PASSWORD            = OFF;
+    PUBLIC_IO           = ON;
+    FAST_CMBF           = ON;
+    FAST_COA            = OFF;
+    BTYPE               = 8_BIT;
+    C_TYPE              = ANSI;
+  } /* SHELLOPTIONS */
+  MODEL {
+    VARIABLE_SECTION {
+      LVAR {
+        NAME       = DatoError;
+        BASEVAR    = Units;
+        LVRANGE    = MIN(0.0), MAX(255.0),
+                     MINDEF(0), MAXDEF(255),
+                     DEFAULT_OUTPUT(128.0);
+        RESOLUTION = XGRID(1.0), YGRID(1.0),
+                     SHOWGRID (ON), SNAPTOGRID(ON);
+        COLOR      = RED (255), GREEN (0), BLUE (0);
+        INPUT      = FCMBF;
+        POS        = -308, -273;
+        TERM {
+          TERMNAME = negative2;
+          POINTS   = (0.0, 1.0),
+                     (100.0, 1.0),
+                     (117.0, 0.0),
+                     (255.0, 0.0);
+          SHAPE    = LINEAR;
+          COLOR    = RED (255), GREEN (0), BLUE (128);
+        }
+        TERM {
+          TERMNAME = negative1;
+          POINTS   = (0.0, 0.0),
+                     (109.0, 0.0),
+                     (115.0, 1.0),
+                     (127.0, 0.0),
+                     (255.0, 0.0);
+          SHAPE    = LINEAR;
+          COLOR    = RED (0), GREEN (128), BLUE (0);
+        }
+        TERM {
+          TERMNAME = zero;
+          POINTS   = (0.0, 0.0),
+                     (126.0, 0.0),
+                     (128.0, 1.0),
+                     (130.0, 0.0),
+                     (255.0, 0.0);
+          SHAPE    = LINEAR;
+          COLOR    = RED (0), GREEN (0), BLUE (255);
+        }
+        TERM {
+          TERMNAME = positive1;
+          POINTS   = (0.0, 0.0),
+                     (129.0, 0.0),
+                     (131.0, 1.0),
+                     (133.0, 0.0),
+                     (255.0, 0.0);
+          SHAPE    = LINEAR;
+          COLOR    = RED (128), GREEN (0), BLUE (0);
+        }
+        TERM {
+          TERMNAME = positive2;
+          POINTS   = (0.0, 0.0),
+                     (132.0, 0.0),
+                     (134.0, 1.0),
+                     (136.0, 0.0),
+                     (255.0, 0.0);
+          SHAPE    = LINEAR;
+          COLOR    = RED (0), GREEN (128), BLUE (128);
+        }
+        TERM {
+          TERMNAME = positive3;
+          POINTS   = (0.0, 0.0),
+                     (135.0, 0.0),
+                     (137.0, 1.0),
+                     (139.0, 0.0),
+                     (255.0, 0.0);
+          SHAPE    = LINEAR;
+          COLOR    = RED (0), GREEN (0), BLUE (128);
+        }
+        TERM {
+          TERMNAME = positive4;
+          POINTS   = (0.0, 0.0),
+                     (138.0, 0.0),
+                     (141.0, 1.0),
+                     (255.0, 1.0);
+          SHAPE    = LINEAR;
+          COLOR    = RED (255), GREEN (0), BLUE (128);
+        }
+      }  /* LVAR */
+      LVAR {
+        NAME       = DatoReferencia;
+        BASEVAR    = Units;
+        LVRANGE    = MIN(0.0), MAX(255.0),
+                     MINDEF(0), MAXDEF(255),
+                     DEFAULT_OUTPUT(10.0);
+        RESOLUTION = XGRID(1.0), YGRID(1.0),
+                     SHOWGRID (ON), SNAPTOGRID(ON);
+        COLOR      = RED (0), GREEN (128), BLUE (0);
+        INPUT      = FCMBF;
+        POS        = -308, -238;
+        TERM {
+          TERMNAME = very_low;
+          POINTS   = (0.0, 1.0),
+                     (63.0, 0.0),
+                     (255.0, 0.0);
+          SHAPE    = LINEAR;
+          COLOR    = RED (255), GREEN (0), BLUE (0);
+        }
+        TERM {
+          TERMNAME = low;
+          POINTS   = (0.0, 0.0),
+                     (63.0, 1.0),
+                     (127.0, 0.0),
+                     (255.0, 0.0);
+          SHAPE    = LINEAR;
+          COLOR    = RED (0), GREEN (128), BLUE (0);
+        }
+        TERM {
+          TERMNAME = medium;
+          POINTS   = (0.0, 0.0),
+                     (63.0, 0.0),
+                     (127.0, 1.0),
+                     (191.0, 0.0),
+                     (255.0, 0.0);
+          SHAPE    = LINEAR;
+          COLOR    = RED (0), GREEN (0), BLUE (255);
+        }
+        TERM {
+          TERMNAME = high;
+          POINTS   = (0.0, 0.0),
+                     (127.0, 0.0),
+                     (191.0, 1.0),
+                     (255.0, 0.0);
+          SHAPE    = LINEAR;
+          COLOR    = RED (128), GREEN (0), BLUE (0);
+        }
+        TERM {
+          TERMNAME = very_high;
+          POINTS   = (0.0, 0.0),
+                     (191.0, 0.0),
+                     (255.0, 1.0);
+          SHAPE    = LINEAR;
+          COLOR    = RED (0), GREEN (128), BLUE (128);
+        }
+      }  /* LVAR */
+      LVAR {
+        NAME       = DatoMotor;
+        BASEVAR    = Units;
+        LVRANGE    = MIN(0.0), MAX(255.0),
+                     MINDEF(0), MAXDEF(255),
+                     DEFAULT_OUTPUT(128.0);
+        RESOLUTION = XGRID(1.0), YGRID(1.0),
+                     SHOWGRID (ON), SNAPTOGRID(ON);
+        COLOR      = RED (0), GREEN (0), BLUE (255);
+        OUTPUT     = COM;
+        POS        = 19, -257;
+        TERM {
+          TERMNAME = very_low;
+          POINTS   = (0.0, 1.0),
+                     (63.0, 0.0),
+                     (255.0, 0.0);
+          SHAPE    = LINEAR;
+          COLOR    = RED (255), GREEN (0), BLUE (0);
+        }
+        TERM {
+          TERMNAME = low;
+          POINTS   = (0.0, 0.0),
+                     (63.0, 1.0),
+                     (127.0, 0.0),
+                     (255.0, 0.0);
+          SHAPE    = LINEAR;
+          COLOR    = RED (0), GREEN (128), BLUE (0);
+        }
+        TERM {
+          TERMNAME = medium;
+          POINTS   = (0.0, 0.0),
+                     (63.0, 0.0),
+                     (127.0, 1.0),
+                     (191.0, 0.0),
+                     (255.0, 0.0);
+          SHAPE    = LINEAR;
+          COLOR    = RED (0), GREEN (0), BLUE (255);
+        }
+        TERM {
+          TERMNAME = high;
+          POINTS   = (0.0, 0.0),
+                     (127.0, 0.0),
+                     (191.0, 1.0),
+                     (255.0, 0.0);
+          SHAPE    = LINEAR;
+          COLOR    = RED (128), GREEN (0), BLUE (0);
+        }
+        TERM {
+          TERMNAME = very_high;
+          POINTS   = (0.0, 0.0),
+                     (191.0, 0.0),
+                     (255.0, 1.0);
+          SHAPE    = LINEAR;
+          COLOR    = RED (0), GREEN (128), BLUE (128);
+        }
+      }  /* LVAR */
+    }  /* VARIABLE_SECTION */
+
+    OBJECT_SECTION {
+      RULEBLOCK {
+        NAME        = RB1;
+        INPUT       = DatoError, DatoReferencia; 
+        OUTPUT      = DatoMotor; 
+        AGGREGATION = (MIN_MAX, PAR (0.0));
+        RESULT_AGGR = MAX;
+        POS         = -167, -276;
+        RULES {
+          IF    DatoError = negative2
+            AND DatoReferencia = very_low
+          THEN  DatoMotor = very_low   WITH 1.000;
+          IF    DatoError = negative2
+            AND DatoReferencia = low
+          THEN  DatoMotor = very_low   WITH 1.000;
+          IF    DatoError = negative2
+            AND DatoReferencia = medium
+          THEN  DatoMotor = very_low   WITH 1.000;
+          IF    DatoError = negative2
+            AND DatoReferencia = high
+          THEN  DatoMotor = low   WITH 1.000;
+          IF    DatoError = negative2
+            AND DatoReferencia = very_high
+          THEN  DatoMotor = medium   WITH 1.000;
+          IF    DatoError = negative1
+            AND DatoReferencia = very_low
+          THEN  DatoMotor = very_low   WITH 1.000;
+          IF    DatoError = negative1
+            AND DatoReferencia = low
+          THEN  DatoMotor = very_low   WITH 1.000;
+          IF    DatoError = negative1
+            AND DatoReferencia = medium
+          THEN  DatoMotor = low   WITH 1.000;
+          IF    DatoError = negative1
+            AND DatoReferencia = high
+          THEN  DatoMotor = medium   WITH 1.000;
+          IF    DatoError = negative1
+            AND DatoReferencia = very_high
+          THEN  DatoMotor = high   WITH 1.000;
+          IF    DatoError = zero
+            AND DatoReferencia = very_low
+          THEN  DatoMotor = very_low   WITH 1.000;
+          IF    DatoError = zero
+            AND DatoReferencia = low
+          THEN  DatoMotor = low   WITH 1.000;
+          IF    DatoError = zero
+            AND DatoReferencia = medium
+          THEN  DatoMotor = medium   WITH 1.000;
+          IF    DatoError = zero
+            AND DatoReferencia = high
+          THEN  DatoMotor = high   WITH 1.000;
+          IF    DatoError = zero
+            AND DatoReferencia = very_high
+          THEN  DatoMotor = very_high   WITH 1.000;
+          IF    DatoError = positive1
+            AND DatoReferencia = very_low
+          THEN  DatoMotor = low   WITH 1.000;
+          IF    DatoError = positive1
+            AND DatoReferencia = low
+          THEN  DatoMotor = medium   WITH 1.000;
+          IF    DatoError = positive1
+            AND DatoReferencia = medium
+          THEN  DatoMotor = high   WITH 1.000;
+          IF    DatoError = positive1
+            AND DatoReferencia = high
+          THEN  DatoMotor = very_high   WITH 1.000;
+          IF    DatoError = positive1
+            AND DatoReferencia = very_high
+          THEN  DatoMotor = very_high   WITH 1.000;
+          IF    DatoError = positive2
+            AND DatoReferencia = very_low
+          THEN  DatoMotor = medium   WITH 1.000;
+          IF    DatoError = positive2
+            AND DatoReferencia = low
+          THEN  DatoMotor = high   WITH 1.000;
+          IF    DatoError = positive2
+            AND DatoReferencia = medium
+          THEN  DatoMotor = very_high   WITH 1.000;
+          IF    DatoError = positive2
+            AND DatoReferencia = high
+          THEN  DatoMotor = very_high   WITH 1.000;
+          IF    DatoError = positive2
+            AND DatoReferencia = very_high
+          THEN  DatoMotor = very_high   WITH 1.000;
+          IF    DatoError = positive3
+            AND DatoReferencia = very_low
+          THEN  DatoMotor = high   WITH 1.000;
+          IF    DatoError = positive3
+            AND DatoReferencia = low
+          THEN  DatoMotor = very_high   WITH 1.000;
+          IF    DatoError = positive3
+            AND DatoReferencia = medium
+          THEN  DatoMotor = very_high   WITH 1.000;
+          IF    DatoError = positive3
+            AND DatoReferencia = high
+          THEN  DatoMotor = very_high   WITH 1.000;
+          IF    DatoError = positive3
+            AND DatoReferencia = very_high
+          THEN  DatoMotor = very_high   WITH 1.000;
+          IF    DatoError = positive4
+            AND DatoReferencia = very_low
+          THEN  DatoMotor = very_high   WITH 1.000;
+          IF    DatoError = positive4
+            AND DatoReferencia = low
+          THEN  DatoMotor = very_high   WITH 1.000;
+          IF    DatoError = positive4
+            AND DatoReferencia = medium
+          THEN  DatoMotor = very_high   WITH 1.000;
+          IF    DatoError = positive4
+            AND DatoReferencia = high
+          THEN  DatoMotor = very_high   WITH 1.000;
+          IF    DatoError = positive4
+            AND DatoReferencia = very_high
+          THEN  DatoMotor = very_high   WITH 1.000;
+        }  /* RULES */
+      }  /* RULEBLOCK */
+    }  /* OBJECT_SECTION */
+  }  /* MODEL */
+}  /* PROJECT */ 
+/* fuzzyTECH 5.52f MCU-MP Demo */
+
+
+NEUROFUZZY {
+  LEARNRULE     =RandomMethod;
+  STEPWIDTHDOS  = 0.101563;
+  STEPWIDTHTERM = 1.000000;
+  MAXDEVIATION  = (50.000000, 1.000000, 0.750000);
+  AVGDEVIATION  = 0.100000;
+  MAXSTEPS      = 100;
+  NEURONS       = 1;
+  DATASEQUENCE  = RANDOM;
+  UPDATEDBGWIN  = OFF;
+}  /* NEUROFUZZY */

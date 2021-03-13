@@ -1,0 +1,19 @@
+>>> Warning 225 "D:\fuzzyTECH\MP16Cxx\Samples\Myproj\ftlibc.h" Line 32(13,23): Duplicate #define
+*** Error 28 "D:\fuzzyTECH\MP16Cxx\Samples\Myproj\ftlibc.h" Line 181(29,30): Expecting an identifier
+*** Error 84 "D:\fuzzyTECH\MP16Cxx\Samples\Myproj\ftlibc.h" Line 184(19,28): Pointers to bits are not permitted
+*** Error 84 "D:\fuzzyTECH\MP16Cxx\Samples\Myproj\ftlibc.h" Line 186(15,20): Pointers to bits are not permitted
+*** Error 34 "D:\fuzzyTECH\MP16Cxx\Samples\Myproj\ftlibc.h" Line 194(8,13): Unknown type
+*** Error 48 "D:\fuzzyTECH\MP16Cxx\Samples\Myproj\ftlibc.h" Line 194(18,25): Expecting a (
+*** Error 43 "D:\fuzzyTECH\MP16Cxx\Samples\Myproj\ftlibc.h" Line 209(1,2): Expecting a declaration
+*** Error 48 "D:\fuzzyTECH\MP16Cxx\Samples\Myproj\ftlibc.h" Line 209(3,6): Expecting a (
+*** Error 48 "D:\fuzzyTECH\MP16Cxx\Samples\Myproj\ftlibc.h" Line 216(32,37): Expecting a (
+*** Error 43 "D:\fuzzyTECH\MP16Cxx\Samples\Myproj\ftlibc.h" Line 216(39,40): Expecting a declaration
+*** Error 46 "D:\fuzzyTECH\MP16Cxx\Samples\Myproj\MYPROJ.h" Line 34(31,32): Expecting an =
+*** Error 12 "Myproj.c" Line 70(11,18): Undefined identifier   fratptr
+*** Error 1 "Myproj.c" Line 81(3,4): Illegal C character in input file  0xFE
+*** Error 1 "Myproj.c" Line 81(4,5): Illegal C character in input file  0xB7
+*** Error 1 "Myproj.c" Line 81(5,6): Illegal C character in input file  0x97
+*** Error 1 "Myproj.c" Line 81(5,6): Illegal C character in input file  0x17
+*** Error 51 "Myproj.c" Line 81(6,7): A numeric expression must appear here
+*** Error 1 "Myproj.c" Line 81(8,9): Illegal C character in input file  0x0B
+      17 Errors,  1 Warnings.

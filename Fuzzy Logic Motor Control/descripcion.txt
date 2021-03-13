@@ -1,0 +1,1 @@
+control de velocidad de un motor dc mediante un control difuso

@@ -1,0 +1,35 @@
+MPLINK 4.34, Linker
+Linker Map File - Created Sun Nov 29 17:48:56 2009
+
+                                 Section Info
+                  Section       Type    Address   Location Size(Bytes)
+                ---------  ---------  ---------  ---------  ---------
+                   .org_0       code   0x000000    program   0x000028
+       .config_2007_PWM.O       code   0x002007    program   0x000002
+
+
+
+                              Program Memory Usage 
+                               Start         End      
+                           ---------   ---------      
+                            0x000000    0x000013      
+                            0x002007    0x002007      
+            21 out of 2117 program addresses used, program memory utilization is 0%
+
+
+
+                              Symbols - Sorted by Name
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                    START   0x00000c    program     static D:\871\pwm.asm           
+                    STOP1   0x00000e    program     static D:\871\pwm.asm           
+
+
+
+                              Symbols - Sorted by Address
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                    START   0x00000c    program     static D:\871\pwm.asm           
+                    STOP1   0x00000e    program     static D:\871\pwm.asm           
+
+

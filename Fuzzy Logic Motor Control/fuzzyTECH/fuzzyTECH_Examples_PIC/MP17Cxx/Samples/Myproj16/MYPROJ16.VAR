@@ -1,0 +1,47 @@
+;-----------------------------------------------------------------------------
+;----------------- fuzzyTECH 5.1 MP Edition --- Preassembler -----------------
+;-------- Inform Software Corp., 2001 Midwest Rd., Oak Brook, IL 60523 -------
+;---------- (c) 1991-1998 INFORM GmbH, Pascalstr. 23, D-52076 Aachen ---------
+;-----------------------------------------------------------------------------
+;--------------- code generation date: Fri Dec 19 11:47:17 1997 --------------
+;----------------------------- project: MYPROJ16 -----------------------------
+;-----------------------------------------------------------------------------
+
+FAMILY          EQU     2
+BANKED          SET     0
+RESOLUTION      EQU     16
+LARGE_RT        EQU     0
+                        
+include         "ftmp17xx.inc"  
+                        
+;------ NOTE: FUZZY_RAM_START must be defined in the users main program ------
+                        
+if FUZZY_RAM_START < RAM_START          
+   ERROR  "First location for FUZZY_RAM_START is too low"           
+endif                   
+                        
+                CBLOCK FUZZY_RAM_START  
+                  lv0_Input_1   
+                  lv0_Input_1_  
+                  lv1_Input_2   
+                  lv1_Input_2_  
+                  lv2_Output    
+                  lv2_Output_   
+                  invalidflags  
+                ENDC    
+                        
+                include "ftpubdec.var"  
+                        
+                CBLOCK  
+                  fuzvals   
+                ENDC    
+                        
+                        
+                CBLOCK fuzvals + .17    
+                  FUZZY_RAM_END 
+                ENDC    
+                        
+if FUZZY_RAM_END > RAM_END          
+   ERROR  "FUZZY_RAM_END exceeds internal RAM"          
+endif                   
+                include "ftpubdec.mac"  

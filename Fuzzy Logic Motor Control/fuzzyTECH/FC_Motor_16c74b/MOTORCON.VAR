@@ -1,0 +1,46 @@
+;-----------------------------------------------------------------------------
+;----------------------- fuzzyTECH 5.52 MCU-MP Edition -----------------------
+;-----------------------------------------------------------------------------
+;------------------- Code Generator: Assembler Source Code -------------------
+;--------------- Code Generation Date: Sun Nov 29 13:36:52 2009 --------------
+;------------------------ Fuzzy Logic System: MOTORCON -----------------------
+;-----------------------------------------------------------------------------
+;---------- (c) 1991-2001 INFORM GmbH, Pascalstr. 23, D-52076 Aachen ---------
+;-------- Inform Software Corp., 2001 Midwest Rd., Oak Brook, IL 60523 -------
+;-----------------------------------------------------------------------------
+
+FAMILY          EQU     1
+BANKED          SET     0
+RESOLUTION      EQU     8
+LARGE_RT        EQU     0
+                        
+include         "ftmp16xx.inc"  
+                        
+;------ NOTE: FUZZY_RAM_START must be defined in the users main program ------
+                        
+if FUZZY_RAM_START < RAM_START          
+   ERROR  "First location for FUZZY_RAM_START is too low"           
+endif                   
+                        
+                CBLOCK FUZZY_RAM_START  
+                  lv0_DatoError 
+                  lv1_DatoReferencia    
+                  lv2_DatoMotor 
+                  invalidflags  
+                ENDC    
+                        
+                include "ftpubdec.var"  
+                        
+                CBLOCK  
+                  fuzvals   
+                ENDC    
+                        
+                        
+                CBLOCK fuzvals + .12    
+                  FUZZY_RAM_END 
+                ENDC    
+                        
+if FUZZY_RAM_END > RAM_END          
+   ERROR  "FUZZY_RAM_END exceeds internal RAM"          
+endif                   
+                include "ftpubdec.mac"  

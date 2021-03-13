@@ -1,0 +1,33 @@
+[DeviceName]
+Value=P16C73B
+[DeviceClock]
+Value=4
+[MainUnit]
+Value=
+[DeviceFlags]
+Count=5
+Value0=_BODEN_OFF = $3FBF
+Value1=_CP_OFF = $3FFF
+Value2=_PWRTE_OFF = $3FFF
+Value3=_WDT_OFF = $3FFB
+Value4=_XT_OSC = $3FFD
+[BuildType]
+bType=0
+[ProjectFiles]
+Count=1
+Value0=Myproj.c
+[HeaderFiles]
+Count=0
+[ObjLibFiles]
+Count=0
+[PLDFiles]
+Count=0
+[EEPROMinfo]
+isused=0
+[SearchPath]
+Count=3
+Value0=C:\Archivos de programa\Mikroelektronika\mikroC\Defs\
+Value1=C:\Archivos de programa\Mikroelektronika\mikroC\Uses\p16\
+Value2=D:\fuzzyTECH\MP16Cxx\Samples\Myproj\
+[IncludePath]
+Count=0

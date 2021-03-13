@@ -1,0 +1,888 @@
+        LIST
+; FTPUBDEC.MAC  Macro definition file, Version 4.1   Inform Software Corporation
+        NOLIST
+;*-----------------------------------------------------------------------------*
+;*------------------------- fuzzyTECH MCU-MP V4.1 -----------------------------*
+;* (c) 1995 Inform Software Corporation, 2001 Midwest Road, Oak Brook, IL60521 *
+;*------------ (c) 1995 Inform GmbH, Pascalstr. 23, 52076 Aachen --------------*
+;*-----------------------------------------------------------------------------*
+;*---------------------- global macros for common use -------------------------*
+;*-----------------------------------------------------------------------------*
+
+;*---------------------------- General purpose macros -------------------------*
+
+FCLR    MACRO   filereg
+    if      FAMILY < 2
+     if     RESOLUTION == 8
+        clrf    filereg+0
+     else
+        clrf    filereg+0
+        clrf    filereg+1
+     endif
+    else
+     if     RESOLUTION == 8
+        clrf    filereg+0,F
+     else
+        clrf    filereg+0,F
+        clrf    filereg+1,F
+     endif
+    endif
+	    ENDM
+
+FSET    MACRO   filereg
+    if      FAMILY < 2
+     if     RESOLUTION == 8
+	    movlw   0xFF
+	    movwf   filereg+0
+     else
+        movlw   0xFF
+	    movwf   filereg+0
+	    movwf   filereg+1
+     endif
+    else
+     if     RESOLUTION == 8
+        setf    filereg+0,F
+     else
+        setf    filereg+0,F
+        setf    filereg+1,F
+     endif
+    endif
+	    ENDM
+
+FCLR16  MACRO   filereg
+    if      FAMILY < 2
+        clrf    filereg+0
+        clrf    filereg+1
+    else
+        clrf    filereg+0,F
+        clrf    filereg+1,F
+    endif
+	    ENDM
+
+FCLR24  MACRO   filereg
+    if      FAMILY < 2
+        clrf    filereg+0
+        clrf    filereg+1
+        clrf    filereg+2
+    else
+        clrf    filereg+0,F
+        clrf    filereg+1,F
+        clrf    filereg+2,F
+    endif
+	    ENDM
+
+FCLR32	    MACRO   filereg
+    if      FAMILY < 2
+        clrf    filereg+0
+        clrf    filereg+1
+        clrf    filereg+2
+        clrf    filereg+3
+    else
+        clrf    filereg+0,F
+        clrf    filereg+1,F
+        clrf    filereg+2,F
+        clrf    filereg+3,F
+    endif
+	    ENDM
+
+FCLR0F16    MACRO
+    if      FAMILY < 2
+        clrf    0
+	    incf    FSR,F
+        clrf    0
+	    decf    FSR,F
+    else
+        clrf    INDF0,F
+        clrf    INDF0,F
+    endif
+        ENDM
+
+FSET0F16    MACRO
+	    setf    0
+	    incf    FSR,F
+	    setf    0
+	    decf    FSR,F
+	    ENDM
+
+FADD16	    MACRO   filereg1,filereg2
+    if	    FAMILY == 2
+        movfp   filereg1+1,WREG
+        addwf   filereg2+1,F
+        movfp   filereg1+0,WREG
+        addwfc  filereg2+0,F
+    else
+	    movf    filereg1+1,W
+	    addwf   filereg2+1,F
+	    movf    filereg1+0,W
+	    btfsc   _C
+	    incf    filereg2+0,F
+	    addwf   filereg2+0,F
+    endif
+	    ENDM
+
+FADD32	    MACRO   filereg1, filereg2
+    if	    FAMILY == 2
+        movfp   filereg1+3,WREG
+        addwf   filereg2+3,F
+        movfp   filereg1+2,WREG
+        addwfc  filereg2+2,F
+        movfp   filereg1+1,WREG
+        addwfc  filereg2+1,F
+        movfp   filereg1+0,WREG
+        addwfc  filereg2+0,F
+    else
+	    movf    filereg1+3,W
+	    addwf   filereg2+3,F
+        movlw   1
+	    btfss   _C
+	    btfsc   _C
+	    addwf   filereg2+2,F
+	    btfsc   _C
+	    addwf   filereg2+1,F
+	    btfsc   _C
+	    incf    filereg2+0,F
+	    movf    filereg1+2,W
+	    addwf   filereg2+2,F
+        movlw   1
+        btfss   _C
+        btfsc   _C
+	    addwf   filereg2+1,F
+	    btfsc   _C
+	    incf    filereg2+0,F
+	    movf    filereg1+1,W
+	    addwf   filereg2+1,F
+        btfsc   _C
+	    incf    filereg2+0,F
+	    movf    filereg1+0,W
+	    addwf   filereg2+0,F
+    endif
+	    ENDM
+
+FADD8TO16   MACRO   filereg1, filereg2
+    if	    FAMILY == 2
+        movfp   filereg1,WREG
+        addwf   filereg2+1,F
+        movlw   0
+        addwfc  filereg2+0,F
+    else
+	    movf    filereg1,W
+	    addwf   filereg2+1,F
+        btfsc   _C
+	    incf    filereg2+0,F
+    endif
+	    ENDM
+
+FADD16TO24  MACRO   filereg1, filereg2
+    if	    FAMILY == 2
+        movfp   filereg1+1,WREG
+        addwf   filereg2+2,F
+        movfp   filereg1+0,WREG
+        addwfc  filereg2+1,F
+        movlw   0x00
+        addwfc  filereg2+0,F
+    else
+	    movf    filereg1+1,W
+	    addwf   filereg2+2,F
+        movlw   0x01
+	    btfsc   _C
+	    addwf   filereg2+1,F
+	    btfsc   _C
+	    addwf   filereg2+0,F
+	    movf    filereg1+0,W
+	    addwf   filereg2+1,F
+        btfsc   _C
+	    incf    filereg2+0,F
+    endif
+	    ENDM
+
+
+FSUB16F     MACRO   filereg1,filereg2,filereg3
+    if	    FAMILY == 2
+        movfp   filereg1+1,WREG
+	    subwf   filereg2+1,W
+	    movwf   filereg3+1
+        movfp   filereg1+0,WREG
+	    subwfb  filereg2+0,W
+	    movwf   filereg3+0
+    else
+	    movf    filereg1+1,W
+	    subwf   filereg2+1,W
+	    movwf   filereg3+1
+	    movf    filereg1+0,W
+	    btfss   _C
+	    addlw   1
+	    subwf   filereg2+0,W
+	    movwf   filereg3+0
+    endif
+	    ENDM
+
+FMOV0F16    MACRO   filereg
+    if	    FAMILY == 1
+	    movf    0,W
+	    movwf   filereg+0
+	    incf    FSR,F
+	    movf    0,W
+	    movwf   filereg+1
+        decf    FSR,F
+    endif
+
+    if      FAMILY == 2
+        movpf   INDF0,filereg+0
+        movpf   INDF0,filereg+1
+    endif
+	    ENDM
+
+FMOV16F0    MACRO   filereg
+    if	    FAMILY == 1
+        movf    filereg+0,W
+	    movwf   0
+	    incf    FSR,F
+        movf    filereg+1,W
+	    movwf   0
+	    decf    FSR,F
+    endif
+
+    if      FAMILY == 2
+        movfp   filereg+0,INDF0
+        movfp   filereg+1,INDF0
+    endif
+	    ENDM
+
+FTMOV16     MACRO   filereg1,filereg2
+    if	    FAMILY == 2
+     if     ORDER == LSB_MSB
+; Please specify the order of the linguistic variables in your main program
+; Use 'ORDER  EQU  MSB_LSB' for compatibilty with the old fuzzyTECH format
+; or  'ORDER  EQU  LSB_MSB' for compatibilty with existing PIC macros
+        movfp   filereg1+0,WREG
+	    movwf   filereg2+1
+        movfp   filereg1+1,WREG
+	    movwf   filereg2+0
+     else
+        movfp   filereg1+0,WREG
+	    movwf   filereg2+0
+        movfp   filereg1+1,WREG
+	    movwf   filereg2+1
+     endif
+    else
+     if     ORDER == LSB_MSB
+	    movf    filereg1+0,W
+	    movwf   filereg2+1
+	    movf    filereg1+1,W
+	    movwf   filereg2+0
+     else
+	    movf    filereg1+0,W
+	    movwf   filereg2+0
+	    movf    filereg1+1,W
+	    movwf   filereg2+1
+     endif
+    endif
+	    ENDM
+
+FMOV16	    MACRO   filereg1, filereg2
+    if	    FAMILY == 2
+        movfp   filereg1+0,WREG
+	    movwf   filereg2+0
+        movfp   filereg1+1,WREG
+	    movwf   filereg2+1
+    else
+	    movf    filereg1+0,W
+	    movwf   filereg2+0
+	    movf    filereg1+1,W
+	    movwf   filereg2+1
+    endif
+	    ENDM
+
+FMOV16K     MACRO   filereg, Fconstant
+	    movlw   high Fconstant
+	    movwf   filereg+0
+	    movlw   low Fconstant
+	    movwf   filereg+1
+	    ENDM
+
+FTSTFSZ16   MACRO   filereg
+    if	    FAMILY == 2
+        movfp   filereg+0,WREG
+	    iorwf   filereg+1,W
+        tstfsz  WREG
+    else
+	    movf    filereg+0,W
+	    iorwf   filereg+1,W
+	    btfss   _Z
+    endif
+	    ENDM
+
+
+FCPFSGT16   MACRO   filereg1, filereg2
+    if	    FAMILY == 1
+	    LOCAL   ready
+	    movf    filereg1+0,W
+	    subwf   filereg2+0,W
+	    btfss   _C
+	    goto    ready
+	    btfss   _Z
+	    goto    ready
+	    movf    filereg1+1,W
+	    subwf   filereg2+1,W
+	ready
+    else
+        movfp   filereg1+1,WREG
+	    subwf   filereg2+1,W
+        movfp   filereg1+0,WREG
+	    subwfb  filereg2+0,W
+    endif
+	    btfsc   _C
+	    ENDM
+
+
+FCPFSLE16   MACRO   filereg1, filereg2
+    if	    FAMILY == 1
+	    LOCAL   ready
+	    movf    filereg2+0,W
+	    subwf   filereg1+0,W
+	    btfss   _C
+	    goto    ready
+	    btfss   _Z
+	    goto    ready
+	    movf    filereg2+1,W
+	    subwf   filereg1+1,W
+	    btfsc   _Z
+	    bcf     _C
+	ready
+    else
+        movfp   filereg2+1,WREG
+	    subwf   filereg1+1,W
+        movfp   filereg2+0,WREG
+	    subwfb  filereg1+0,W
+	    btfsc   _Z
+	    bcf     _C
+    endif
+	    btfsc   _C
+	    ENDM
+
+
+FCPFSLT16   MACRO   filereg1, filereg2
+    if	    FAMILY == 1
+	    LOCAL   ready
+	    movf    filereg2+0,W
+	    subwf   filereg1+0,W
+	    btfss   _C
+	    goto    ready
+	    btfss   _Z
+	    goto    ready
+	    movf    filereg2+1,W
+	    subwf   filereg1+1,W
+	ready
+    else
+        movfp   filereg2+1,WREG
+	    subwf   filereg1+1,W
+        movfp   filereg2+0,WREG
+	    subwfb  filereg1+0,W
+    endif
+	    btfsc   _C
+	    ENDM
+
+
+FDEC16	    MACRO   filereg
+    if	    FAMILY == 2
+        clrf    WREG,F
+        decf    filereg+1,F
+        subwfb  filereg+0,F
+    endif
+	    ENDM
+
+FCLR_AUTO   MACRO
+        bsf     ALUSTA,4
+        bsf     ALUSTA,5
+	    ENDM
+
+FSET_AUTO_INC MACRO
+        bsf     ALUSTA,4
+        bcf     ALUSTA,5
+    if  BANKED == 1
+        movlr   0x000
+        bcf     BBANK
+    endif
+	    ENDM
+
+FSET_AUTO_DEC MACRO
+        bcf     ALUSTA,4
+        bcf     ALUSTA,5
+    if  BANKED == 1
+        movlr   0x000
+        bcf     BBANK
+    endif
+        ENDM
+
+FCOMF16     MACRO   filereg
+	    comf    filereg+1,F
+	    comf    filereg+0,F
+	    ENDM
+
+FRR16	    MACRO   filename
+    if      FAMILY < 2
+        rrf     filename+0,F
+	    rrf     filename+1,F
+    else
+        rrcf    filename+0,F
+        rrcf    filename+1,F
+    endif
+	    ENDM
+
+FRR24	    MACRO   filename
+    if      FAMILY < 2
+        rrf     filename+0,F
+	    rrf     filename+1,F
+	    rrf     filename+2,F
+    else
+        rrcf    filename+0,F
+        rrcf    filename+1,F
+        rrcf    filename+2,F
+    endif
+	    ENDM
+
+FRR32	    MACRO   filename
+    if	    FAMILY == 2
+        rrcf    filename+0,F
+        rrcf    filename+1,F
+        rrcf    filename+2,F
+        rrcf    filename+3,F
+    else
+	    rrf     filename+0,F
+	    rrf     filename+1,F
+	    rrf     filename+2,F
+	    rrf     filename+3,F
+    endif
+	    ENDM
+
+;--------------------------- fuzzyTECH specific macros ------------------------
+FCLR_INC_FSR MACRO
+    if	    BANKED == 0
+     if     FAMILY < 2
+        clrf    0
+	    incf    FSR,F
+      if    RESOLUTION == 16
+        clrf    0
+	    incf    FSR,F
+      endif
+     else
+        clrf    INDF0,F
+      if    RESOLUTION == 16
+        clrf    INDF0,F
+      endif
+     endif
+
+    else
+
+     if     FAMILY == 0
+	    SET_PAGE
+        clrf    0
+	    incf	FSR,F
+	    bsf 	FSR,4
+	    RES_PAGE
+     endif
+
+     if     FAMILY == 1
+	    LOCAL   p1_test
+	    LOCAL   end_test
+        clrf    0
+	    btfss   FSR,7
+	    goto    p1_test
+	    incf    FSR,F
+      if    RESOLUTION == 16
+        clrf    0
+	    incf    FSR,F
+      endif
+	    goto    end_test
+	  p1_test
+        incf    FSR,F
+      if    RESOLUTION == 16
+        clrf    0
+	    incf    FSR,F
+      endif
+        btfss   FSR,7
+	    goto    end_test
+	    movlw   RAM_GAP_SIZE
+        addwf   FSR,F
+	  end_test
+     endif
+
+     if     FAMILY == 2
+        LOCAL   cross_page
+	    SET_PAGE
+        clrf    INDF0,F
+      if    RESOLUTION == 16
+        clrf    INDF0,F
+      endif
+        movpf   FSR0,WREG
+        btfss   _Z
+        goto    cross_page
+        bsf     BBANK
+        movlw   0x20
+        movwf   FSR0
+      cross_page
+	    RES_PAGE
+     endif
+
+    endif
+	    ENDM
+
+
+INC_FSR     MACRO
+    if	    BANKED == 0
+
+     if     FAMILY < 2
+	    incf    FSR,F
+      if    RESOLUTION == 16
+	    incf    FSR,F
+      endif
+     else
+     endif
+
+    else
+
+     if     FAMILY == 0
+	    incf	FSR,F
+	    bsf 	FSR,4
+     endif
+
+     if     FAMILY == 1
+	    LOCAL   p1_test
+	    LOCAL   end_test
+	    btfss   FSR,7
+	    goto    p1_test
+	    incf    FSR,F
+      if    RESOLUTION == 16
+	    incf    FSR,F
+      endif
+	    goto    end_test
+	  p1_test
+	    incf    FSR,F
+      if    RESOLUTION == 16
+	    incf    FSR,F
+      endif
+	    btfss   FSR,7
+	    goto    end_test
+	    movlw   RAM_GAP_SIZE
+	    addwf   FSR,F
+	  end_test
+     endif
+
+     if     FAMILY == 2
+        LOCAL       first_page
+        movpf       FSR0,FSR0
+        btfss       _Z
+        goto        first_page
+        movwf       FSR1
+        movlw       RAM_GAP_SIZE
+        addwf       FSR0,F
+        movpf       FSR1,WREG
+        bsf         BBANK
+      first_page
+     endif
+
+    endif
+	    ENDM
+
+
+DEC_FSR     MACRO
+    if	    BANKED == 0
+
+        decf        FSR,F
+     if     RESOLUTION == 16
+        decf        FSR,F
+     endif
+
+    else
+
+     if     FAMILY == 0
+	    bcf 	FSR,4
+	    decf	FSR,F
+	    bsf 	FSR,4
+     endif
+
+     if     FAMILY == 1
+	    LOCAL   p0_test
+	    LOCAL   end_test
+	    btfsc   FSR,7
+	    goto    p0_test
+	    decf    FSR,F
+      if    RESOLUTION == 16
+	    decf    FSR,F
+      endif
+	    goto    end_test
+	  p0_test
+	    decf    FSR,F
+      if    RESOLUTION == 16
+	    decf    FSR,F
+      endif
+	    movlw   RAM_GAP_END
+	    subwf   FSR,W
+	    btfsc   _C
+	    goto    end_test
+	    movlw   RAM_GAP_SIZE
+	    subwf   FSR,F
+	  end_test
+     endif
+
+     if     FAMILY == 2
+     endif
+
+    endif
+	    ENDM
+
+
+
+ADD_TBL16   MACRO   tbl_addr, offset
+	    addlw   (tbl_addr) & 0x0FF
+	    movwf   TBLPTRL
+        clrf    TBLPTRH,F
+	    movlw   page tbl_addr
+        addwfc  TBLPTRH,F
+	    ENDM
+
+LD8TBL	    MACRO   table, offset
+	    movlw   page table
+	    movwf   PCLATH
+	    movlw   ( table & 0x0FF )
+	    addwf   offset,W
+	    btfsc   _C
+	    incf    PCLATH,F
+            movwf   PCL
+	    ENDM
+
+LD_TBL16    MACRO   tbl_addr
+    if      FAMILY < 2
+	    movlw   page tbl_addr
+            movwf   rt_table+1
+	    movlw   (tbl_addr) & 0x0FF
+            movwf   rt_table
+    else
+	    movlw   page tbl_addr
+	    movwf   TBLPTRH
+	    movlw   (tbl_addr) & 0x0FF
+	    movwf   TBLPTRL
+    endif
+	    ENDM
+
+
+LD16TBL     MACRO   table, offset
+	    movlw   page table
+	    addwf   offset+1,W
+	    movwf   PCLATH
+	    movlw   ( table & 0x0FF )
+	    addwf   offset,W
+	    btfsc   _C
+	    incf    PCLATH,F
+            movwf   PCL
+	    ENDM
+
+LD8PTR      MACRO   table, offset
+            movf    table+1,W
+	    movwf   PCLATH
+            movf    table,W
+            addwf   offset,W
+	    btfsc   _C
+	    incf    PCLATH,F
+            movwf   PCL
+	    ENDM
+
+LD16PTR     MACRO   table, offset
+            movf    table+1,W
+            addwf   offset+1,W
+	    movwf   PCLATH
+            movf    table,W
+            addwf   offset,W
+	    btfsc   _C
+	    incf    PCLATH,F
+            movwf   PCL
+	    ENDM
+
+
+IS_PAGE     MACRO   Fpage
+    if	    BANKED == 0
+    else
+     if     FAMILY == 0
+	  if ( Fpage < 0x20 )
+	    movlw   0x020
+	  endif
+	  if ( (Fpage >= 0x20) && (Fpage < 0x40) )
+	    movlw   0x040
+	  endif
+	  if ( (Fpage >= 0x40) && (Fpage < 0x60) )
+	    movlw   0x060
+	  endif
+	  if ( (Fpage >= 0x60) && (Fpage < 0x80) )
+	    movlw   0x080
+	  endif
+
+	    movwf   page_bound
+     else
+     endif
+    endif
+	    ENDM
+
+
+FPREP_PAGE   MACRO   adr
+    if	    BANKED == 0
+	    movlw   fuzvals + adr
+     if     FAMILY < 2
+        movwf   FSR
+     else
+        movwf   FSR0
+     endif
+    else
+
+     if     FAMILY == 0
+      if ((fuzvals + adr) < 0x20 )
+        movlw   fuzvals + adr
+      endif
+
+      if ( ((fuzvals + adr) >= 0x20 ) && ((fuzvals + adr) < 0x2F ) )
+        movlw   fuzvals + adr + 1 * RAM_GAP_SIZE
+      endif
+
+      if ( ((fuzvals + adr) >= 0x30 ) && ((fuzvals + adr) < 0x3F ) )
+        movlw   fuzvals + adr + 2 * RAM_GAP_SIZE
+      endif
+
+      if ( ((fuzvals + adr) >= 0x40 ) && ((fuzvals + adr) < 0x4F ) )
+        movlw   fuzvals + adr + 3 * RAM_GAP_SIZE
+      endif
+
+	    movwf   save_page
+     endif
+
+     if     FAMILY == 1
+      if ((fuzvals + adr) < RAM_GAP_START )
+	    movlw   fuzvals + adr
+      else
+	    movlw   fuzvals + adr + RAM_GAP_SIZE
+      endif
+	    movwf   FSR
+     endif
+
+     if     FAMILY == 2
+      if ((fuzvals + adr) < RAM_GAP_START )
+        bcf     BBANK
+	    movlw   fuzvals + adr
+      else
+        bsf     BBANK
+        movlw   low (fuzvals + adr + RAM_GAP_SIZE)
+      endif
+        movwf   FSR0
+     endif
+    endif
+	    ENDM
+
+
+SET_PAGE    MACRO
+    if	    BANKED == 0
+    else
+     if     FAMILY == 0
+        movwf   save_wreg
+	    movf    save_page,W
+	    movwf   FSR
+        movf    save_wreg,W
+     endif
+
+     if     FAMILY == 1
+     endif
+
+     if     FAMILY == 2
+        btfsc   BBANK
+        bsf     BSR,4
+     endif
+    endif
+
+	    ENDM
+
+
+RES_PAGE    MACRO
+    if	    BANKED == 0
+    else
+     if     FAMILY == 0
+        movwf   save_wreg
+        movf    FSR,W
+        clrf    FSR
+	    movwf   save_page
+        movf    save_wreg,W
+     endif
+
+     if     FAMILY == 1
+     endif
+
+     if     FAMILY == 2
+        bcf     BSR,4
+     endif
+    endif
+	    ENDM
+
+
+COMP_FSR    MACRO
+    if	    BANKED == 0
+     if      FAMILY < 2
+        movwf   FSR
+	    movlw   fuzvals
+	    addwf   FSR,F
+     else
+        movwf   FSR0
+	    movlw   fuzvals
+        addwf   FSR0,F
+     endif
+    else
+
+     if      FAMILY == 0
+	    LOCAL   add_page_loop
+	    LOCAL   add_page_end
+        movwf   save_page
+	    movlw   fuzvals
+	    addwf   save_page,F
+        movf    page_bound,W
+	 add_page_loop
+	    subwf   save_page,W
+	    btfss   _C
+	    goto    add_page_end
+	    movlw   RAM_GAP_SIZE
+	    addwf   save_page,F
+	    movlw   0x020
+	    addwf   page_bound,W
+	    goto    add_page_loop
+	 add_page_end
+     endif
+
+     if      FAMILY == 1
+	    LOCAL   add_page_end
+        movwf   FSR
+	    movlw   fuzvals
+	    addwf   FSR,F
+	    movlw   RAM_GAP_START
+	    subwf   FSR,W
+	    btfss   _C
+	    goto    add_page_end
+	    movlw   RAM_GAP_SIZE
+	    addwf   FSR,F
+	 add_page_end
+     endif
+
+     if      FAMILY == 2
+        LOCAL   cross_page
+        bcf     BBANK
+        movwf   FSR0
+	    movlw   fuzvals
+        addwf   FSR0,F
+        btfss   _C
+        goto    cross_page
+        movlw   RAM_GAP_SIZE
+        addwf   FSR0,F
+        bsf     BBANK
+      cross_page
+     endif
+
+    endif
+	    ENDM
+
+; The end of module public declarations
+
+        LIST
+

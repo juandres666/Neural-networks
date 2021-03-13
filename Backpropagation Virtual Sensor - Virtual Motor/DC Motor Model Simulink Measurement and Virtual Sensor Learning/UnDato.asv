@@ -1,0 +1,14 @@
+load motor_virtual_sensor
+
+open_system('dc_motor_model');
+
+
+
+set_param('dc_motor_model/Friction','brkwy_trq',num2str(0.2,'%0.6f'));
+set_param('dc_motor_model/Friction','Col_trq' , num2str(0.2,'%0.6f'));
+set_param(gcs,'SimulationCommand','Start');
+pause(1)
+
+rpm_motor
+
+rpm_virtual_sensor=sim(net,[i_motor;v_motor])

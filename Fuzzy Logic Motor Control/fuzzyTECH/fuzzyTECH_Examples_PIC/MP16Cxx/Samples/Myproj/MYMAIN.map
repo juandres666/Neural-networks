@@ -1,0 +1,118 @@
+MPLINK 4.34, Linker
+Linker Map File - Created Sat Nov 28 21:06:38 2009
+
+                                 Section Info
+                  Section       Type    Address   Location Size(Bytes)
+                ---------  ---------  ---------  ---------  ---------
+                   .org_0       code   0x000000    program   0x000000
+                   .org_2       code   0x000000    program   0x000002
+                   .org_1       code   0x000100    program   0x0002b4
+    .config_2007_MYMAIN.O       code   0x002007    program   0x000002
+
+
+
+                              Program Memory Usage 
+                               Start         End      
+                           ---------   ---------      
+                            0x000000    0x000000      
+                            0x000100    0x000259      
+                            0x002007    0x002007      
+            348 out of 4101 program addresses used, program memory utilization is 8%
+
+
+
+                              Symbols - Sorted by Name
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                      Min   0x0001ce    program     static D:\fuzzyTECH\MP16Cxx\Samples\Myproj\Min.asm
+                     STOP   0x000108    program     static D:\fuzzyTECH\MP16Cxx\Samples\Myproj\MYMAIN.ASM
+                    STOP1   0x00010e    program     static D:\fuzzyTECH\MP16Cxx\Samples\Myproj\MYMAIN.ASM
+                       as   0x000196    program     static D:\fuzzyTECH\MP16Cxx\Samples\Myproj\FLMSS.ASM
+                case_fire   0x000116    program     static D:\fuzzyTECH\MP16Cxx\Samples\Myproj\MYMAIN.ASM
+             case_no_fire   0x000119    program     static D:\fuzzyTECH\MP16Cxx\Samples\Myproj\MYMAIN.ASM
+                cmp_flmss   0x00018d    program     static D:\fuzzyTECH\MP16Cxx\Samples\Myproj\FLMSS.ASM
+                  cmp_min   0x0001da    program     static D:\fuzzyTECH\MP16Cxx\Samples\Myproj\Min.asm
+                      com   0x0001fe    program     static D:\fuzzyTECH\MP16Cxx\Samples\Myproj\COM.ASM
+                 comp_min   0x0001e7    program     static D:\fuzzyTECH\MP16Cxx\Samples\Myproj\Min.asm
+              compute_com   0x00022f    program     static D:\fuzzyTECH\MP16Cxx\Samples\Myproj\COM.ASM
+                  div16_8   0x000246    program     static D:\fuzzyTECH\MP16Cxx\Samples\Myproj\DIV16_8.ASM
+                  divLoop   0x000249    program     static D:\fuzzyTECH\MP16Cxx\Samples\Myproj\DIV16_8.ASM
+                       ds   0x0001a9    program     static D:\fuzzyTECH\MP16Cxx\Samples\Myproj\FLMSS.ASM
+                    flmss   0x00017d    program     static D:\fuzzyTECH\MP16Cxx\Samples\Myproj\FLMSS.ASM
+              flmss_start   0x00017d    program     static D:\fuzzyTECH\MP16Cxx\Samples\Myproj\FLMSS.ASM
+                 initloop   0x000153    program     static D:\fuzzyTECH\MP16Cxx\Samples\Myproj\myproj.asm
+               initmyproj   0x00014f    program     static D:\fuzzyTECH\MP16Cxx\Samples\Myproj\myproj.asm
+               ishift_com   0x000221    program     static D:\fuzzyTECH\MP16Cxx\Samples\Myproj\COM.ASM
+              ishift_com2   0x000227    program     static D:\fuzzyTECH\MP16Cxx\Samples\Myproj\COM.ASM
+                main_loop   0x000106    program     static D:\fuzzyTECH\MP16Cxx\Samples\Myproj\MYMAIN.ASM
+                  maxdone   0x0001bd    program     static D:\fuzzyTECH\MP16Cxx\Samples\Myproj\FLMSS.ASM
+                  mindone   0x0001bf    program     static D:\fuzzyTECH\MP16Cxx\Samples\Myproj\FLMSS.ASM
+                   mpy8_8   0x000238    program     static D:\fuzzyTECH\MP16Cxx\Samples\Myproj\MPY8_8.ASM
+                  mpyLoop   0x00023d    program     static D:\fuzzyTECH\MP16Cxx\Samples\Myproj\MPY8_8.ASM
+                   mymain   0x000100    program     static D:\fuzzyTECH\MP16Cxx\Samples\Myproj\MYMAIN.ASM
+                   myproj   0x000158    program     static D:\fuzzyTECH\MP16Cxx\Samples\Myproj\myproj.asm
+              next_in_min   0x0001e5    program     static D:\fuzzyTECH\MP16Cxx\Samples\Myproj\Min.asm
+             next_out_min   0x0001f2    program     static D:\fuzzyTECH\MP16Cxx\Samples\Myproj\Min.asm
+                 no_carry   0x000252    program     static D:\fuzzyTECH\MP16Cxx\Samples\Myproj\DIV16_8.ASM
+                   no_sub   0x000255    program     static D:\fuzzyTECH\MP16Cxx\Samples\Myproj\DIV16_8.ASM
+                ready_com   0x00021e    program     static D:\fuzzyTECH\MP16Cxx\Samples\Myproj\COM.ASM
+             rout_div_com   0x000234    program     static D:\fuzzyTECH\MP16Cxx\Samples\Myproj\COM.ASM
+                      rt0   0x000135    program     static D:\fuzzyTECH\MP16Cxx\Samples\Myproj\myproj.asm
+               rt_routine   0x0001c7    program     static D:\fuzzyTECH\MP16Cxx\Samples\Myproj\Min.asm
+                start_com   0x000203    program     static D:\fuzzyTECH\MP16Cxx\Samples\Myproj\COM.ASM
+           start_rule_min   0x0001d2    program     static D:\fuzzyTECH\MP16Cxx\Samples\Myproj\Min.asm
+                    store   0x0001c0    program     static D:\fuzzyTECH\MP16Cxx\Samples\Myproj\FLMSS.ASM
+                     tpts   0x00011a    program     static D:\fuzzyTECH\MP16Cxx\Samples\Myproj\myproj.asm
+             tpts_routine   0x000176    program     static D:\fuzzyTECH\MP16Cxx\Samples\Myproj\FLMSS.ASM
+                     xcom   0x000132    program     static D:\fuzzyTECH\MP16Cxx\Samples\Myproj\myproj.asm
+             xcom_routine   0x0001f7    program     static D:\fuzzyTECH\MP16Cxx\Samples\Myproj\COM.ASM
+
+
+
+                              Symbols - Sorted by Address
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                   mymain   0x000100    program     static D:\fuzzyTECH\MP16Cxx\Samples\Myproj\MYMAIN.ASM
+                main_loop   0x000106    program     static D:\fuzzyTECH\MP16Cxx\Samples\Myproj\MYMAIN.ASM
+                     STOP   0x000108    program     static D:\fuzzyTECH\MP16Cxx\Samples\Myproj\MYMAIN.ASM
+                    STOP1   0x00010e    program     static D:\fuzzyTECH\MP16Cxx\Samples\Myproj\MYMAIN.ASM
+                case_fire   0x000116    program     static D:\fuzzyTECH\MP16Cxx\Samples\Myproj\MYMAIN.ASM
+             case_no_fire   0x000119    program     static D:\fuzzyTECH\MP16Cxx\Samples\Myproj\MYMAIN.ASM
+                     tpts   0x00011a    program     static D:\fuzzyTECH\MP16Cxx\Samples\Myproj\myproj.asm
+                     xcom   0x000132    program     static D:\fuzzyTECH\MP16Cxx\Samples\Myproj\myproj.asm
+                      rt0   0x000135    program     static D:\fuzzyTECH\MP16Cxx\Samples\Myproj\myproj.asm
+               initmyproj   0x00014f    program     static D:\fuzzyTECH\MP16Cxx\Samples\Myproj\myproj.asm
+                 initloop   0x000153    program     static D:\fuzzyTECH\MP16Cxx\Samples\Myproj\myproj.asm
+                   myproj   0x000158    program     static D:\fuzzyTECH\MP16Cxx\Samples\Myproj\myproj.asm
+             tpts_routine   0x000176    program     static D:\fuzzyTECH\MP16Cxx\Samples\Myproj\FLMSS.ASM
+                    flmss   0x00017d    program     static D:\fuzzyTECH\MP16Cxx\Samples\Myproj\FLMSS.ASM
+              flmss_start   0x00017d    program     static D:\fuzzyTECH\MP16Cxx\Samples\Myproj\FLMSS.ASM
+                cmp_flmss   0x00018d    program     static D:\fuzzyTECH\MP16Cxx\Samples\Myproj\FLMSS.ASM
+                       as   0x000196    program     static D:\fuzzyTECH\MP16Cxx\Samples\Myproj\FLMSS.ASM
+                       ds   0x0001a9    program     static D:\fuzzyTECH\MP16Cxx\Samples\Myproj\FLMSS.ASM
+                  maxdone   0x0001bd    program     static D:\fuzzyTECH\MP16Cxx\Samples\Myproj\FLMSS.ASM
+                  mindone   0x0001bf    program     static D:\fuzzyTECH\MP16Cxx\Samples\Myproj\FLMSS.ASM
+                    store   0x0001c0    program     static D:\fuzzyTECH\MP16Cxx\Samples\Myproj\FLMSS.ASM
+               rt_routine   0x0001c7    program     static D:\fuzzyTECH\MP16Cxx\Samples\Myproj\Min.asm
+                      Min   0x0001ce    program     static D:\fuzzyTECH\MP16Cxx\Samples\Myproj\Min.asm
+           start_rule_min   0x0001d2    program     static D:\fuzzyTECH\MP16Cxx\Samples\Myproj\Min.asm
+                  cmp_min   0x0001da    program     static D:\fuzzyTECH\MP16Cxx\Samples\Myproj\Min.asm
+              next_in_min   0x0001e5    program     static D:\fuzzyTECH\MP16Cxx\Samples\Myproj\Min.asm
+                 comp_min   0x0001e7    program     static D:\fuzzyTECH\MP16Cxx\Samples\Myproj\Min.asm
+             next_out_min   0x0001f2    program     static D:\fuzzyTECH\MP16Cxx\Samples\Myproj\Min.asm
+             xcom_routine   0x0001f7    program     static D:\fuzzyTECH\MP16Cxx\Samples\Myproj\COM.ASM
+                      com   0x0001fe    program     static D:\fuzzyTECH\MP16Cxx\Samples\Myproj\COM.ASM
+                start_com   0x000203    program     static D:\fuzzyTECH\MP16Cxx\Samples\Myproj\COM.ASM
+                ready_com   0x00021e    program     static D:\fuzzyTECH\MP16Cxx\Samples\Myproj\COM.ASM
+               ishift_com   0x000221    program     static D:\fuzzyTECH\MP16Cxx\Samples\Myproj\COM.ASM
+              ishift_com2   0x000227    program     static D:\fuzzyTECH\MP16Cxx\Samples\Myproj\COM.ASM
+              compute_com   0x00022f    program     static D:\fuzzyTECH\MP16Cxx\Samples\Myproj\COM.ASM
+             rout_div_com   0x000234    program     static D:\fuzzyTECH\MP16Cxx\Samples\Myproj\COM.ASM
+                   mpy8_8   0x000238    program     static D:\fuzzyTECH\MP16Cxx\Samples\Myproj\MPY8_8.ASM
+                  mpyLoop   0x00023d    program     static D:\fuzzyTECH\MP16Cxx\Samples\Myproj\MPY8_8.ASM
+                  div16_8   0x000246    program     static D:\fuzzyTECH\MP16Cxx\Samples\Myproj\DIV16_8.ASM
+                  divLoop   0x000249    program     static D:\fuzzyTECH\MP16Cxx\Samples\Myproj\DIV16_8.ASM
+                 no_carry   0x000252    program     static D:\fuzzyTECH\MP16Cxx\Samples\Myproj\DIV16_8.ASM
+                   no_sub   0x000255    program     static D:\fuzzyTECH\MP16Cxx\Samples\Myproj\DIV16_8.ASM
+
+

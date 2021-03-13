@@ -1,0 +1,236 @@
+        LIST
+; FTPUBDEC.VAR  Global variable allocation file v4.1 Inform Software Corporation
+        NOLIST
+;*-----------------------------------------------------------------------------*
+;*------------------------- fuzzyTECH MCU-MP V4.1 -----------------------------*
+;* (c) 1995 Inform Software Corporation, 2001 Midwest Road, Oak Brook, IL60521 *
+;*------------ (c) 1995 Inform GmbH, Pascalstr. 23, 52076 Aachen --------------*
+;*-----------------------------------------------------------------------------*
+;*----------- public declarations of all internal used variables --------------*
+;*-----------------------------------------------------------------------------*
+
+    ifdef W
+        ;P16C5x.inc used or
+        ;P16Cxx.inc used or
+        ;P17Cxx.inc used
+    else
+	    W	    EQU     0x00
+        PCL      EQU     0x02
+
+        C       EQU     0x00
+	    Z	    EQU     0x02
+    endif
+
+    if  FAMILY < 2
+     ifdef INDF
+        ;P16C5x.inc used or
+        ;P16Cxx.inc used or
+     else
+        INDF    EQU     0x00
+	    STATUS  EQU     0x03
+	    FSR     EQU     0x04
+        PCLATH  EQU     0x0A
+     endif
+    else
+     ifdef INDF0
+        ;P17Cxx.inc used
+     else
+        INDF0   EQU     0x00
+        FSR0    EQU     0x01
+	    PCLATH  EQU     0x03
+        ALUSTA  EQU     0x04
+        FSR1    EQU     0x09
+        WREG    EQU     0x0A
+	    TBLPTRL EQU     0x0D
+	    TBLPTRH EQU     0x0E
+        BSR     EQU     0x0F
+        PRODL   EQU     0x18
+        PRODH   EQU     0x19
+     endif
+    endif
+
+    if  FAMILY < 2
+        ;P16C5xd.inc used or
+        ;P16Cxxd.inc used or
+        #define _C  STATUS,C
+        #define _Z  STATUS,Z
+    else
+        ;P17Cxxd.inc used
+        #define _C  ALUSTA,C
+        #define _Z  ALUSTA,Z
+    endif
+
+	    MSB_LSB EQU     0x00
+	    LSB_MSB EQU     0x01
+
+	  CBLOCK
+	    var1, var2, var3, var4,  var5,  var6
+	    var7, var8, var9, var10, var11
+	  ENDC
+
+    if  FAMILY > 0
+	  CBLOCK
+        var12
+	  ENDC
+    endif
+
+    if  RESOLUTION   ==  16
+	  CBLOCK
+	    var13, var14, var15, var16, var17, var18
+	    var19, var20, var21, var22
+	  ENDC
+    endif
+
+    if  FAMILY == 2
+        #define BBANK       FSR1,0
+        #define BASEREG     PRODL
+    endif
+
+;*------------------------------ memory mapping -------------------------------*
+        loopcnt     EQU     var1
+        crisp       EQU     var1
+    if  RESOLUTION == 8
+        min_tmp     EQU     var1
+        max_tmp     EQU     var1
+        num         EQU     var1
+        maxout      EQU     var1
+    else
+        num         EQU     var1
+        FAARG       EQU     num
+        res_div     EQU     FAARG
+        no_o        EQU     var1
+    endif
+    if  FAMILY == 2
+        rulecount   EQU     var2
+    else
+        rtptr       EQU     var2
+    endif
+
+    if  RESOLUTION == 8
+        itptr       EQU     var2
+        numHI       EQU     num+1
+        FAARG       EQU     num+1
+        res_div     EQU     FAARG
+    else
+        crispLO     EQU     crisp+1
+        numMHI      EQU     num+1
+        FAARGMHI    EQU     FAARG+1
+        res_divMHI  EQU     res_div+1
+    endif
+        itcnt       EQU     var3
+
+    if  FAMILY == 2
+        rulecountLO EQU     rulecount+1
+    else
+     if  LARGE_RT == 1
+        rtptrHI     EQU     rtptr+1
+     endif
+    endif
+
+    if  RESOLUTION == 8
+        maxoutpos   EQU     var3
+        numLO       EQU     num+2
+        FAARGLO     EQU     num+2
+        res_divLO   EQU     res_div+1
+    else
+        numMLO      EQU     num+2
+        FAARGMLO    EQU     num+2
+        res_divMLO  EQU     res_div+2
+    endif
+    if  FAMILY == 2
+        rtptr       EQU     var4
+    else
+        rulecount   EQU     var4
+    endif
+
+        cur_term    EQU     var4
+    if  RESOLUTION == 8
+        denom       EQU     var4
+        FBARG       EQU     denom
+    else
+        numLO       EQU     num+3
+        FAARGLO     EQU     num+3
+        res_divLO   EQU     res_div+3
+    endif
+        rt_table    EQU     var5
+    if  RESOLUTION == 8
+        cur_term2   EQU     var5
+        denomLO     EQU     denom+1
+        FBARGLO     EQU     denom+1
+    else
+        cur_termLO  EQU     cur_term+1
+    endif
+        rt_tableLO  EQU     rt_table+1
+        otcnt       EQU     var6
+        FTEMP       EQU     var6
+    if	FAMILY == 0
+        page_var    EQU     var7
+        page_bound  EQU     var7
+    endif
+        mulcnd      EQU     var7
+        FREM        EQU     var7
+    if  RESOLUTION == 8
+        mulplr      EQU     var8
+    else
+        FREMLO      EQU     FREM+1
+        mulcndLO    EQU     mulcnd+1
+    endif
+        cmp_reg     EQU     var9
+        FTcount     EQU     var9
+        offset      EQU     var9
+    if  FAMILY > 0
+        otoffset    EQU     var10
+    else
+        res_mpy     EQU     var10
+    endif
+    if  RESOLUTION == 8
+        no_o        EQU     var10
+    else
+        cmp_regLO   EQU     cmp_reg+1
+    endif
+        no_i        EQU     var11
+        tmp_var     EQU     var11
+    if  FAMILY > 0
+        res_mpy     EQU     var11
+    else
+        res_mpyLO   EQU     res_mpy+1
+    endif
+
+    if  RESOLUTION == 8
+    else
+        maxout      EQU     var11
+    endif
+    if  RESOLUTION == 8
+     if FAMILY > 0
+        res_mpyLO   EQU     res_mpy+1
+     endif
+    else
+        res_mpyMHI  EQU     res_mpy+1
+        maxoutLO    EQU     maxout+1
+    endif
+    if	    RESOLUTION == 8
+    else
+        res_mpyMLO  EQU     res_mpy+2
+        res_mpyLO   EQU     res_mpy+3
+        maxoutpos   EQU     var14
+        cur_term2   EQU     var15
+        min_tmp     EQU     var15
+        max_tmp     EQU     var15
+        cur_term2LO EQU     cur_term2+1
+        min_tmpLO   EQU     min_tmp+1
+        max_tmpLO   EQU     max_tmp+1
+        itptr       EQU     var17
+        denom       EQU     var17
+        FBARG       EQU     denom
+        denomLO     EQU     denom+1
+        FBARGLO     EQU     denom+1
+        mulplr      EQU     var19
+        mulplrLO    EQU     mulplr+1
+        Temp16      EQU     var21
+        Temp16LO    EQU     Temp16+1
+    endif
+
+; The end of module public declarations
+
+        LIST
+

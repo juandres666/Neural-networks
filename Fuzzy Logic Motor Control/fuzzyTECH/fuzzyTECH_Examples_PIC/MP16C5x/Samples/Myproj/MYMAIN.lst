@@ -1,0 +1,1853 @@
+MPASM  5.34                        MYMAIN.ASM   11-28-2009  18:00:58         PAGE  1
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00001     PROCESSOR 16C54
+                      00002 
+                      00003 ;------------------------------------------------------------------------------
+                      00004 ;- USER MAIN FILE                                                             -
+                      00005 ;------------------------------------------------------------------------------
+                      00006 
+Warning[207]: Found label after column 1. (CODE_START)
+  00000080            00007     CODE_START      EQU     0x080   ;code  startadr for 16C5x
+Warning[207]: Found label after column 1. (RESET_VECTOR)
+  000001FF            00008     RESET_VECTOR    EQU     0x1FF   ;reset vector
+                      00009 
+Warning[207]: Found label after column 1. (FUZZY_RAM_START)
+  00000008            00010     FUZZY_RAM_START EQU     0x008   ;first free RAM location for 16C5x
+                      00011 
+                      00012 
+                      00013         include "myproj.var"        ;include preassembler variables
+                      00001 ;-----------------------------------------------------------------------------
+                      00002 ;----------------- fuzzyTECH 5.1 MP Edition --- Preassembler -----------------
+                      00003 ;-------- Inform Software Corp., 2001 Midwest Rd., Oak Brook, IL 60523 -------
+                      00004 ;---------- (c) 1991-1998 INFORM GmbH, Pascalstr. 23, D-52076 Aachen ---------
+                      00005 ;-----------------------------------------------------------------------------
+                      00006 ;--------------- code generation date: Fri Dec 19 11:37:17 1997 --------------
+                      00007 ;------------------------------ project: MYPROJ ------------------------------
+                      00008 ;-----------------------------------------------------------------------------
+                      00009 
+  00000000            00010 FAMILY          EQU     0
+  00000000            00011 BANKED          SET     0
+  00000008            00012 RESOLUTION      EQU     8
+  00000000            00013 LARGE_RT        EQU     0
+                      00014                         
+Warning[205]: Found directive in column 1. (include)
+                      00015 include         "ftmp165x.inc"  
+                      00001         LIST
+                      00002 ; FTMP165X.INC  Restriction definition file     v4.1 Inform Software Corporation
+Warning[205]: Found directive in column 1. (IFDEF)
+Warning[207]: Found label after column 1. (RAM_START)
+Warning[207]: Found label after column 1. (RAM_GAP_START)
+Warning[207]: Found label after column 1. (RAM_END)
+Warning[205]: Found directive in column 1. (ENDIF)
+Warning[205]: Found directive in column 1. (IFDEF)
+Warning[205]: Found directive in column 1. (IFDEF)
+Warning[205]: Found directive in column 1. (IFDEF)
+Warning[205]: Found directive in column 1. (IFDEF)
+Warning[205]: Found directive in column 1. (IFDEF)
+Warning[205]: Found directive in column 1. (IFNDEF)
+Warning[205]: Found directive in column 1. (IF)
+Warning[205]: Found directive in column 1. (IF)
+                      00070         LIST
+                      00071 
+                      00016                         
+                      00017 ;------ NOTE: FUZZY_RAM_START must be defined in the users main program ------
+                      00018                         
+Warning[205]: Found directive in column 1. (if)
+MPASM  5.34                        MYMAIN.ASM   11-28-2009  18:00:58         PAGE  2
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00019 if FUZZY_RAM_START < RAM_START          
+                      00020    ERROR  "First location for FUZZY_RAM_START is too low"           
+                      00021 endif                   
+                      00022                         
+                      00023                 CBLOCK FUZZY_RAM_START  
+  00000008            00024                   lv0_Input_1   
+  00000009            00025                   lv1_Input_2   
+  0000000A            00026                   lv2_Output    
+  0000000B            00027                   invalidflags  
+                      00028                 ENDC    
+                      00029                         
+                      00030                 include "ftpubdec.var"  
+                      00001         LIST
+                      00002 ; FTPUBDEC.VAR  Global variable allocation file v4.1 Inform Software Corporation
+Warning[207]: Found label after column 1. (MSB_LSB)
+Warning[207]: Found label after column 1. (LSB_MSB)
+Warning[207]: Found label after column 1. (loopcnt)
+Warning[207]: Found label after column 1. (crisp)
+Warning[207]: Found label after column 1. (min_tmp)
+Warning[207]: Found label after column 1. (max_tmp)
+Warning[207]: Found label after column 1. (num)
+Warning[207]: Found label after column 1. (maxout)
+Warning[207]: Found label after column 1. (rtptr)
+Warning[207]: Found label after column 1. (itptr)
+Warning[207]: Found label after column 1. (numHI)
+Warning[207]: Found label after column 1. (FAARG)
+Warning[207]: Found label after column 1. (res_div)
+Warning[207]: Found label after column 1. (itcnt)
+Warning[207]: Found label after column 1. (maxoutpos)
+Warning[207]: Found label after column 1. (numLO)
+Warning[207]: Found label after column 1. (FAARGLO)
+Warning[207]: Found label after column 1. (res_divLO)
+Warning[207]: Found label after column 1. (rulecount)
+Warning[207]: Found label after column 1. (cur_term)
+Warning[207]: Found label after column 1. (denom)
+Warning[207]: Found label after column 1. (FBARG)
+Warning[207]: Found label after column 1. (rt_table)
+Warning[207]: Found label after column 1. (cur_term2)
+Warning[207]: Found label after column 1. (denomLO)
+Warning[207]: Found label after column 1. (FBARGLO)
+Warning[207]: Found label after column 1. (rt_tableLO)
+Warning[207]: Found label after column 1. (otcnt)
+Warning[207]: Found label after column 1. (FTEMP)
+Warning[207]: Found label after column 1. (page_var)
+Warning[207]: Found label after column 1. (page_bound)
+Warning[207]: Found label after column 1. (mulcnd)
+Warning[207]: Found label after column 1. (FREM)
+Warning[207]: Found label after column 1. (mulplr)
+Warning[207]: Found label after column 1. (cmp_reg)
+Warning[207]: Found label after column 1. (FTcount)
+Warning[207]: Found label after column 1. (offset)
+Warning[207]: Found label after column 1. (res_mpy)
+Warning[207]: Found label after column 1. (no_o)
+Warning[207]: Found label after column 1. (no_i)
+Warning[207]: Found label after column 1. (tmp_var)
+Warning[207]: Found label after column 1. (res_mpyLO)
+MPASM  5.34                        MYMAIN.ASM   11-28-2009  18:00:58         PAGE  3
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00235         LIST
+                      00236 
+                      00031                         
+                      00032                 CBLOCK  
+  00000017            00033                   fuzvals   
+                      00034                 ENDC    
+                      00035                         
+                      00036                         
+                      00037                 CBLOCK fuzvals + .8 
+  0000001F            00038                   FUZZY_RAM_END 
+                      00039                 ENDC    
+                      00040                         
+Warning[205]: Found directive in column 1. (if)
+                      00041 if FUZZY_RAM_END > RAM_END          
+                      00042    ERROR  "FUZZY_RAM_END exceeds internal RAM"          
+                      00043 endif                   
+                      00044                 include "ftpubdec.mac"  
+                      00001         LIST
+                      00002 ; FTPUBDEC.MAC  Macro definition file, Version 4.1   Inform Software Corporation
+                      00887         LIST
+                      00888 
+                      00014 
+                      00015         CBLOCK                      ;starts after fuzzy ram locations
+  00000020            00016           user1                     ;reserve 1 byte (example)
+                      00017             ENDC
+                      00018 
+0080                  00019         ORG     CODE_START          ;example start adress for code
+0080                  00020 mymain
+                      00021 
+0080   0938           00022         call    initmyproj          ;call init once
+                      00023 
+0081                  00024 main_loop
+0081   0C00           00025         movlw   0x000               ;example
+0082   0028           00026         movwf   lv0_Input_1         ;set 1st crisp input
+                      00027 
+0083   0CA0           00028         movlw   0x0A0               ;example
+0084   0029           00029         movwf   lv1_Input_2         ;set 2nd crisp input
+                      00030 
+                      00031         include "myproj.asm"        ;include preassembler code
+                      00001 ;-----------------------------------------------------------------------------
+                      00002 ;----------------- fuzzyTECH 5.1 MP Edition --- Preassembler -----------------
+                      00003 ;-------- Inform Software Corp., 2001 Midwest Rd., Oak Brook, IL 60523 -------
+                      00004 ;---------- (c) 1991-1998 INFORM GmbH, Pascalstr. 23, D-52076 Aachen ---------
+                      00005 ;-----------------------------------------------------------------------------
+                      00006 ;--------------- code generation date: Fri Dec 19 11:37:17 1997 --------------
+                      00007 ;------------------------------ project: MYPROJ ------------------------------
+                      00008 ;-----------------------------------------------------------------------------
+                      00009 
+                      00010                         
+Warning[207]: Found label after column 1. (pc_save)
+  00000085            00011                 pc_save EQU $                      ;save code location
+                      00012                         
+0000                  00013                 ORG     000H                       ;16C5x
+MPASM  5.34                        MYMAIN.ASM   11-28-2009  18:00:58         PAGE  4
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00014                         
+                      00015 ;------------------ slope term definition (x1, a_s, x3, d_s) -----------------
+0000   01E2           00016 tpts            ADDWF   PCL,F
+0001   0880 0806 08FF 00017                 DW      0880H, 0806H, 08FFH, 0800H
+       0800 
+0005   0833 0806 0888 00018                 DW      0833H, 0806H, 0888H, 0806H
+       0806 
+0009   0800 0800 0833 00019                 DW      0800H, 0800H, 0833H, 0806H
+       0806 
+000D   0800 0800 0800 00020                 DW      0800H, 0800H, 0800H, 0804H
+       0804 
+0011   0800 0804 0880 00021                 DW      0800H, 0804H, 0880H, 0804H
+       0804 
+0015   0880 0804 08FF 00022                 DW      0880H, 0804H, 08FFH, 0800H
+       0800 
+                      00023 
+                      00024 ;------------------------ xcom table (defuzzification) -----------------------
+0019   01E2           00025 xcom            ADDWF   PCL,F
+001A   082D 0880 08D9 00026                 DW      082DH, 0880H, 08D9H
+                      00027 
+                      00028 ;--------------------------------- rule table --------------------------------
+001D   01E2           00029 rt0             ADDWF   PCL,F
+001E   0805           00030                 DW      0805H
+001F   0802 0801 0800 00031                 DW      0802H, 0801H, 0800H, 0803H, 0806H
+       0803 0806 
+0024   0802 0801 0801 00032                 DW      0802H, 0801H, 0801H, 0805H, 0806H
+       0805 0806 
+0029   0802 0801 0802 00033                 DW      0802H, 0801H, 0802H, 0804H, 0807H
+       0804 0807 
+002E   0802 0801 0800 00034                 DW      0802H, 0801H, 0800H, 0805H, 0808H
+       0805 0808 
+0033   0802 0801 0800 00035                 DW      0802H, 0801H, 0800H, 0804H, 0806H
+       0804 0806 
+                      00036 
+0038   0B14           00037 initmyproj      goto    initmyproj_ 
+0039   0B1D           00038 mpy8_8          goto    mpy8_8_
+003A   0B2B           00039 flmss           goto    flmss_
+                      00040                         
+Warning[205]: Found directive in column 1. (if)
+                      00041 if $ > 0x0100           
+                      00042    ERROR  "Knowledgebase tables are too large. Please reduce your project!"         
+                      00043 endif                   
+                      00044                         
+0085                  00045                 ORG     pc_save
+                      00046                         
+Warning[207]: Found label after column 1. (FT_code_start)
+  00000085            00047                 FT_code_start EQU $ 
+                      00048                         
+                      00049 ;-----------------------------------------------------------------------------
+0085                  00050 myproj                  
+0085   0C17           00051                 movlw   fuzvals
+0086   0024           00052                 movwf   FSR
+0087   006D           00053                 clrf    itptr
+MPASM  5.34                        MYMAIN.ASM   11-28-2009  18:00:58         PAGE  5
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00054 ;------------------------------- fuzzification -------------------------------
+0088   0C03           00055                 movlw   .3
+0089   002E           00056                 movwf   itcnt
+008A   0208           00057                 movf    lv0_Input_1,W   
+008B   002C           00058                 movwf   crisp
+008C   093A           00059                 call    flmss
+                      00060                         
+008D   0C03           00061                 movlw   .3
+008E   002E           00062                 movwf   itcnt
+008F   0209           00063                 movf    lv1_Input_2,W   
+0090   002C           00064                 movwf   crisp
+0091   093A           00065                 call    flmss
+                      00066                         
+                      00067 ;--------------------------------- inference ---------------------------------
+                      00068                 include "Min.asm"                  ;"MIN.ASM"
+                      00001 ;*-----------------------------------------------------------------------------*
+                      00002 ;*------------------------- fuzzyTECH MCU-MP V4.1 -----------------------------*
+                      00003 ;* (c) 1995 Inform Software Corporation, 2001 Midwest Road, Oak Brook, IL60521 *
+                      00004 ;*------------ (c) 1995 Inform GmbH, Pascalstr. 23, 52076 Aachen --------------*
+                      00005 ;*-----------------------------------------------------------------------------*
+                      00006 ;*-------------------- routine inference minimum for PIC16 --------------------*
+                      00007 ;*-----------------------------------------------------------------------------*
+                      00008 
+                      00009 
+                      00010 GET_TAB     MACRO
+                      00011      if FAMILY < 1
+                      00012         movf        rtptr,W
+                      00013         call        rt0
+                      00014      else
+                      00015         call        rt_routine
+                      00016      endif
+                      00017         incf        rtptr,F
+                      00018      if LARGE_RT == 1
+                      00019         btfsc       _Z
+                      00020         incf        rtptr+1,F
+                      00021      endif
+                      00022             ENDM
+                      00023 
+                      00024     if      FAMILY == 1
+                      00025 rt_routine
+                      00026      if     LARGE_RT == 0
+                      00027         LD8PTR      rt_table,rtptr
+                      00028      else
+                      00029         LD16PTR     rt_table,rtptr
+                      00030      endif
+                      00031     endif
+                      00032 
+0092                  00033 Min
+                      00034         IS_PAGE     fuzvals
+                          M     if      BANKED == 0
+                          M     else
+                          M      if     FAMILY == 0
+                          M           if ( fuzvals < 0x20 )
+MPASM  5.34                        MYMAIN.ASM   11-28-2009  18:00:58         PAGE  6
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                          M             movlw   0x020
+                          M           endif
+                          M           if ( (fuzvals >= 0x20) && (fuzvals < 0x40) )
+                          M             movlw   0x040
+                          M           endif
+                          M           if ( (fuzvals >= 0x40) && (fuzvals < 0x60) )
+                          M             movlw   0x060
+                          M           endif
+                          M           if ( (fuzvals >= 0x60) && (fuzvals < 0x80) )
+                          M             movlw   0x080
+                          M           endif
+                          M 
+                          M             movwf   page_bound
+                          M      else
+                          M      endif
+                          M     endif
+0092   006D           00035         clrf        rtptr
+                      00036      if     LARGE_RT == 1
+                      00037         clrf        rtptr+1
+                      00038      endif
+                      00039         GET_TAB
+                          M      if FAMILY < 1
+0093   020D               M         movf        rtptr,W
+0094   091D               M         call        rt0
+                          M      else
+                          M         call        rt_routine
+                          M      endif
+0095   02AD               M         incf        rtptr,F
+                          M      if LARGE_RT == 1
+                          M         btfsc       _Z
+                          M         incf        rtptr+1,F
+                          M      endif
+0096   002F           00040         movwf       rulecount
+0097                  00041 start_rule_min
+                      00042     if      RESOLUTION == 8
+0097   0CFF           00043         movlw       0x0FF
+0098   002C           00044         movwf       min_tmp
+                      00045     else
+                      00046         movlw       0x0FF
+                      00047         movwf       min_tmp+0
+                      00048         movwf       min_tmp+1
+                      00049     endif
+                      00050         GET_TAB
+                          M      if FAMILY < 1
+0099   020D               M         movf        rtptr,W
+009A   091D               M         call        rt0
+                          M      else
+                          M         call        rt_routine
+                          M      endif
+009B   02AD               M         incf        rtptr,F
+                          M      if LARGE_RT == 1
+                          M         btfsc       _Z
+                          M         incf        rtptr+1,F
+MPASM  5.34                        MYMAIN.ASM   11-28-2009  18:00:58         PAGE  7
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                          M      endif
+009C   0036           00051         movwf       no_i
+                      00052         GET_TAB
+                          M      if FAMILY < 1
+009D   020D               M         movf        rtptr,W
+009E   091D               M         call        rt0
+                          M      else
+                          M         call        rt_routine
+                          M      endif
+009F   02AD               M         incf        rtptr,F
+                          M      if LARGE_RT == 1
+                          M         btfsc       _Z
+                          M         incf        rtptr+1,F
+                          M      endif
+00A0   0035           00053         movwf       no_o
+00A1                  00054 cmp_min
+                      00055         GET_TAB
+                          M      if FAMILY < 1
+00A1   020D               M         movf        rtptr,W
+00A2   091D               M         call        rt0
+                          M      else
+                          M         call        rt_routine
+                          M      endif
+00A3   02AD               M         incf        rtptr,F
+                          M      if LARGE_RT == 1
+                          M         btfsc       _Z
+                          M         incf        rtptr+1,F
+                          M      endif
+                      00056         COMP_FSR
+                          M     if      BANKED == 0
+                          M      if      FAMILY < 2
+00A4   0024               M         movwf   FSR
+00A5   0C17               M             movlw   fuzvals
+00A6   01E4               M             addwf   FSR,F
+                          M      else
+                          M         movwf   FSR0
+                          M             movlw   fuzvals
+                          M         addwf   FSR0,F
+                          M      endif
+                          M     else
+                          M 
+                          M      if      FAMILY == 0
+                          M             LOCAL   add_page_loop
+                          M             LOCAL   add_page_end
+                          M         movwf   save_page
+                          M             movlw   fuzvals
+                          M             addwf   save_page,F
+                          M         movf    page_bound,W
+                          M          add_page_loop
+                          M             subwf   save_page,W
+                          M             btfss   _C
+                          M             goto    add_page_end
+                          M             movlw   RAM_GAP_SIZE
+MPASM  5.34                        MYMAIN.ASM   11-28-2009  18:00:58         PAGE  8
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                          M             addwf   save_page,F
+                          M             movlw   0x020
+                          M             addwf   page_bound,W
+                          M             goto    add_page_loop
+                          M          add_page_end
+                          M      endif
+                          M 
+                          M      if      FAMILY == 1
+                          M             LOCAL   add_page_end
+                          M         movwf   FSR
+                          M             movlw   fuzvals
+                          M             addwf   FSR,F
+                          M             movlw   RAM_GAP_START
+                          M             subwf   FSR,W
+                          M             btfss   _C
+                          M             goto    add_page_end
+                          M             movlw   RAM_GAP_SIZE
+                          M             addwf   FSR,F
+                          M          add_page_end
+                          M      endif
+                          M 
+                          M      if      FAMILY == 2
+                          M         LOCAL   cross_page
+                          M         bcf     BBANK
+                          M         movwf   FSR0
+                          M             movlw   fuzvals
+                          M         addwf   FSR0,F
+                          M         btfss   _C
+                          M         goto    cross_page
+                          M         movlw   RAM_GAP_SIZE
+                          M         addwf   FSR0,F
+                          M         bsf     BBANK
+                          M       cross_page
+                          M      endif
+                          M 
+                          M     endif
+                      00057         SET_PAGE
+                          M     if      BANKED == 0
+                          M     else
+                          M      if     FAMILY == 0
+                          M         movwf   save_wreg
+                          M             movf    save_page,W
+                          M             movwf   FSR
+                          M         movf    save_wreg,W
+                          M      endif
+                          M 
+                          M      if     FAMILY == 1
+                          M      endif
+                          M 
+                          M      if     FAMILY == 2
+                          M         btfsc   BBANK
+                          M         bsf     BSR,4
+                          M      endif
+MPASM  5.34                        MYMAIN.ASM   11-28-2009  18:00:58         PAGE  9
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                          M     endif
+                          M 
+                      00058     if      RESOLUTION == 8
+00A7   0200           00059         movf        0,W
+                      00060     else
+                      00061         FMOV0F16    Temp16
+                      00062     endif
+                      00063         RES_PAGE
+                          M     if      BANKED == 0
+                          M     else
+                          M      if     FAMILY == 0
+                          M         movwf   save_wreg
+                          M         movf    FSR,W
+                          M         clrf    FSR
+                          M             movwf   save_page
+                          M         movf    save_wreg,W
+                          M      endif
+                          M 
+                          M      if     FAMILY == 1
+                          M      endif
+                          M 
+                          M      if     FAMILY == 2
+                          M         bcf     BSR,4
+                          M      endif
+                          M     endif
+                      00064     if     BANKED == 1
+                      00065         btfss       _Z
+                      00066        goto        cmp_min_ff
+                      00067         clrf        min_tmp
+                      00068         movf        no_i,W
+                      00069         decf        rtptr,F
+                      00070         addwf       rtptr,F
+                      00071      if     LARGE_RT == 1
+                      00072         btfsc       _Z
+                      00073         incf        rtptr+1,F
+                      00074      endif
+                      00075        goto        comp_min
+                      00076 cmp_min_ff
+                      00077      if     FAMILY == 0
+                      00078         movwf       save_wreg
+                      00079      endif
+                      00080     endif
+                      00081     if      RESOLUTION == 8
+00A8   008C           00082         subwf       min_tmp,W
+00A9   0703           00083         btfss       _C
+                      00084     else
+                      00085         FCPFSLT16   Temp16,min_tmp
+                      00086     endif
+00AA   0AAD           00087        goto        next_in_min
+                      00088     if      FAMILY == 0
+                      00089      if     BANKED == 0
+00AB   0200           00090         movf        0,W
+00AC   002C           00091         movwf       min_tmp
+MPASM  5.34                        MYMAIN.ASM   11-28-2009  18:00:58         PAGE 10
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00092      else
+                      00093         movf        save_wreg,W
+                      00094         movwf       min_tmp
+                      00095      endif
+                      00096     else
+                      00097      if    RESOLUTION == 8
+                      00098         movf        0,W
+                      00099         movwf       min_tmp
+                      00100      else
+                      00101         FMOV0F16    min_tmp
+                      00102      endif
+                      00103     endif
+00AD                  00104 next_in_min
+00AD   02F6           00105         decfsz      no_i,F
+00AE   0AA1           00106        goto        cmp_min
+00AF                  00107 comp_min
+                      00108         GET_TAB
+                          M      if FAMILY < 1
+00AF   020D               M         movf        rtptr,W
+00B0   091D               M         call        rt0
+                          M      else
+                          M         call        rt_routine
+                          M      endif
+00B1   02AD               M         incf        rtptr,F
+                          M      if LARGE_RT == 1
+                          M         btfsc       _Z
+                          M         incf        rtptr+1,F
+                          M      endif
+                      00109         COMP_FSR
+                          M     if      BANKED == 0
+                          M      if      FAMILY < 2
+00B2   0024               M         movwf   FSR
+00B3   0C17               M             movlw   fuzvals
+00B4   01E4               M             addwf   FSR,F
+                          M      else
+                          M         movwf   FSR0
+                          M             movlw   fuzvals
+                          M         addwf   FSR0,F
+                          M      endif
+                          M     else
+                          M 
+                          M      if      FAMILY == 0
+                          M             LOCAL   add_page_loop
+                          M             LOCAL   add_page_end
+                          M         movwf   save_page
+                          M             movlw   fuzvals
+                          M             addwf   save_page,F
+                          M         movf    page_bound,W
+                          M          add_page_loop
+                          M             subwf   save_page,W
+                          M             btfss   _C
+                          M             goto    add_page_end
+                          M             movlw   RAM_GAP_SIZE
+MPASM  5.34                        MYMAIN.ASM   11-28-2009  18:00:58         PAGE 11
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                          M             addwf   save_page,F
+                          M             movlw   0x020
+                          M             addwf   page_bound,W
+                          M             goto    add_page_loop
+                          M          add_page_end
+                          M      endif
+                          M 
+                          M      if      FAMILY == 1
+                          M             LOCAL   add_page_end
+                          M         movwf   FSR
+                          M             movlw   fuzvals
+                          M             addwf   FSR,F
+                          M             movlw   RAM_GAP_START
+                          M             subwf   FSR,W
+                          M             btfss   _C
+                          M             goto    add_page_end
+                          M             movlw   RAM_GAP_SIZE
+                          M             addwf   FSR,F
+                          M          add_page_end
+                          M      endif
+                          M 
+                          M      if      FAMILY == 2
+                          M         LOCAL   cross_page
+                          M         bcf     BBANK
+                          M         movwf   FSR0
+                          M             movlw   fuzvals
+                          M         addwf   FSR0,F
+                          M         btfss   _C
+                          M         goto    cross_page
+                          M         movlw   RAM_GAP_SIZE
+                          M         addwf   FSR0,F
+                          M         bsf     BBANK
+                          M       cross_page
+                          M      endif
+                          M 
+                          M     endif
+                      00110      if RESOLUTION == 8
+                      00111         SET_PAGE
+                          M     if      BANKED == 0
+                          M     else
+                          M      if     FAMILY == 0
+                          M         movwf   save_wreg
+                          M             movf    save_page,W
+                          M             movwf   FSR
+                          M         movf    save_wreg,W
+                          M      endif
+                          M 
+                          M      if     FAMILY == 1
+                          M      endif
+                          M 
+                          M      if     FAMILY == 2
+                          M         btfsc   BBANK
+                          M         bsf     BSR,4
+MPASM  5.34                        MYMAIN.ASM   11-28-2009  18:00:58         PAGE 12
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                          M      endif
+                          M     endif
+                          M 
+00B5   0200           00112         movf        0,W
+                      00113         RES_PAGE
+                          M     if      BANKED == 0
+                          M     else
+                          M      if     FAMILY == 0
+                          M         movwf   save_wreg
+                          M         movf    FSR,W
+                          M         clrf    FSR
+                          M             movwf   save_page
+                          M         movf    save_wreg,W
+                          M      endif
+                          M 
+                          M      if     FAMILY == 1
+                          M      endif
+                          M 
+                          M      if     FAMILY == 2
+                          M         bcf     BSR,4
+                          M      endif
+                          M     endif
+00B6   008C           00114        subwf       min_tmp,W
+00B7   0703           00115         btfss       _C
+00B8   0ABB           00116        goto        next_out_min
+00B9   020C           00117        movf        min_tmp,W
+                      00118         SET_PAGE
+                          M     if      BANKED == 0
+                          M     else
+                          M      if     FAMILY == 0
+                          M         movwf   save_wreg
+                          M             movf    save_page,W
+                          M             movwf   FSR
+                          M         movf    save_wreg,W
+                          M      endif
+                          M 
+                          M      if     FAMILY == 1
+                          M      endif
+                          M 
+                          M      if     FAMILY == 2
+                          M         btfsc   BBANK
+                          M         bsf     BSR,4
+                          M      endif
+                          M     endif
+                          M 
+00BA   0020           00119         movwf       0
+                      00120         RES_PAGE
+                          M     if      BANKED == 0
+                          M     else
+                          M      if     FAMILY == 0
+                          M         movwf   save_wreg
+                          M         movf    FSR,W
+                          M         clrf    FSR
+MPASM  5.34                        MYMAIN.ASM   11-28-2009  18:00:58         PAGE 13
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                          M             movwf   save_page
+                          M         movf    save_wreg,W
+                          M      endif
+                          M 
+                          M      if     FAMILY == 1
+                          M      endif
+                          M 
+                          M      if     FAMILY == 2
+                          M         bcf     BSR,4
+                          M      endif
+                          M     endif
+                      00121     else
+                      00122         SET_PAGE
+                      00123         FMOV0F16    Temp16
+                      00124         RES_PAGE
+                      00125        FCPFSGT16   min_tmp,Temp16
+                      00126        goto        next_out_min
+                      00127         SET_PAGE
+                      00128        FMOV16F0    min_tmp
+                      00129         RES_PAGE
+                      00130     endif
+00BB                  00131 next_out_min
+00BB   02F5           00132         decfsz      no_o,F
+00BC   0AAF           00133        goto        comp_min
+00BD   02EF           00134         decfsz      rulecount,F
+00BE   0A97           00135        goto        start_rule_min
+                      00136     if      FAMILY == 1
+                      00137         return
+                      00138     endif
+                      00139 
+                      00140 ; The end of module inference minimum
+                      00141 
+                      00069 ;------------------------------ defuzzification ------------------------------
+00BF   006B           00070                 clrf    invalidflags    
+                      00071                 FPREP_PAGE  .8
+                          M     if      BANKED == 0
+00C0   0C1F               M             movlw   fuzvals + .8
+                          M      if     FAMILY < 2
+00C1   0024               M         movwf   FSR
+                          M      else
+                          M         movwf   FSR0
+                          M      endif
+                          M     else
+                          M 
+                          M      if     FAMILY == 0
+                          M       if ((fuzvals + .8)  < 0x20 )
+                          M         movlw   fuzvals + .8
+                          M       endif
+                          M 
+                          M       if ( ((fuzvals + .8)  >= 0x20 ) && ((fuzvals + .8)  < 0x2F ) )
+                          M         movlw   fuzvals + .8  + 1 * RAM_GAP_SIZE
+                          M       endif
+                          M 
+MPASM  5.34                        MYMAIN.ASM   11-28-2009  18:00:58         PAGE 14
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                          M       if ( ((fuzvals + .8)  >= 0x30 ) && ((fuzvals + .8)  < 0x3F ) )
+                          M         movlw   fuzvals + .8  + 2 * RAM_GAP_SIZE
+                          M       endif
+                          M 
+                          M       if ( ((fuzvals + .8)  >= 0x40 ) && ((fuzvals + .8)  < 0x4F ) )
+                          M         movlw   fuzvals + .8  + 3 * RAM_GAP_SIZE
+                          M       endif
+                          M 
+                          M             movwf   save_page
+                          M      endif
+                          M 
+                          M      if     FAMILY == 1
+                          M       if ((fuzvals + .8)  < RAM_GAP_START )
+                          M             movlw   fuzvals + .8
+                          M       else
+                          M             movlw   fuzvals + .8  + RAM_GAP_SIZE
+                          M       endif
+                          M             movwf   FSR
+                          M      endif
+                          M 
+                          M      if     FAMILY == 2
+                          M       if ((fuzvals + .8)  < RAM_GAP_START )
+                          M         bcf     BBANK
+                          M             movlw   fuzvals + .8
+                          M       else
+                          M         bsf     BBANK
+                          M         movlw   low (fuzvals + .8  + RAM_GAP_SIZE)
+                          M       endif
+                          M         movwf   FSR0
+                          M      endif
+                          M     endif
+00C2   0C03           00072                 movlw   .3
+00C3   0031           00073                 movwf   otcnt
+                      00074                 include "com.asm"                  ;"COM.ASM"
+                      00001 ;*-----------------------------------------------------------------------------*
+                      00002 ;*------------------------- fuzzyTECH MCU-MP V4.1 -----------------------------*
+                      00003 ;* (c) 1995 Inform Software Corporation, 2001 Midwest Road, Oak Brook, IL60521 *
+                      00004 ;*------------ (c) 1995 Inform GmbH, Pascalstr. 23, 52076 Aachen --------------*
+                      00005 ;*-----------------------------------------------------------------------------*
+                      00006 ;*----------- defuzzification routine center of maximum for PIC16 -------------*
+                      00007 ;*-----------------------------------------------------------------------------*
+                      00008 
+                      00009 GET_XCOM    MACRO   target
+                      00010     if      RESOLUTION == 8
+                      00011         movwf       offset
+                      00012         call        xcom_routine
+                      00013         movwf       target
+                      00014     else
+                      00015         movwf       offset
+                      00016         bcf         _C
+                      00017         rlf         offset,F
+                      00018         call        xcom_routine
+                      00019         movwf       target+0
+MPASM  5.34                        MYMAIN.ASM   11-28-2009  18:00:58         PAGE 15
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00020         incf        offset,F
+                      00021         call        xcom_routine
+                      00022         movwf       target+1
+                      00023     endif
+                      00024             ENDM
+                      00025 
+                      00026     if      FAMILY == 1
+                      00027 xcom_routine
+                      00028         LD8TBL  xcom,offset
+                      00029     endif
+                      00030 
+00C4                  00031 com
+                      00032     if      RESOLUTION == 8
+                      00033         FCLR24      num
+                          M     if      FAMILY < 2
+00C4   006C               M         clrf    num+0
+00C5   006D               M         clrf    num+1
+00C6   006E               M         clrf    num+2
+                          M     else
+                          M         clrf    num+0,F
+                          M         clrf    num+1,F
+                          M         clrf    num+2,F
+                          M     endif
+                      00034         FCLR16      denom
+                          M     if      FAMILY < 2
+00C7   006F               M         clrf    denom+0
+00C8   0070               M         clrf    denom+1
+                          M     else
+                          M         clrf    denom+0,F
+                          M         clrf    denom+1,F
+                          M     endif
+                      00035     else
+                      00036         FCLR32      num
+                      00037         FCLR16      denom
+                      00038     endif
+00C9                  00039 start_com
+                      00040     if    RESOLUTION == 8
+                      00041      if      FAMILY == 0
+                      00042       if     BANKED == 0
+00C9   00F1           00043         decf        otcnt,F
+00CA   0200           00044         movf        0,W
+00CB   0060           00045         clrf        0
+00CC   00E4           00046         decf        FSR,F
+00CD   0EFF           00047         andlw       0x0FF
+                      00048       else
+                      00049         decf        otcnt,F
+                      00050         SET_PAGE
+                      00051         movf        0,W
+                      00052         clrf        0
+                      00053         bcf         FSR,4
+                      00054         decf        FSR,F
+                      00055         bsf         FSR,4
+                      00056         RES_PAGE
+MPASM  5.34                        MYMAIN.ASM   11-28-2009  18:00:58         PAGE 16
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00057       endif
+                      00058      else
+                      00059         SET_PAGE
+                      00060         movf        0,W
+                      00061         clrf        0
+                      00062         INC_FSR
+                      00063         RES_PAGE
+                      00064       if    BANKED == 0
+                      00065         andlw       0x0FF
+                      00066       endif
+                      00067      endif
+                      00068     else
+                      00069     FMOV0F16    Temp16
+                      00070     FCLR0F16
+                      00071     INC_FSR
+                      00072         bcf         _C
+                      00073         FRR16       Temp16
+                      00074         bcf         _C
+                      00075         FRR16       Temp16
+                      00076         bcf         _C
+                      00077         FRR16       Temp16
+                      00078         movf        Temp16+0,W
+                      00079         iorwf       Temp16+1,W
+                      00080     endif
+00CE   0643           00081         btfsc       _Z
+00CF   0AE4           00082         goto        ready_com
+                      00083     if      RESOLUTION == 8
+00D0   0033           00084         movwf       mulplr
+                      00085         FADD8TO16   mulplr, denom
+                          M     if      FAMILY == 2
+                          M         movfp   mulplr,WREG
+                          M         addwf   denom+1,F
+                          M         movlw   0
+                          M         addwfc  denom+0,F
+                          M     else
+00D1   0213               M             movf    mulplr,W
+00D2   01F0               M             addwf   denom+1,F
+00D3   0603               M         btfsc   _C
+00D4   02AF               M             incf    denom+0,F
+                          M     endif
+                      00086     else
+                      00087         FMOV16      Temp16,mulplr
+                      00088         FADD16      Temp16,denom
+                      00089     endif
+                      00090     if      FAMILY < 1
+00D5   0211           00091         movf        otcnt,W
+00D6   0919           00092         call        xcom
+00D7   0032           00093         movwf       mulcnd
+00D8   0939           00094         call        mpy8_8
+                      00095         FADD16TO24  res_mpy,num
+                          M     if      FAMILY == 2
+                          M         movfp   res_mpy+1,WREG
+                          M         addwf   num+2,F
+MPASM  5.34                        MYMAIN.ASM   11-28-2009  18:00:58         PAGE 17
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                          M         movfp   res_mpy+0,WREG
+                          M         addwfc  num+1,F
+                          M         movlw   0x00
+                          M         addwfc  num+0,F
+                          M     else
+00D9   0216               M             movf    res_mpy+1,W
+00DA   01EE               M             addwf   num+2,F
+00DB   0C01               M         movlw   0x01
+00DC   0603               M             btfsc   _C
+00DD   01ED               M             addwf   num+1,F
+00DE   0603               M             btfsc   _C
+00DF   01EC               M             addwf   num+0,F
+00E0   0215               M             movf    res_mpy+0,W
+00E1   01ED               M             addwf   num+1,F
+00E2   0603               M         btfsc   _C
+00E3   02AC               M             incf    num+0,F
+                          M     endif
+                      00096     else
+                      00097         movf        otoffset,W
+                      00098      if     RESOLUTION == 8
+                      00099         GET_XCOM    mulcnd
+                      00100         call        mpy8_8
+                      00101         FADD16TO24  res_mpy,num
+                      00102      else
+                      00103         GET_XCOM    mulcnd
+                      00104         call        mpy16_16
+                      00105         FADD32      res_mpy,num
+                      00106      endif
+                      00107     endif
+00E4                  00108 ready_com
+                      00109     if      FAMILY > 0
+                      00110         incf        otoffset,F
+                      00111         decfsz      otcnt,F
+                      00112     else
+00E4   0231           00113         movf        otcnt,F
+00E5   0743           00114         btfss       _Z
+                      00115     endif
+00E6   0AC9           00116         goto        start_com
+                      00117     if      RESOLUTION == 8
+00E7                  00118 ishift_com
+00E7   022C           00119         movf        num+0,F
+00E8   0743           00120         btfss       _Z
+00E9   0AED           00121         goto        ishift_com2
+00EA   020F           00122         movf        denom+0,W
+00EB   0643           00123         btfsc       _Z
+00EC   0AF5           00124         goto        compute_com
+00ED                  00125 ishift_com2
+00ED   0403           00126         bcf         _C
+00EE   032C           00127         rrf         num+0,F
+00EF   032D           00128         rrf         num+1,F
+00F0   032E           00129         rrf         num+2,F
+00F1   0403           00130         bcf         _C
+00F2   032F           00131         rrf         denom+0,F
+MPASM  5.34                        MYMAIN.ASM   11-28-2009  18:00:58         PAGE 18
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+00F3   0330           00132         rrf         denom+1,F
+00F4   0AE7           00133         goto        ishift_com
+                      00134     endif
+00F5                  00135 compute_com
+                      00136     if      RESOLUTION == 8
+00F5   0210           00137         movf        denom+1,W
+00F6   0743           00138         btfss       _Z
+                      00139     else
+                      00140         FTSTFSZ16   denom+0
+                      00141     endif
+00F7   0AFA           00142         goto        rout_div_com
+00F8   0503           00143         bsf         _C
+                      00144     if      FAMILY == 1
+                      00145         return
+                      00146     else
+00F9   0B0F           00147         goto        end_com
+                      00148     endif
+00FA                  00149 rout_div_com
+                      00150     if      FAMILY == 1
+                      00151      if     RESOLUTION == 8
+                      00152         call        div16_8
+                      00153      else
+                      00154         call        div32_16
+                      00155      endif
+                      00156     else
+                      00157         include     "div16_8.asm"
+                      00001         LIST
+                      00002 ; DIV16_8.ASM   16 by 8 Bit Division Routine    v4.1 Inform Software Corporation
+Warning[207]: Found label after column 1. (no_carry)
+Warning[207]: Found label after column 1. (no_sub)
+                      00083         LIST
+                      00084 
+                      00158     endif
+010D   0403           00159         bcf         _C
+                      00160     if      RESOLUTION == 8
+010E   020E           00161     movf        res_div+1,W
+                      00162     else
+                      00163         FMOV16      res_div+2,Temp16
+                      00164     endif
+                      00165     if      FAMILY == 1
+                      00166         return
+                      00167     else
+Warning[207]: Found label after column 1. (end_com)
+010F                  00168  end_com
+                      00169     endif
+                      00170 
+                      00171 ; The end of module com
+                      00172 
+010F   036B           00075                 rlf     invalidflags,F  
+0110   060B           00076                 btfsc   invalidflags,0  
+0111   0C80           00077                 movlw   0x080
+0112   002A           00078                 movwf   lv2_Output  
+                      00079                         
+MPASM  5.34                        MYMAIN.ASM   11-28-2009  18:00:58         PAGE 19
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+Warning[205]: Found directive in column 1. (if)
+                      00080 if $ > 0x01FF           
+                      00081    ERROR  "Fuzzy System is too large. Please reduce your project!"          
+                      00082 endif                   
+                      00083                         
+0113   0B70           00084                 goto    end_myproj  
+                      00085                         
+                      00086 ;-------------------------------- initmyproj_ --------------------------------
+0114                  00087 initmyproj_             
+                      00088                 FPREP_PAGE  .6
+                          M     if      BANKED == 0
+0114   0C1D               M             movlw   fuzvals + .6
+                          M      if     FAMILY < 2
+0115   0024               M         movwf   FSR
+                          M      else
+                          M         movwf   FSR0
+                          M      endif
+                          M     else
+                          M 
+                          M      if     FAMILY == 0
+                          M       if ((fuzvals + .6)  < 0x20 )
+                          M         movlw   fuzvals + .6
+                          M       endif
+                          M 
+                          M       if ( ((fuzvals + .6)  >= 0x20 ) && ((fuzvals + .6)  < 0x2F ) )
+                          M         movlw   fuzvals + .6  + 1 * RAM_GAP_SIZE
+                          M       endif
+                          M 
+                          M       if ( ((fuzvals + .6)  >= 0x30 ) && ((fuzvals + .6)  < 0x3F ) )
+                          M         movlw   fuzvals + .6  + 2 * RAM_GAP_SIZE
+                          M       endif
+                          M 
+                          M       if ( ((fuzvals + .6)  >= 0x40 ) && ((fuzvals + .6)  < 0x4F ) )
+                          M         movlw   fuzvals + .6  + 3 * RAM_GAP_SIZE
+                          M       endif
+                          M 
+                          M             movwf   save_page
+                          M      endif
+                          M 
+                          M      if     FAMILY == 1
+                          M       if ((fuzvals + .6)  < RAM_GAP_START )
+                          M             movlw   fuzvals + .6
+                          M       else
+                          M             movlw   fuzvals + .6  + RAM_GAP_SIZE
+                          M       endif
+                          M             movwf   FSR
+                          M      endif
+                          M 
+                          M      if     FAMILY == 2
+                          M       if ((fuzvals + .6)  < RAM_GAP_START )
+                          M         bcf     BBANK
+                          M             movlw   fuzvals + .6
+                          M       else
+MPASM  5.34                        MYMAIN.ASM   11-28-2009  18:00:58         PAGE 20
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                          M         bsf     BBANK
+                          M         movlw   low (fuzvals + .6  + RAM_GAP_SIZE)
+                          M       endif
+                          M         movwf   FSR0
+                          M      endif
+                          M     endif
+0116   0C03           00089                 movlw   .3
+0117   002C           00090                 movwf   loopcnt
+                      00091 initloop        FCLR_INC_FSR    
+                          M     if      BANKED == 0
+                          M      if     FAMILY < 2
+0118   0060               M         clrf    0
+0119   02A4               M             incf    FSR,F
+                          M       if    RESOLUTION == 16
+                          M         clrf    0
+                          M             incf    FSR,F
+                          M       endif
+                          M      else
+                          M         clrf    INDF0,F
+                          M       if    RESOLUTION == 16
+                          M         clrf    INDF0,F
+                          M       endif
+                          M      endif
+                          M 
+                          M     else
+                          M 
+                          M      if     FAMILY == 0
+                          M             SET_PAGE
+                          M         clrf    0
+                          M             incf        FSR,F
+                          M             bsf         FSR,4
+                          M             RES_PAGE
+                          M      endif
+                          M 
+                          M      if     FAMILY == 1
+                          M             LOCAL   p1_test
+                          M             LOCAL   end_test
+                          M         clrf    0
+                          M             btfss   FSR,7
+                          M             goto    p1_test
+                          M             incf    FSR,F
+                          M       if    RESOLUTION == 16
+                          M         clrf    0
+                          M             incf    FSR,F
+                          M       endif
+                          M             goto    end_test
+                          M           p1_test
+                          M         incf    FSR,F
+                          M       if    RESOLUTION == 16
+                          M         clrf    0
+                          M             incf    FSR,F
+                          M       endif
+                          M         btfss   FSR,7
+MPASM  5.34                        MYMAIN.ASM   11-28-2009  18:00:58         PAGE 21
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                          M             goto    end_test
+                          M             movlw   RAM_GAP_SIZE
+                          M         addwf   FSR,F
+                          M           end_test
+                          M      endif
+                          M 
+                          M      if     FAMILY == 2
+                          M         LOCAL   cross_page
+                          M             SET_PAGE
+                          M         clrf    INDF0,F
+                          M       if    RESOLUTION == 16
+                          M         clrf    INDF0,F
+                          M       endif
+                          M         movpf   FSR0,WREG
+                          M         btfss   _Z
+                          M         goto    cross_page
+                          M         bsf     BBANK
+                          M         movlw   0x20
+                          M         movwf   FSR0
+                          M       cross_page
+                          M             RES_PAGE
+                          M      endif
+                          M 
+                          M     endif
+011A   02EC           00092                 decfsz  loopcnt,F   
+011B   0B18           00093                 goto    initloop    
+011C   0800           00094                 retlw   0
+                      00095                         
+                      00096                 include "MPY8_8.ASM"               ;"MPY8_8.ASM"
+                      00001         LIST
+                      00002 ; MPY8_8.ASM    8 * 8 Bit Multiplication        v4.1 Inform Software Corporation
+                      00073         LIST
+                      00074 
+                      00097                 include "FLMSS.ASM"                ;"FLMSS.ASM"
+                      00001 ;*-----------------------------------------------------------------------------*
+                      00002 ;*------------------------- fuzzyTECH MCU-MP V4.1 -----------------------------*
+                      00003 ;* (c) 1995 Inform Software Corporation, 2001 Midwest Road, Oak Brook, IL60521 *
+                      00004 ;*------------ (c) 1995 Inform GmbH, Pascalstr. 23, 52076 Aachen --------------*
+                      00005 ;*-----------------------------------------------------------------------------*
+                      00006 ;*----- fuzzification routine fast linear membership with slope for PIC16 -----*
+                      00007 ;*-----------------------------------------------------------------------------*
+                      00008 
+                      00009     if      RESOLUTION == 8
+                      00010 GET_TERM    MACRO
+                      00011         movwf       offset
+                      00012         call        tpts_routine
+                      00013             ENDM
+                      00014     else
+                      00015 GET_TERM    MACRO   target
+                      00016         movwf       offset
+                      00017         bcf         _C
+                      00018         rlf         offset,F
+                      00019         call        tpts_routine
+MPASM  5.34                        MYMAIN.ASM   11-28-2009  18:00:58         PAGE 22
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00020         movwf       target + 0
+                      00021         incf        offset,F
+                      00022         call        tpts_routine
+                      00023         movwf       target + 1
+                      00024             ENDM
+                      00025     endif
+                      00026 
+                      00027     if      FAMILY == 1
+                      00028 tpts_routine
+                      00029         LD8TBL      tpts,offset
+                      00030 
+                      00031    flmss
+                      00032     else
+Warning[207]: Found label after column 1. (flmss_)
+012B                  00033    flmss_
+                      00034     endif
+012B                  00035 flmss_start
+012B   020D           00036         movf        itptr,W
+                      00037     if      FAMILY == 0
+012C   0900           00038         call        tpts
+012D   002F           00039         movwf       cur_term
+012E   008C           00040         subwf       crisp,W
+012F   0703           00041         btfss       _C
+0130   0B68           00042         goto        mindone
+0131   0743           00043         btfss       _Z
+0132   0B39           00044         goto        cmp_flmss
+                      00045     else
+                      00046      if     RESOLUTION == 8
+                      00047         GET_TERM
+                      00048         movwf       cur_term
+                      00049         subwf       crisp,W
+                      00050         btfss       _C
+                      00051         goto        mindone
+                      00052         btfss       _Z
+                      00053         goto        cmp_flmss
+                      00054      else
+                      00055         GET_TERM    cur_term
+                      00056         FSUB16F     cur_term,crisp,Temp16
+                      00057         btfss       _C
+                      00058         goto        mindone
+                      00059         FTSTFSZ16   Temp16
+                      00060         goto        cmp_flmss
+                      00061      endif
+                      00062     endif
+0133   028D           00063         incf        itptr,W
+                      00064     if      FAMILY == 1
+                      00065      if     RESOLUTION == 8
+                      00066         GET_TERM
+                      00067         andlw       0x0FF
+                      00068      else
+                      00069         GET_TERM    Temp16
+                      00070         iorwf       Temp16+0,W
+                      00071      endif
+MPASM  5.34                        MYMAIN.ASM   11-28-2009  18:00:58         PAGE 23
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00072     else
+0134   0900           00073         call        tpts
+0135   0EFF           00074         andlw       0x0FF
+                      00075     endif
+0136   0743           00076         btfss       _Z
+0137   0B68           00077         goto        mindone
+0138   0B66           00078         goto        maxdone
+0139                  00079 cmp_flmss
+0139   0C02           00080         movlw       .2
+013A   01CD           00081         addwf       itptr,W
+                      00082     if      FAMILY == 0
+013B   0900           00083         call        tpts
+013C   0030           00084         movwf       cur_term2
+013D   020C           00085         movf        crisp,W
+013E   0090           00086         subwf       cur_term2,W
+013F   0703           00087         btfss       _C
+                      00088     else
+                      00089      if     RESOLUTION == 8
+                      00090         GET_TERM
+                      00091         movwf       cur_term2
+                      00092         movf        crisp,W
+                      00093         subwf       cur_term2,W
+                      00094         btfss       _C
+                      00095      else
+                      00096         GET_TERM    cur_term2
+                      00097         FCPFSLE16   crisp,cur_term2
+                      00098      endif
+                      00099     endif
+0140   0B53           00100         goto        ds
+0141                  00101 as
+0141   0C01           00102         movlw       .1
+0142   01CD           00103         addwf       itptr,W
+                      00104     if      FAMILY == 1
+                      00105      if     RESOLUTION == 8
+                      00106         GET_TERM
+                      00107         andlw       0x0FF
+                      00108      else
+                      00109         GET_TERM    Temp16
+                      00110         iorwf       Temp16+0,W
+                      00111      endif
+                      00112     else
+0143   0900           00113         call        tpts
+0144   0EFF           00114         andlw       0x0FF
+                      00115     endif
+0145   0643           00116         btfsc       _Z
+0146   0B66           00117         goto        maxdone
+                      00118 
+                      00119     if      RESOLUTION == 8
+0147   0033           00120         movwf       mulplr
+0148   020F           00121         movf        cur_term,W
+0149   008C           00122         subwf       crisp,W
+014A   0032           00123         movwf       mulcnd
+014B   0939           00124         call        mpy8_8
+MPASM  5.34                        MYMAIN.ASM   11-28-2009  18:00:58         PAGE 24
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+014C   0403           00125         bcf         _C
+014D   0315           00126         rrf         res_mpy+0,W
+014E   0EFF           00127         andlw       0x0FF
+014F   0743           00128         btfss       _Z
+0150   0B66           00129         goto        maxdone
+0151   0316           00130         rrf         res_mpy+1,W
+                      00131     else
+                      00132         FMOV16      Temp16,mulplr
+                      00133         FSUB16F     cur_term,crisp,mulcnd
+                      00134         call        mpy16_16
+                      00135         bcf         _C
+                      00136         rrf         res_mpy+0,W
+                      00137         movwf       Temp16+0
+                      00138         rrf         res_mpy+1,W
+                      00139         movwf       Temp16+1
+                      00140         iorwf       Temp16+0,W
+                      00141         btfss       _Z
+                      00142         goto        maxdone
+                      00143         rrf         res_mpy+2,W
+                      00144         movwf       Temp16+0
+                      00145         rrf         res_mpy+3,W
+                      00146         movwf       Temp16+1
+                      00147     endif
+0152   0B69           00148         goto        store
+0153                  00149 ds
+0153   0C03           00150         movlw       .3
+0154   01CD           00151         addwf       itptr,W
+                      00152     if      FAMILY == 1
+                      00153      if     RESOLUTION == 8
+                      00154         GET_TERM
+                      00155         andlw       0x0FF
+                      00156      else
+                      00157         GET_TERM    Temp16
+                      00158         iorwf       Temp16+0,W
+                      00159      endif
+                      00160     else
+0155   0900           00161         call        tpts
+0156   0EFF           00162         andlw       0x0FF
+                      00163     endif
+0157   0643           00164         btfsc       _Z
+0158   0B68           00165         goto        mindone
+                      00166     if      RESOLUTION == 8
+0159   0033           00167         movwf       mulplr
+015A   0210           00168         movf        cur_term2,W
+015B   008C           00169         subwf       crisp,W
+015C   0032           00170         movwf       mulcnd
+015D   0939           00171         call        mpy8_8
+015E   0403           00172         bcf         _C
+015F   0315           00173         rrf         res_mpy+0,W
+0160   0EFF           00174         andlw       0x0FF
+0161   0743           00175         btfss       _Z
+0162   0B68           00176         goto        mindone
+0163   0336           00177         rrf         res_mpy+1,F
+MPASM  5.34                        MYMAIN.ASM   11-28-2009  18:00:58         PAGE 25
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0164   0256           00178         comf        res_mpy+1,W
+                      00179     else
+                      00180         FMOV16      Temp16,mulplr
+                      00181         FSUB16F     cur_term2,crisp,mulcnd
+                      00182         call        mpy16_16
+                      00183         bcf         _C
+                      00184         rrf         res_mpy+0,W
+                      00185         movwf       Temp16+0
+                      00186         rrf         res_mpy+1,W
+                      00187         movwf       Temp16+1
+                      00188         iorwf       Temp16+0,W
+                      00189         btfss       _Z
+                      00190         goto        mindone
+                      00191         rrf         res_mpy+2,W
+                      00192         movwf       Temp16+0
+                      00193         rrf         res_mpy+3,W
+                      00194         movwf       Temp16+1
+                      00195         FCOMF16     Temp16
+                      00196     endif
+0165   0B69           00197         goto        store
+0166                  00198 maxdone
+                      00199     if      RESOLUTION == 8
+0166   0CFF           00200         movlw       0x0FF
+                      00201     else
+                      00202         movlw       0x0FF
+                      00203         movwf       Temp16+0
+                      00204         movwf       Temp16+1
+                      00205     endif
+0167   0B69           00206         goto        store
+0168                  00207 mindone
+                      00208     if      RESOLUTION == 8
+0168   0C00           00209         movlw       0x000
+                      00210     else
+                      00211         movlw       0x000
+                      00212         movwf       Temp16+0
+                      00213         movwf       Temp16+1
+                      00214     endif
+0169                  00215 store
+                      00216     if      RESOLUTION == 8
+                      00217         SET_PAGE
+                          M     if      BANKED == 0
+                          M     else
+                          M      if     FAMILY == 0
+                          M         movwf   save_wreg
+                          M             movf    save_page,W
+                          M             movwf   FSR
+                          M         movf    save_wreg,W
+                          M      endif
+                          M 
+                          M      if     FAMILY == 1
+                          M      endif
+                          M 
+                          M      if     FAMILY == 2
+MPASM  5.34                        MYMAIN.ASM   11-28-2009  18:00:58         PAGE 26
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                          M         btfsc   BBANK
+                          M         bsf     BSR,4
+                          M      endif
+                          M     endif
+                          M 
+0169   0020           00218         movwf       0
+                      00219         INC_FSR
+                          M     if      BANKED == 0
+                          M 
+                          M      if     FAMILY < 2
+016A   02A4               M             incf    FSR,F
+                          M       if    RESOLUTION == 16
+                          M             incf    FSR,F
+                          M       endif
+                          M      else
+                          M      endif
+                          M 
+                          M     else
+                          M 
+                          M      if     FAMILY == 0
+                          M             incf        FSR,F
+                          M             bsf         FSR,4
+                          M      endif
+                          M 
+                          M      if     FAMILY == 1
+                          M             LOCAL   p1_test
+                          M             LOCAL   end_test
+                          M             btfss   FSR,7
+                          M             goto    p1_test
+                          M             incf    FSR,F
+                          M       if    RESOLUTION == 16
+                          M             incf    FSR,F
+                          M       endif
+                          M             goto    end_test
+                          M           p1_test
+                          M             incf    FSR,F
+                          M       if    RESOLUTION == 16
+                          M             incf    FSR,F
+                          M       endif
+                          M             btfss   FSR,7
+                          M             goto    end_test
+                          M             movlw   RAM_GAP_SIZE
+                          M             addwf   FSR,F
+                          M           end_test
+                          M      endif
+                          M 
+                          M      if     FAMILY == 2
+                          M         LOCAL       first_page
+                          M         movpf       FSR0,FSR0
+                          M         btfss       _Z
+                          M         goto        first_page
+                          M         movwf       FSR1
+                          M         movlw       RAM_GAP_SIZE
+MPASM  5.34                        MYMAIN.ASM   11-28-2009  18:00:58         PAGE 27
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                          M         addwf       FSR0,F
+                          M         movpf       FSR1,WREG
+                          M         bsf         BBANK
+                          M       first_page
+                          M      endif
+                          M 
+                          M     endif
+                      00220         RES_PAGE
+                          M     if      BANKED == 0
+                          M     else
+                          M      if     FAMILY == 0
+                          M         movwf   save_wreg
+                          M         movf    FSR,W
+                          M         clrf    FSR
+                          M             movwf   save_page
+                          M         movf    save_wreg,W
+                          M      endif
+                          M 
+                          M      if     FAMILY == 1
+                          M      endif
+                          M 
+                          M      if     FAMILY == 2
+                          M         bcf     BSR,4
+                          M      endif
+                          M     endif
+                      00221     else
+                      00222         SET_PAGE
+                      00223         FMOV16F0    Temp16
+                      00224         INC_FSR
+                      00225         RES_PAGE
+                      00226     endif
+016B   0C04           00227         movlw       4
+016C   01ED           00228         addwf       itptr,F
+016D   02EE           00229         decfsz      itcnt,F
+016E   0B2B           00230         goto        flmss_start
+                      00231     if      FAMILY == 1
+                      00232         return
+                      00233     else
+016F   0800           00234         retlw       0
+                      00235     endif
+                      00236 
+                      00237 ; The end of module flmss
+                      00238 
+0170                  00098 end_myproj              
+Warning[205]: Found directive in column 1. (if)
+                      00099 if ((FT_code_start / 0x1FF) != ($ / 0x1FF))         
+                      00100    ERROR  "The complete fuzzy code must fit in one page."           
+                      00101    ERROR  "Please take care of the fuzzy code location."            
+                      00102 endif                   
+                      00103                         
+                      00104 ;data size knowledge base (bytes):
+                      00105 ;RAM:        13   0000DH
+                      00106 ;ROM:        53   00035H
+MPASM  5.34                        MYMAIN.ASM   11-28-2009  18:00:58         PAGE 28
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00107 ;TOTAL:      66   00042H
+                      00108 ;
+                      00032 
+0170   020B           00033             movf    invalidflags,W
+0171   0743           00034         btfss   _Z                  ;test if the project is completely defined
+0172   0B75           00035             goto    case_no_fire
+                      00036 
+0173                  00037 case_fire
+                      00038             ;proj OK
+0173   020A           00039         movf    lv2_Output,W        ;fetch crisp output
+                      00040 
+                      00041           ; user code
+                      00042 
+0174   0A81           00043             goto    main_loop
+                      00044 
+0175                  00045 case_no_fire
+                      00046             ;no rule for this input combination
+                      00047 
+                      00048           ; call default_handling_routine
+                      00049 
+                      00050           ; user code
+                      00051 
+0175   0A81           00052             goto    main_loop
+                      00053 
+                      00054 ;------------------------------------------------------------------------------
+                      00055 ;- RESET VECTOR                                                               -
+                      00056 ;------------------------------------------------------------------------------
+                      00057 
+01FF                  00058         ORG     RESET_VECTOR
+                      00059 
+01FF   0A80           00060         goto    mymain              ;jump to program code
+                      00061 
+                      00062         END                         ;end for assembler
+MPASM  5.34                        MYMAIN.ASM   11-28-2009  18:00:58         PAGE 29
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+ADD_TBL16                         
+BANKED                            00000000
+C                                 00000000
+CODE_START                        00000080
+COMP_FSR                          
+DEC_FSR                           
+FAARG                             0000000D
+FAARGLO                           0000000E
+FADD16                            
+FADD16TO24                        
+FADD32                            
+FADD8TO16                         
+FAMILY                            00000000
+FBARG                             0000000F
+FBARGLO                           00000010
+FCLR                              
+FCLR0F16                          
+FCLR16                            
+FCLR24                            
+FCLR32                            
+FCLR_AUTO                         
+FCLR_INC_FSR                      
+FCOMF16                           
+FCPFSGT16                         
+FCPFSLE16                         
+FCPFSLT16                         
+FDEC16                            
+FMOV0F16                          
+FMOV16                            
+FMOV16F0                          
+FMOV16K                           
+FPREP_PAGE                        
+FREM                              00000012
+FRR16                             
+FRR24                             
+FRR32                             
+FSET                              
+FSET0F16                          
+FSET_AUTO_DEC                     
+FSET_AUTO_INC                     
+FSR                               00000004
+FSUB16F                           
+FTEMP                             00000011
+FTMOV16                           
+FTSTFSZ16                         
+FT_code_start                     00000085
+FTcount                           00000014
+FUZZY_RAM_END                     0000001F
+FUZZY_RAM_START                   00000008
+GET_TAB                           
+GET_TERM                          
+GET_XCOM                          
+INC_FSR                           
+MPASM  5.34                        MYMAIN.ASM   11-28-2009  18:00:58         PAGE 30
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+INDF                              00000000
+IS_PAGE                           
+LARGE_RT                          00000000
+LD16PTR                           
+LD16TBL                           
+LD8PTR                            
+LD8TBL                            
+LD_TBL16                          
+LSB_MSB                           00000001
+MSB_LSB                           00000000
+Min                               00000092
+PCL                               00000002
+PCLATH                            0000000A
+RAM_END                           0000001F
+RAM_GAP_START                     00000000
+RAM_START                         00000008
+RESET_VECTOR                      000001FF
+RESOLUTION                        00000008
+RES_PAGE                          
+SET_PAGE                          
+STATUS                            00000003
+W                                 00000000
+Z                                 00000002
+_C                                STATUS,C
+_Z                                STATUS,Z
+__16C54                           00000001
+__DEBUG                           1
+as                                00000141
+case_fire                         00000173
+case_no_fire                      00000175
+cmp_flmss                         00000139
+cmp_min                           000000A1
+cmp_reg                           00000014
+com                               000000C4
+comp_min                          000000AF
+compute_com                       000000F5
+crisp                             0000000C
+cur_term                          0000000F
+cur_term2                         00000010
+denom                             0000000F
+denomLO                           00000010
+div16_8                           000000FA
+divLoop                           000000FD
+ds                                00000153
+end_com                           0000010F
+end_myproj                        00000170
+flmss                             0000003A
+flmss_                            0000012B
+flmss_start                       0000012B
+fuzvals                           00000017
+initloop                          00000118
+initmyproj                        00000038
+initmyproj_                       00000114
+MPASM  5.34                        MYMAIN.ASM   11-28-2009  18:00:58         PAGE 31
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+invalidflags                      0000000B
+ishift_com                        000000E7
+ishift_com2                       000000ED
+itcnt                             0000000E
+itptr                             0000000D
+loopcnt                           0000000C
+lv0_Input_1                       00000008
+lv1_Input_2                       00000009
+lv2_Output                        0000000A
+main_loop                         00000081
+max_tmp                           0000000C
+maxdone                           00000166
+maxout                            0000000C
+maxoutpos                         0000000E
+min_tmp                           0000000C
+mindone                           00000168
+mpy8_8                            00000039
+mpy8_8_                           0000011D
+mpyLoop                           00000122
+mulcnd                            00000012
+mulplr                            00000013
+mymain                            00000080
+myproj                            00000085
+next_in_min                       000000AD
+next_out_min                      000000BB
+no_carry                          00000106
+no_i                              00000016
+no_o                              00000015
+no_sub                            00000109
+num                               0000000C
+numHI                             0000000D
+numLO                             0000000E
+offset                            00000014
+otcnt                             00000011
+page_bound                        00000012
+page_var                          00000012
+pc_save                           00000085
+ready_com                         000000E4
+res_div                           0000000D
+res_divLO                         0000000E
+res_mpy                           00000015
+res_mpyLO                         00000016
+rout_div_com                      000000FA
+rt0                               0000001D
+rt_table                          00000010
+rt_tableLO                        00000011
+rtptr                             0000000D
+rulecount                         0000000F
+start_com                         000000C9
+start_rule_min                    00000097
+store                             00000169
+tmp_var                           00000016
+tpts                              00000000
+MPASM  5.34                        MYMAIN.ASM   11-28-2009  18:00:58         PAGE 32
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+user1                             00000020
+var1                              0000000C
+var10                             00000015
+var11                             00000016
+var2                              0000000D
+var3                              0000000E
+var4                              0000000F
+var5                              00000010
+var6                              00000011
+var7                              00000012
+var8                              00000013
+var9                              00000014
+xcom                              00000019
+
+
+MEMORY USAGE MAP ('X' = Used,  '-' = Unused)
+
+0000 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXX-----
+0080 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+00C0 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0100 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0140 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXX----------
+01C0 : ---------------- ---------------- ---------------- ---------------X
+
+All other memory blocks unused.
+
+Program Memory Words Used:   306
+Program Memory Words Free:   206
+
+
+Errors   :     0
+Warnings :    70 reported,     0 suppressed
+Messages :     0 reported,     0 suppressed
+
+

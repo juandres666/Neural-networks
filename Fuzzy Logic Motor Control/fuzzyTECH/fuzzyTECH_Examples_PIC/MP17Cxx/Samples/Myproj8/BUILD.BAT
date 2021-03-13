@@ -1,0 +1,1 @@
+mpasm mymain.asm /l

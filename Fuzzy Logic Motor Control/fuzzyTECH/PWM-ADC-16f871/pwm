@@ -1,0 +1,7 @@
+		list		p=16F871
+		#include	<p16f871.inc>
+		__config 	0x3f39
+		errorlevel	-302
+		
+		
+		

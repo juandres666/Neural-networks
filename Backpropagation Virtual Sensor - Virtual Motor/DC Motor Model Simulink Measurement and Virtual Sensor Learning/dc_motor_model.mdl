@@ -1,0 +1,1431 @@
+Model {
+  Name			  "dc_motor_model"
+  Version		  7.4
+  MdlSubVersion		  0
+  GraphicalInterface {
+    NumRootInports	    0
+    NumRootOutports	    0
+    ParameterArgumentNames  ""
+    ComputedModelVersion    "1.182"
+    NumModelReferences	    0
+    NumTestPointedSignals   0
+  }
+  Description		  "Linear Electric Actuator (Motor Model)\n\nThis model shows how to model a linear actuator.  It consi"
+  "sts\nof a DC motor driving a 6.25:1 worm gear which in turn drives a 3mm\nlead screw to produce linear motion. Manuf"
+  "acturer data for the\nactuator defines no-load linear speed (26mm/s), rated load (1000N),\nrated-load linear speed ("
+  "19mm/s), and maximum current (5A). The\nmaximum static force is 4000N and the rated voltage is 24V DC.\n\nIf frictio"
+  "n and rotor damping are neglected, the DC Motor mask\nparameters can be  calculated as follows. A no-load speed of 2"
+  "6mm/s\nis equivalent to (26/3)*6.25*60=3250rpm. The rated motor speed is\n(19/3)*6.25*60=2375rpm, and the rated powe"
+  "r is\n1000N*19e-3m/s=19W. To run the model based on these parameters,\nset the DC Motor Model parameterization param"
+  "eter to By rated\npower, rated speed & no-load speed and remove the Friction block.\nThe results validate the speeds"
+  " for zero and 1000N load, but\nunder-predict the maximum current and maximum static force.\n\nFor a more accurate ap"
+  "proximation of the motor, friction effects\nmust be included. The no-load and rated-load speed information\ndepends "
+  "on the unknown friction levels, so instead we parameterize\nthe motor in terms of the maximum current which occurs w"
+  "hen the\nrotor is locked (i.e. no  back emf). Then the winding resistance is\ngiven by rated voltage divided by maxi"
+  "mum current i.e. 24V/5A = 4.8\nohms. The torque constant is given by maximum static torque divided\nby the current i"
+  ".e. (4000N*3e-3m/s/(2*pi*6.25))/4.8A = 0.3056Nm/A.\nTo run the model based on these parameters, set the DC Motor\nMo"
+  "del Parameterization parameter to By equivalent circuit parameters\nand reinstate the Friction block. You should fin"
+  "d that a torsional friction\nof 0.03Nm results in a 26mm/s no-load speed. The model also\nconfirms rated-load speed "
+  "is 19mm/s, maximum current is 5A and\nmaximum linear force is 4000N.\n\nNote that a limitation of this model is that"
+  " the load can back drive\nthe motor through the worm gear. A more detailed friction\nmodel would be required to prev"
+  "ent this.\n\n\n\n\nCopyright 2008-2009 The MathWorks(TM), Inc.\n"
+  SavedCharacterEncoding  "US-ASCII"
+  SaveDefaultBlockParams  on
+  ScopeRefreshTime	  0.035000
+  OverrideScopeRefreshTime on
+  DisableAllScopes	  off
+  DataTypeOverride	  "UseLocalSettings"
+  MinMaxOverflowLogging	  "UseLocalSettings"
+  MinMaxOverflowArchiveMode "Overwrite"
+  MaxMDLFileLineLength	  120
+  UserBdParams		  "PhysicalModelingChecksum;PhysicalModelingParameterChecksum;PhysicalModelingProducts"
+  PhysicalModelingChecksum "256827531"
+  PhysicalModelingParameterChecksum "175024405"
+  PhysicalModelingProducts "SimElectronics|Simscape"
+  Created		  "Mon Oct 16 09:58:11 2006"
+  Creator		  "rhyde"
+  UpdateHistory		  "UpdateHistoryNever"
+  ModifiedByFormat	  "%<Auto>"
+  LastModifiedBy	  "Owner"
+  ModifiedDateFormat	  "%<Auto>"
+  LastModifiedDate	  "Tue Feb 02 19:26:25 2010"
+  RTWModifiedTimeStamp	  187039584
+  ModelVersionFormat	  "1.%<AutoIncrement:182>"
+  ConfigurationManager	  "None"
+  SampleTimeColors	  off
+  SampleTimeAnnotations	  off
+  LibraryLinkDisplay	  "none"
+  WideLines		  off
+  ShowLineDimensions	  off
+  ShowPortDataTypes	  off
+  ShowLoopsOnError	  on
+  IgnoreBidirectionalLines off
+  ShowStorageClass	  off
+  ShowTestPointIcons	  on
+  ShowSignalResolutionIcons on
+  ShowViewerIcons	  on
+  SortedOrder		  off
+  ExecutionContextIcon	  off
+  ShowLinearizationAnnotations on
+  BlockNameDataTip	  off
+  BlockParametersDataTip  off
+  BlockDescriptionStringDataTip	off
+  ToolBar		  on
+  StatusBar		  on
+  BrowserShowLibraryLinks off
+  BrowserLookUnderMasks	  off
+  SimulationMode	  "normal"
+  LinearizationMsg	  "none"
+  Profile		  off
+  ParamWorkspaceSource	  "MATLABWorkspace"
+  AccelSystemTargetFile	  "accel.tlc"
+  AccelTemplateMakefile	  "accel_default_tmf"
+  AccelMakeCommand	  "make_rtw"
+  TryForcingSFcnDF	  off
+  RecordCoverage	  off
+  CovPath		  "/"
+  CovSaveName		  "covdata"
+  CovMetricSettings	  "dw"
+  CovNameIncrementing	  off
+  CovHtmlReporting	  on
+  CovForceBlockReductionOff on
+  covSaveCumulativeToWorkspaceVar on
+  CovSaveSingleToWorkspaceVar on
+  CovCumulativeVarName	  "covCumulativeData"
+  CovCumulativeReport	  off
+  CovReportOnPause	  on
+  CovModelRefEnable	  "Off"
+  CovExternalEMLEnable	  off
+  ExtModeBatchMode	  off
+  ExtModeEnableFloating	  on
+  ExtModeTrigType	  "manual"
+  ExtModeTrigMode	  "normal"
+  ExtModeTrigPort	  "1"
+  ExtModeTrigElement	  "any"
+  ExtModeTrigDuration	  1000
+  ExtModeTrigDurationFloating "auto"
+  ExtModeTrigHoldOff	  0
+  ExtModeTrigDelay	  0
+  ExtModeTrigDirection	  "rising"
+  ExtModeTrigLevel	  0
+  ExtModeArchiveMode	  "off"
+  ExtModeAutoIncOneShot	  off
+  ExtModeIncDirWhenArm	  off
+  ExtModeAddSuffixToVar	  off
+  ExtModeWriteAllDataToWs off
+  ExtModeArmWhenConnect	  on
+  ExtModeSkipDownloadWhenConnect off
+  ExtModeLogAll		  on
+  ExtModeAutoUpdateStatusClock off
+  BufferReuse		  on
+  ShowModelReferenceBlockVersion off
+  ShowModelReferenceBlockIO off
+  Array {
+    Type		    "Handle"
+    Dimension		    1
+    Simulink.ConfigSet {
+      $ObjectID		      1
+      Version		      "1.6.0"
+      Array {
+	Type			"Handle"
+	Dimension		10
+	Simulink.SolverCC {
+	  $ObjectID		  2
+	  Version		  "1.6.0"
+	  StartTime		  "0.0"
+	  StopTime		  "3"
+	  AbsTol		  "auto"
+	  FixedStep		  "auto"
+	  InitialStep		  "auto"
+	  MaxNumMinSteps	  "-1"
+	  MaxOrder		  5
+	  ZcThreshold		  "auto"
+	  ConsecutiveZCsStepRelTol "10*128*eps"
+	  MaxConsecutiveZCs	  "1000"
+	  ExtrapolationOrder	  4
+	  NumberNewtonIterations  1
+	  MaxStep		  "1e-2"
+	  MinStep		  "auto"
+	  MaxConsecutiveMinStep	  "1"
+	  RelTol		  "1e-3"
+	  SolverMode		  "Auto"
+	  Solver		  "ode15s"
+	  SolverName		  "ode15s"
+	  ShapePreserveControl	  "DisableAll"
+	  ZeroCrossControl	  "EnableAll"
+	  ZeroCrossAlgorithm	  "Nonadaptive"
+	  AlgebraicLoopSolver	  "TrustRegion"
+	  SolverResetMethod	  "Fast"
+	  PositivePriorityOrder	  off
+	  AutoInsertRateTranBlk	  off
+	  SampleTimeConstraint	  "Unconstrained"
+	  InsertRTBMode		  "Whenever possible"
+	}
+	Simulink.DataIOCC {
+	  $ObjectID		  3
+	  Version		  "1.6.0"
+	  Decimation		  "1"
+	  ExternalInput		  "[Col_trq, brkwy_trq]"
+	  FinalStateName	  "xFinal"
+	  InitialState		  "xInitial"
+	  LimitDataPoints	  on
+	  MaxDataPoints		  "1000"
+	  LoadExternalInput	  off
+	  LoadInitialState	  off
+	  SaveFinalState	  off
+	  SaveCompleteFinalSimState off
+	  SaveFormat		  "Array"
+	  SaveOutput		  on
+	  SaveState		  off
+	  SignalLogging		  on
+	  InspectSignalLogs	  off
+	  SaveTime		  off
+	  ReturnWorkspaceOutputs  off
+	  StateSaveName		  "xout"
+	  TimeSaveName		  "tout"
+	  OutputSaveName	  "yout"
+	  SignalLoggingName	  "logsout"
+	  OutputOption		  "RefineOutputTimes"
+	  OutputTimes		  "[]"
+	  ReturnWorkspaceOutputsName "out"
+	  Refine		  "1"
+	}
+	Simulink.OptimizationCC {
+	  $ObjectID		  4
+	  Version		  "1.6.0"
+	  Array {
+	    Type		    "Cell"
+	    Dimension		    4
+	    Cell		    "ZeroExternalMemoryAtStartup"
+	    Cell		    "ZeroInternalMemoryAtStartup"
+	    Cell		    "NoFixptDivByZeroProtection"
+	    Cell		    "OptimizeModelRefInitCode"
+	    PropName		    "DisabledProps"
+	  }
+	  BlockReduction	  on
+	  BooleanDataType	  on
+	  ConditionallyExecuteInputs on
+	  InlineParams		  off
+	  UseIntDivNetSlope	  off
+	  InlineInvariantSignals  off
+	  OptimizeBlockIOStorage  on
+	  BufferReuse		  on
+	  EnhancedBackFolding	  off
+	  StrengthReduction	  off
+	  EnforceIntegerDowncast  on
+	  ExpressionFolding	  on
+	  BooleansAsBitfields	  off
+	  EnableMemcpy		  on
+	  MemcpyThreshold	  64
+	  PassReuseOutputArgsAs	  "Structure reference"
+	  ExpressionDepthLimit	  2147483647
+	  FoldNonRolledExpr	  on
+	  LocalBlockOutputs	  on
+	  RollThreshold		  5
+	  SystemCodeInlineAuto	  off
+	  StateBitsets		  off
+	  DataBitsets		  off
+	  UseTempVars		  off
+	  ZeroExternalMemoryAtStartup on
+	  ZeroInternalMemoryAtStartup on
+	  InitFltsAndDblsToZero	  on
+	  NoFixptDivByZeroProtection off
+	  EfficientFloat2IntCast  off
+	  EfficientMapNaN2IntZero on
+	  OptimizeModelRefInitCode off
+	  LifeSpan		  "inf"
+	  BufferReusableBoundary  on
+	  SimCompilerOptimization "Off"
+	  AccelVerboseBuild	  off
+	}
+	Simulink.DebuggingCC {
+	  $ObjectID		  5
+	  Version		  "1.6.0"
+	  RTPrefix		  "error"
+	  ConsistencyChecking	  "none"
+	  ArrayBoundsChecking	  "none"
+	  SignalInfNanChecking	  "none"
+	  SignalRangeChecking	  "none"
+	  ReadBeforeWriteMsg	  "UseLocalSettings"
+	  WriteAfterWriteMsg	  "UseLocalSettings"
+	  WriteAfterReadMsg	  "UseLocalSettings"
+	  AlgebraicLoopMsg	  "warning"
+	  ArtificialAlgebraicLoopMsg "warning"
+	  SaveWithDisabledLinksMsg "warning"
+	  SaveWithParameterizedLinksMsg	"none"
+	  CheckSSInitialOutputMsg on
+	  UnderspecifiedInitializationDetection	"Classic"
+	  MergeDetectMultiDrivingBlocksExec "none"
+	  CheckExecutionContextPreStartOutputMsg off
+	  CheckExecutionContextRuntimeOutputMsg	off
+	  SignalResolutionControl "TryResolveAllWithWarning"
+	  BlockPriorityViolationMsg "warning"
+	  MinStepSizeMsg	  "warning"
+	  TimeAdjustmentMsg	  "none"
+	  MaxConsecutiveZCsMsg	  "error"
+	  SolverPrmCheckMsg	  "warning"
+	  InheritedTsInSrcMsg	  "warning"
+	  DiscreteInheritContinuousMsg "warning"
+	  MultiTaskDSMMsg	  "error"
+	  MultiTaskCondExecSysMsg "error"
+	  MultiTaskRateTransMsg	  "error"
+	  SingleTaskRateTransMsg  "none"
+	  TasksWithSamePriorityMsg "warning"
+	  SigSpecEnsureSampleTimeMsg "warning"
+	  CheckMatrixSingularityMsg "none"
+	  IntegerOverflowMsg	  "warning"
+	  Int32ToFloatConvMsg	  "warning"
+	  ParameterDowncastMsg	  "error"
+	  ParameterOverflowMsg	  "error"
+	  ParameterUnderflowMsg	  "none"
+	  ParameterPrecisionLossMsg "warning"
+	  ParameterTunabilityLossMsg "warning"
+	  FixptConstUnderflowMsg  "none"
+	  FixptConstOverflowMsg	  "none"
+	  FixptConstPrecisionLossMsg "none"
+	  UnderSpecifiedDataTypeMsg "none"
+	  UnnecessaryDatatypeConvMsg "none"
+	  VectorMatrixConversionMsg "none"
+	  InvalidFcnCallConnMsg	  "error"
+	  FcnCallInpInsideContextMsg "Use local settings"
+	  SignalLabelMismatchMsg  "none"
+	  UnconnectedInputMsg	  "warning"
+	  UnconnectedOutputMsg	  "warning"
+	  UnconnectedLineMsg	  "warning"
+	  SFcnCompatibilityMsg	  "none"
+	  UniqueDataStoreMsg	  "none"
+	  BusObjectLabelMismatch  "warning"
+	  RootOutportRequireBusObject "warning"
+	  AssertControl		  "UseLocalSettings"
+	  EnableOverflowDetection off
+	  ModelReferenceIOMsg	  "none"
+	  ModelReferenceVersionMismatchMessage "none"
+	  ModelReferenceIOMismatchMessage "none"
+	  ModelReferenceCSMismatchMessage "none"
+	  UnknownTsInhSupMsg	  "warning"
+	  ModelReferenceDataLoggingMessage "warning"
+	  ModelReferenceSymbolNameMessage "warning"
+	  ModelReferenceExtraNoncontSigs "error"
+	  StateNameClashWarn	  "warning"
+	  SimStateInterfaceChecksumMismatchMsg "warning"
+	  StrictBusMsg		  "Warning"
+	  LoggingUnavailableSignals "error"
+	  BlockIODiagnostic	  "none"
+	}
+	Simulink.HardwareCC {
+	  $ObjectID		  6
+	  Version		  "1.6.0"
+	  ProdBitPerChar	  8
+	  ProdBitPerShort	  16
+	  ProdBitPerInt		  32
+	  ProdBitPerLong	  32
+	  ProdIntDivRoundTo	  "Undefined"
+	  ProdEndianess		  "Unspecified"
+	  ProdWordSize		  32
+	  ProdShiftRightIntArith  on
+	  ProdHWDeviceType	  "32-bit Generic"
+	  TargetBitPerChar	  8
+	  TargetBitPerShort	  16
+	  TargetBitPerInt	  32
+	  TargetBitPerLong	  32
+	  TargetShiftRightIntArith on
+	  TargetIntDivRoundTo	  "Undefined"
+	  TargetEndianess	  "Unspecified"
+	  TargetWordSize	  32
+	  TargetTypeEmulationWarnSuppressLevel 0
+	  TargetPreprocMaxBitsSint 32
+	  TargetPreprocMaxBitsUint 32
+	  TargetHWDeviceType	  "Specified"
+	  TargetUnknown		  off
+	  ProdEqTarget		  on
+	}
+	Simulink.ModelReferenceCC {
+	  $ObjectID		  7
+	  Version		  "1.6.0"
+	  UpdateModelReferenceTargets "IfOutOfDateOrStructuralChange"
+	  CheckModelReferenceTargetMessage "error"
+	  ModelReferenceNumInstancesAllowed "Multi"
+	  ModelReferencePassRootInputsByReference on
+	  ModelReferenceMinAlgLoopOccurrences off
+	}
+	Simulink.SFSimCC {
+	  $ObjectID		  8
+	  Version		  "1.6.0"
+	  SFSimEnableDebug	  on
+	  SFSimOverflowDetection  on
+	  SFSimEcho		  on
+	  SimBlas		  on
+	  SimCtrlC		  on
+	  SimExtrinsic		  on
+	  SimIntegrity		  on
+	  SimUseLocalCustomCode	  off
+	  SimBuildMode		  "sf_incremental_build"
+	}
+	Simulink.RTWCC {
+	  $BackupClass		  "Simulink.RTWCC"
+	  $ObjectID		  9
+	  Version		  "1.6.0"
+	  Array {
+	    Type		    "Cell"
+	    Dimension		    1
+	    Cell		    "IncludeHyperlinkInReport"
+	    PropName		    "DisabledProps"
+	  }
+	  SystemTargetFile	  "grt.tlc"
+	  GenCodeOnly		  off
+	  MakeCommand		  "make_rtw"
+	  GenerateMakefile	  on
+	  TemplateMakefile	  "grt_default_tmf"
+	  GenerateReport	  off
+	  SaveLog		  off
+	  RTWVerbose		  on
+	  RetainRTWFile		  off
+	  ProfileTLC		  off
+	  TLCDebug		  off
+	  TLCCoverage		  off
+	  TLCAssert		  off
+	  ProcessScriptMode	  "Default"
+	  ConfigurationMode	  "Optimized"
+	  ConfigAtBuild		  off
+	  RTWUseLocalCustomCode	  off
+	  RTWUseSimCustomCode	  off
+	  IncludeHyperlinkInReport off
+	  LaunchReport		  off
+	  TargetLang		  "C"
+	  IncludeBusHierarchyInRTWFileBlockHierarchyMap	off
+	  IncludeERTFirstTime	  off
+	  GenerateTraceInfo	  off
+	  GenerateTraceReport	  off
+	  GenerateTraceReportSl	  off
+	  GenerateTraceReportSf	  off
+	  GenerateTraceReportEml  off
+	  GenerateCodeInfo	  off
+	  RTWCompilerOptimization "Off"
+	  CheckMdlBeforeBuild	  "Off"
+	  Array {
+	    Type		    "Handle"
+	    Dimension		    2
+	    Simulink.CodeAppCC {
+	      $ObjectID		      10
+	      Version		      "1.6.0"
+	      Array {
+		Type			"Cell"
+		Dimension		16
+		Cell			"IgnoreCustomStorageClasses"
+		Cell			"InsertBlockDesc"
+		Cell			"SFDataObjDesc"
+		Cell			"SimulinkDataObjDesc"
+		Cell			"DefineNamingRule"
+		Cell			"SignalNamingRule"
+		Cell			"ParamNamingRule"
+		Cell			"InlinedPrmAccess"
+		Cell			"CustomSymbolStr"
+		Cell			"CustomSymbolStrGlobalVar"
+		Cell			"CustomSymbolStrType"
+		Cell			"CustomSymbolStrField"
+		Cell			"CustomSymbolStrFcn"
+		Cell			"CustomSymbolStrBlkIO"
+		Cell			"CustomSymbolStrTmpVar"
+		Cell			"CustomSymbolStrMacro"
+		PropName		"DisabledProps"
+	      }
+	      ForceParamTrailComments off
+	      GenerateComments	      on
+	      IgnoreCustomStorageClasses on
+	      IgnoreTestpoints	      off
+	      IncHierarchyInIds	      off
+	      MaxIdLength	      31
+	      PreserveName	      off
+	      PreserveNameWithParent  off
+	      ShowEliminatedStatement off
+	      IncAutoGenComments      off
+	      SimulinkDataObjDesc     off
+	      SFDataObjDesc	      off
+	      IncDataTypeInIds	      off
+	      MangleLength	      1
+	      CustomSymbolStrGlobalVar "$R$N$M"
+	      CustomSymbolStrType     "$N$R$M"
+	      CustomSymbolStrField    "$N$M"
+	      CustomSymbolStrFcn      "$R$N$M$F"
+	      CustomSymbolStrFcnArg   "rt$I$N$M"
+	      CustomSymbolStrBlkIO    "rtb_$N$M"
+	      CustomSymbolStrTmpVar   "$N$M"
+	      CustomSymbolStrMacro    "$R$N$M"
+	      DefineNamingRule	      "None"
+	      ParamNamingRule	      "None"
+	      SignalNamingRule	      "None"
+	      InsertBlockDesc	      off
+	      SimulinkBlockComments   on
+	      EnableCustomComments    off
+	      InlinedPrmAccess	      "Literals"
+	      ReqsInCode	      off
+	      UseSimReservedNames     off
+	    }
+	    Simulink.GRTTargetCC {
+	      $BackupClass	      "Simulink.TargetCC"
+	      $ObjectID		      11
+	      Version		      "1.6.0"
+	      Array {
+		Type			"Cell"
+		Dimension		13
+		Cell			"IncludeMdlTerminateFcn"
+		Cell			"CombineOutputUpdateFcns"
+		Cell			"SuppressErrorStatus"
+		Cell			"ERTCustomFileBanners"
+		Cell			"GenerateSampleERTMain"
+		Cell			"GenerateTestInterfaces"
+		Cell			"MultiInstanceERTCode"
+		Cell			"PurelyIntegerCode"
+		Cell			"SupportNonFinite"
+		Cell			"SupportComplex"
+		Cell			"SupportAbsoluteTime"
+		Cell			"SupportContinuousTime"
+		Cell			"SupportNonInlinedSFcns"
+		PropName		"DisabledProps"
+	      }
+	      TargetFcnLib	      "ansi_tfl_tmw.mat"
+	      TargetLibSuffix	      ""
+	      TargetPreCompLibLocation ""
+	      TargetFunctionLibrary   "ANSI_C"
+	      UtilityFuncGeneration   "Auto"
+	      ERTMultiwordTypeDef     "System defined"
+	      ERTMultiwordLength      256
+	      MultiwordLength	      2048
+	      GenerateFullHeader      on
+	      GenerateSampleERTMain   off
+	      GenerateTestInterfaces  off
+	      IsPILTarget	      off
+	      ModelReferenceCompliant on
+	      ParMdlRefBuildCompliant on
+	      CompOptLevelCompliant   on
+	      IncludeMdlTerminateFcn  on
+	      GeneratePreprocessorConditionals "Disable all"
+	      CombineOutputUpdateFcns off
+	      SuppressErrorStatus     off
+	      ERTFirstTimeCompliant   off
+	      IncludeFileDelimiter    "Auto"
+	      ERTCustomFileBanners    off
+	      SupportAbsoluteTime     on
+	      LogVarNameModifier      "rt_"
+	      MatFileLogging	      on
+	      MultiInstanceERTCode    off
+	      SupportNonFinite	      on
+	      SupportComplex	      on
+	      PurelyIntegerCode	      off
+	      SupportContinuousTime   on
+	      SupportNonInlinedSFcns  on
+	      SupportVariableSizeSignals off
+	      EnableShiftOperators    on
+	      ParenthesesLevel	      "Nominal"
+	      PortableWordSizes	      off
+	      ModelStepFunctionPrototypeControlCompliant off
+	      CPPClassGenCompliant    off
+	      AutosarCompliant	      off
+	      UseMalloc		      off
+	      ExtMode		      off
+	      ExtModeStaticAlloc      off
+	      ExtModeTesting	      off
+	      ExtModeStaticAllocSize  1000000
+	      ExtModeTransport	      0
+	      ExtModeMexFile	      "ext_comm"
+	      ExtModeIntrfLevel	      "Level1"
+	      RTWCAPISignals	      off
+	      RTWCAPIParams	      off
+	      RTWCAPIStates	      off
+	      GenerateASAP2	      off
+	    }
+	    PropName		    "Components"
+	  }
+	}
+	SSC.SimscapeCC {
+	  $ObjectID		  12
+	  Version		  "1.0"
+	  Array {
+	    Type		    "Cell"
+	    Dimension		    1
+	    Cell		    "Name"
+	    PropName		    "DisabledProps"
+	  }
+	  Name			  "Simscape"
+	  EditingMode		  "Full"
+	  ExplicitSolverDiagnosticOptions "warning"
+	  InputDerivativeDiagnosticOptions "warning"
+	}
+	DES.SimEventsCC {
+	  $ObjectID		  13
+	  Version		  "1.6.0"
+	  Name			  "SimEvents"
+	  SimEventsActiveTab	  "0"
+	  propIdentEvents	  "0"
+	  propIdentEventSeed	  "123456789"
+	  propUnconnectedPorts	  "0"
+	  propMaxDesBlkSimulEvents "1000"
+	  propMaxDesMdlSimulEvents "100000"
+	  propDiagAttribOutput	  "1"
+	  propDiagFcnCallOutput	  "1"
+	  propDiagStatOutput	  "0"
+	  propDiagChangeAttrib	  "2"
+	  propRNGIdenticalSeeds	  "1"
+	}
+	PropName		"Components"
+      }
+      Name		      "Configuration"
+      CurrentDlgPage	      "Data Import//Export"
+      ConfigPrmDlgPosition    " [ 135, 34, 947, 584 ] "
+    }
+    PropName		    "ConfigurationSets"
+  }
+  Simulink.ConfigSet {
+    $PropName		    "ActiveConfigurationSet"
+    $ObjectID		    1
+  }
+  BlockDefaults {
+    ForegroundColor	    "black"
+    BackgroundColor	    "white"
+    DropShadow		    off
+    NamePlacement	    "normal"
+    FontName		    "Arial"
+    FontSize		    10
+    FontWeight		    "normal"
+    FontAngle		    "normal"
+    ShowName		    on
+    BlockRotation	    0
+    BlockMirror		    off
+  }
+  AnnotationDefaults {
+    HorizontalAlignment	    "center"
+    VerticalAlignment	    "middle"
+    ForegroundColor	    "black"
+    BackgroundColor	    "white"
+    DropShadow		    off
+    FontName		    "Courier"
+    FontSize		    10
+    FontWeight		    "normal"
+    FontAngle		    "normal"
+    UseDisplayTextAsClickCallback off
+  }
+  LineDefaults {
+    FontName		    "Courier"
+    FontSize		    9
+    FontWeight		    "normal"
+    FontAngle		    "normal"
+  }
+  BlockParameterDefaults {
+    Block {
+      BlockType		      Scope
+      ModelBased	      off
+      TickLabels	      "OneTimeTick"
+      ZoomMode		      "on"
+      Grid		      "on"
+      TimeRange		      "auto"
+      YMin		      "-5"
+      YMax		      "5"
+      SaveToWorkspace	      off
+      SaveName		      "ScopeData"
+      LimitDataPoints	      on
+      MaxDataPoints	      "5000"
+      Decimation	      "1"
+      SampleInput	      off
+      SampleTime	      "-1"
+    }
+  }
+  System {
+    Name		    "dc_motor_model"
+    Location		    [210, 358, 898, 690]
+    Open		    on
+    ModelBrowserVisibility  off
+    ModelBrowserWidth	    200
+    ScreenColor		    "white"
+    PaperOrientation	    "landscape"
+    PaperPositionMode	    "auto"
+    PaperType		    "usletter"
+    PaperUnits		    "inches"
+    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
+    TiledPageScale	    1
+    ShowPageBoundaries	    off
+    ZoomFactor		    "100"
+    ReportName		    "simulink-default.rpt"
+    SIDHighWatermark	    59
+    Block {
+      BlockType		      Reference
+      Name		      "24V"
+      SID		      1
+      Ports		      [0, 0, 0, 0, 0, 1, 1]
+      Position		      [201, 220, 229, 260]
+      BlockRotation	      270
+      BlockMirror	      on
+      LibraryVersion	      "1.1"
+      DialogController	      "NetworkEngine.DynNeDlgSource"
+      SourceBlock	      "fl_lib/Electrical/Electrical Sources/DC Voltage Source"
+      SourceType	      "DC Voltage Source"
+      ShowPortLabels	      "FromPortIcon"
+      SystemSampleTime	      "-1"
+      FunctionWithSeparateData off
+      RTWMemSecFuncInitTerm   "Inherit from model"
+      RTWMemSecFuncExecute    "Inherit from model"
+      RTWMemSecDataConstants  "Inherit from model"
+      RTWMemSecDataInternal   "Inherit from model"
+      RTWMemSecDataParameters "Inherit from model"
+      ClassName		      "dc_voltage_source"
+      SchemaVersion	      "1"
+      v0		      "24"
+      v0_unit		      "V"
+      i_Log		      "off"
+      v_Log		      "off"
+      LocalVarNames	      "|current|voltage|power"
+      LocalVarDescs	      "|Current (A)|Voltage (V)|Power (W)"
+      LocalVarLogging	      "[0 0 0]"
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "Current Sensor1"
+      SID		      38
+      Ports		      [0, 0, 0, 0, 0, 1, 2]
+      Position		      [250, 110, 290, 150]
+      LibraryVersion	      "1.1"
+      DialogController	      "NetworkEngine.DynNeDlgSource"
+      SourceBlock	      "fl_lib/Electrical/Electrical Sensors/Current Sensor"
+      SourceType	      "Current Sensor"
+      ShowPortLabels	      "FromPortIcon"
+      SystemSampleTime	      "-1"
+      FunctionWithSeparateData off
+      RTWMemSecFuncInitTerm   "Inherit from model"
+      RTWMemSecFuncExecute    "Inherit from model"
+      RTWMemSecDataConstants  "Inherit from model"
+      RTWMemSecDataInternal   "Inherit from model"
+      RTWMemSecDataParameters "Inherit from model"
+      ClassName		      "current"
+      SchemaVersion	      "1"
+      i1_Log		      "off"
+      v1_Log		      "off"
+      LocalVarNames	      "|i1|v1"
+      LocalVarDescs	      "|i1|v1"
+      LocalVarLogging	      "[0 0]"
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "DC Motor"
+      SID		      11
+      Ports		      [0, 0, 0, 0, 0, 2, 2]
+      Position		      [290, 185, 370, 240]
+      BlockRotation	      270
+      BlockMirror	      on
+      BackgroundColor	      "yellow"
+      LibraryVersion	      "1.1"
+      DialogController	      "NetworkEngine.DynNeDlgSource"
+      SourceBlock	      "elec_lib/Actuators & Drivers/DC Motor"
+      SourceType	      "DC Motor"
+      ShowPortLabels	      "FromPortIcon"
+      SystemSampleTime	      "-1"
+      FunctionWithSeparateData off
+      RTWMemSecFuncInitTerm   "Inherit from model"
+      RTWMemSecFuncExecute    "Inherit from model"
+      RTWMemSecDataConstants  "Inherit from model"
+      RTWMemSecDataInternal   "Inherit from model"
+      RTWMemSecDataParameters "Inherit from model"
+      ClassName		      "dc_motor"
+      SchemaVersion	      "1"
+      parameterization	      "1"
+      parameterization_unit   "1"
+      Ra		      "4.8"
+      Ra_unit		      "Ohm"
+      La		      "1600e-6"
+      La_unit		      "H"
+      emf_or_torque	      "2"
+      emf_or_torque_unit      "1"
+      Kv		      "0.0637"
+      Kv_unit		      "V/rpm"
+      Ki		      "0.0637"
+      Ki_unit		      "N*m/A"
+      T_stall		      "3e-3*4000/(2*pi*6.25)"
+      T_stall_unit	      "N*m"
+      w_max		      "3250"
+      w_max_unit	      "rpm"
+      w_rated		      "2375"
+      w_rated_unit	      "rpm"
+      P_rated		      "19"
+      P_rated_unit	      "W"
+      V_rated		      "24"
+      V_rated_unit	      "V"
+      J			      "2.5e-5"
+      J_unit		      "kg*m^2"
+      lam		      "1e-08"
+      lam_unit		      "N*m/(rad/s)"
+      speed0		      "0"
+      speed0_unit	      "rpm"
+      current_Log	      "off"
+      voltage_Log	      "off"
+      power_Log		      "off"
+      i2r_Log		      "off"
+      torque_Log	      "off"
+      speed_Log		      "off"
+      LocalVarNames	      "|current|voltage|power|i2r|torque|speed"
+      LocalVarDescs	      "|Current (A)|Voltage (V)|Power (W)|Electrical losses (W)|Torque (Nm)|Angular speed (rad/s)"
+      LocalVarLogging	      "[0 0 0 0 0 0]"
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "Electrical Reference1"
+      SID		      48
+      Ports		      [0, 0, 0, 0, 0, 1]
+      Position		      [297, 285, 323, 310]
+      BlockRotation	      270
+      BlockMirror	      on
+      ShowName		      off
+      LibraryVersion	      "1.1"
+      DialogController	      "NetworkEngine.DynNeDlgSource"
+      SourceBlock	      "fl_lib/Electrical/Electrical Elements/Electrical Reference"
+      SourceType	      "Electrical Reference"
+      ShowPortLabels	      "FromPortIcon"
+      SystemSampleTime	      "-1"
+      FunctionWithSeparateData off
+      RTWMemSecFuncInitTerm   "Inherit from model"
+      RTWMemSecFuncExecute    "Inherit from model"
+      RTWMemSecDataConstants  "Inherit from model"
+      RTWMemSecDataInternal   "Inherit from model"
+      RTWMemSecDataParameters "Inherit from model"
+      ClassName		      "reference_electrical"
+      SchemaVersion	      "1"
+      i_Log		      "off"
+      LocalVarNames	      "|i"
+      LocalVarDescs	      "|i"
+      LocalVarLogging	      "[]"
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "Electrical Reference2"
+      SID		      12
+      Ports		      [0, 0, 0, 0, 0, 1]
+      Position		      [202, 285, 228, 310]
+      BlockRotation	      270
+      BlockMirror	      on
+      ShowName		      off
+      LibraryVersion	      "1.1"
+      DialogController	      "NetworkEngine.DynNeDlgSource"
+      SourceBlock	      "fl_lib/Electrical/Electrical Elements/Electrical Reference"
+      SourceType	      "Electrical Reference"
+      ShowPortLabels	      "FromPortIcon"
+      SystemSampleTime	      "-1"
+      FunctionWithSeparateData off
+      RTWMemSecFuncInitTerm   "Inherit from model"
+      RTWMemSecFuncExecute    "Inherit from model"
+      RTWMemSecDataConstants  "Inherit from model"
+      RTWMemSecDataInternal   "Inherit from model"
+      RTWMemSecDataParameters "Inherit from model"
+      ClassName		      "reference_electrical"
+      SchemaVersion	      "1"
+      i_Log		      "off"
+      LocalVarNames	      "|i"
+      LocalVarDescs	      "|i"
+      LocalVarLogging	      "[]"
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "Friction"
+      SID		      13
+      Ports		      [0, 0, 0, 0, 0, 1, 1]
+      Position		      [430, 170, 470, 210]
+      BlockRotation	      270
+      BlockMirror	      on
+      NamePlacement	      "alternate"
+      LibraryVersion	      "1.1"
+      DialogController	      "NetworkEngine.DynNeDlgSource"
+      SourceBlock	      "fl_lib/Mechanical/Rotational Elements/Rotational Friction"
+      SourceType	      "Rotational Friction"
+      ShowPortLabels	      "FromPortIcon"
+      SystemSampleTime	      "-1"
+      FunctionWithSeparateData off
+      RTWMemSecFuncInitTerm   "Inherit from model"
+      RTWMemSecFuncExecute    "Inherit from model"
+      RTWMemSecDataConstants  "Inherit from model"
+      RTWMemSecDataInternal   "Inherit from model"
+      RTWMemSecDataParameters "Inherit from model"
+      ClassName		      "friction_rot"
+      SchemaVersion	      "1"
+      brkwy_trq		      "3.0e-2"
+      brkwy_trq_unit	      "N*m"
+      Col_trq		      "3.0e-2"
+      Col_trq_unit	      "N*m"
+      visc_coef		      "0"
+      visc_coef_unit	      "N*m/(rad/s)"
+      trans_coef	      "10"
+      trans_coef_unit	      "s/rad"
+      vel_thr		      "0.1"
+      vel_thr_unit	      "rad/s"
+      t_Log		      "off"
+      w_Log		      "off"
+      LocalVarNames	      "|friction_torque|rel_velocity|power"
+      LocalVarDescs	      "|Friction torque (N*m)|Relative velocity (rad/s)|Power (W)"
+      LocalVarLogging	      "[0 0 0]"
+    }
+    Block {
+      BlockType		      Scope
+      Name		      "I"
+      SID		      42
+      Ports		      [1]
+      Position		      [175, 74, 205, 106]
+      BlockMirror	      on
+      Floating		      off
+      Location		      [1, 48, 1367, 727]
+      Open		      off
+      NumInputPorts	      "1"
+      List {
+	ListType		AxesTitles
+	axes1			"%<SignalLabel>"
+      }
+      YMin		      "-100"
+      YMax		      "100"
+      DataFormat	      "StructureWithTime"
+      SampleTime	      "0"
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "Ideal Rotational\nMotion Sensor"
+      SID		      50
+      Ports		      [0, 0, 0, 0, 0, 1, 3]
+      Position		      [485, 155, 525, 195]
+      BlockRotation	      270
+      BlockMirror	      on
+      LibraryVersion	      "1.1"
+      DialogController	      "NetworkEngine.DynNeDlgSource"
+      SourceBlock	      "fl_lib/Mechanical/Mechanical Sensors/Ideal Rotational\nMotion Sensor"
+      SourceType	      "Ideal Rotational\nMotion Sensor"
+      ShowPortLabels	      "FromPortIcon"
+      SystemSampleTime	      "-1"
+      FunctionWithSeparateData off
+      RTWMemSecFuncInitTerm   "Inherit from model"
+      RTWMemSecFuncExecute    "Inherit from model"
+      RTWMemSecDataConstants  "Inherit from model"
+      RTWMemSecDataInternal   "Inherit from model"
+      RTWMemSecDataParameters "Inherit from model"
+      ClassName		      "sensor_rot_motion"
+      SchemaVersion	      "1"
+      offset		      "0"
+      offset_unit	      "rad"
+      w_Log		      "off"
+      t_Log		      "off"
+      phi_Log		      "off"
+      LocalVarNames	      "|w|t|phi"
+      LocalVarDescs	      "|w|t|phi"
+      LocalVarLogging	      "[]"
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "Mechanical\nRotational Reference"
+      SID		      22
+      Ports		      [0, 0, 0, 0, 0, 1]
+      Position		      [340, 275, 360, 295]
+      BlockRotation	      270
+      BlockMirror	      on
+      NamePlacement	      "alternate"
+      ShowName		      off
+      LibraryVersion	      "1.1"
+      DialogController	      "NetworkEngine.DynNeDlgSource"
+      SourceBlock	      "fl_lib/Mechanical/Rotational Elements/Mechanical\nRotational Reference"
+      SourceType	      "Mechanical\nRotational Reference"
+      ShowPortLabels	      "FromPortIcon"
+      SystemSampleTime	      "-1"
+      FunctionWithSeparateData off
+      RTWMemSecFuncInitTerm   "Inherit from model"
+      RTWMemSecFuncExecute    "Inherit from model"
+      RTWMemSecDataConstants  "Inherit from model"
+      RTWMemSecDataInternal   "Inherit from model"
+      RTWMemSecDataParameters "Inherit from model"
+      ClassName		      "reference_rot"
+      SchemaVersion	      "1"
+      t_Log		      "off"
+      LocalVarNames	      "|t"
+      LocalVarDescs	      "|t"
+      LocalVarLogging	      "[]"
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "Mechanical\nRotational Reference1"
+      SID		      51
+      Ports		      [0, 0, 0, 0, 0, 1]
+      Position		      [480, 215, 500, 235]
+      BlockRotation	      270
+      BlockMirror	      on
+      NamePlacement	      "alternate"
+      ShowName		      off
+      LibraryVersion	      "1.1"
+      DialogController	      "NetworkEngine.DynNeDlgSource"
+      SourceBlock	      "fl_lib/Mechanical/Rotational Elements/Mechanical\nRotational Reference"
+      SourceType	      "Mechanical\nRotational Reference"
+      ShowPortLabels	      "FromPortIcon"
+      SystemSampleTime	      "-1"
+      FunctionWithSeparateData off
+      RTWMemSecFuncInitTerm   "Inherit from model"
+      RTWMemSecFuncExecute    "Inherit from model"
+      RTWMemSecDataConstants  "Inherit from model"
+      RTWMemSecDataInternal   "Inherit from model"
+      RTWMemSecDataParameters "Inherit from model"
+      ClassName		      "reference_rot"
+      SchemaVersion	      "1"
+      t_Log		      "off"
+      LocalVarNames	      "|t"
+      LocalVarDescs	      "|t"
+      LocalVarLogging	      "[]"
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "PS-Simulink\nConverter 1"
+      SID		      46
+      Ports		      [0, 1, 0, 0, 0, 1]
+      Position		      [95, 185, 125, 215]
+      BlockMirror	      on
+      NamePlacement	      "alternate"
+      ShowName		      off
+      LibraryVersion	      "1.1"
+      DialogController	      "NetworkEngine.DynNeUtilDlgSource"
+      SourceBlock	      "nesl_utility/PS-Simulink\nConverter"
+      SourceType	      "PS-Simulink\nConverter"
+      ShowPortLabels	      "none"
+      SystemSampleTime	      "-1"
+      FunctionWithSeparateData off
+      RTWMemSecFuncInitTerm   "Inherit from model"
+      RTWMemSecFuncExecute    "Inherit from model"
+      RTWMemSecDataConstants  "Inherit from model"
+      RTWMemSecDataInternal   "Inherit from model"
+      RTWMemSecDataParameters "Inherit from model"
+      PhysicalDomain	      "network_engine_domain"
+      LeftPortType	      "input"
+      RightPortType	      "output"
+      SubClassName	      "ps_output"
+      Unit		      "V"
+      AffineConversion	      off
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "PS-Simulink\nConverter 2"
+      SID		      44
+      Ports		      [0, 1, 0, 0, 0, 1]
+      Position		      [260, 75, 290, 105]
+      BlockMirror	      on
+      NamePlacement	      "alternate"
+      ShowName		      off
+      LibraryVersion	      "1.1"
+      DialogController	      "NetworkEngine.DynNeUtilDlgSource"
+      SourceBlock	      "nesl_utility/PS-Simulink\nConverter"
+      SourceType	      "PS-Simulink\nConverter"
+      ShowPortLabels	      "none"
+      SystemSampleTime	      "-1"
+      FunctionWithSeparateData off
+      RTWMemSecFuncInitTerm   "Inherit from model"
+      RTWMemSecFuncExecute    "Inherit from model"
+      RTWMemSecDataConstants  "Inherit from model"
+      RTWMemSecDataInternal   "Inherit from model"
+      RTWMemSecDataParameters "Inherit from model"
+      PhysicalDomain	      "network_engine_domain"
+      LeftPortType	      "input"
+      RightPortType	      "output"
+      SubClassName	      "ps_output"
+      Unit		      "A"
+      AffineConversion	      off
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "PS-Simulink\nConverter 3"
+      SID		      52
+      Ports		      [0, 1, 0, 0, 0, 1]
+      Position		      [555, 210, 585, 240]
+      ShowName		      off
+      LibraryVersion	      "1.1"
+      DialogController	      "NetworkEngine.DynNeUtilDlgSource"
+      SourceBlock	      "nesl_utility/PS-Simulink\nConverter"
+      SourceType	      "PS-Simulink\nConverter"
+      ShowPortLabels	      "none"
+      SystemSampleTime	      "-1"
+      FunctionWithSeparateData off
+      RTWMemSecFuncInitTerm   "Inherit from model"
+      RTWMemSecFuncExecute    "Inherit from model"
+      RTWMemSecDataConstants  "Inherit from model"
+      RTWMemSecDataInternal   "Inherit from model"
+      RTWMemSecDataParameters "Inherit from model"
+      PhysicalDomain	      "network_engine_domain"
+      LeftPortType	      "input"
+      RightPortType	      "output"
+      SubClassName	      "ps_output"
+      Unit		      "rpm"
+      AffineConversion	      off
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "Resistor"
+      SID		      49
+      Ports		      [0, 0, 0, 0, 0, 1, 1]
+      Position		      [201, 170, 229, 210]
+      BlockRotation	      90
+      LibraryVersion	      "1.1"
+      DialogController	      "NetworkEngine.DynNeDlgSource"
+      SourceBlock	      "fl_lib/Electrical/Electrical Elements/Resistor"
+      SourceType	      "Resistor"
+      ShowPortLabels	      "FromPortIcon"
+      SystemSampleTime	      "-1"
+      FunctionWithSeparateData off
+      RTWMemSecFuncInitTerm   "Inherit from model"
+      RTWMemSecFuncExecute    "Inherit from model"
+      RTWMemSecDataConstants  "Inherit from model"
+      RTWMemSecDataInternal   "Inherit from model"
+      RTWMemSecDataParameters "Inherit from model"
+      ClassName		      "resistor"
+      SchemaVersion	      "1"
+      R			      "3"
+      R_unit		      "Ohm"
+      i_Log		      "off"
+      v_Log		      "off"
+      LocalVarNames	      "|i|v"
+      LocalVarDescs	      "|i|v"
+      LocalVarLogging	      "[0 0]"
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "Signal To\nWorkspace"
+      SID		      57
+      Ports		      [1]
+      Position		      [620, 238, 675, 272]
+      LibraryVersion	      "1.449"
+      SourceBlock	      "dspsnks4/Signal To\nWorkspace"
+      SourceType	      "Signal To Workspace"
+      ShowPortLabels	      "FromPortIcon"
+      SystemSampleTime	      "-1"
+      FunctionWithSeparateData off
+      RTWMemSecFuncInitTerm   "Inherit from model"
+      RTWMemSecFuncExecute    "Inherit from model"
+      RTWMemSecDataConstants  "Inherit from model"
+      RTWMemSecDataInternal   "Inherit from model"
+      RTWMemSecDataParameters "Inherit from model"
+      VariableName	      "rpm_motor"
+      MaxDataPoints	      "1"
+      Decimation	      "1"
+      FrameMode		      "Concatenate frames (2-D array)"
+      FixptAsFi		      off
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "Signal To\nWorkspace1"
+      SID		      58
+      Ports		      [1]
+      Position		      [165, 33, 220, 67]
+      BlockMirror	      on
+      NamePlacement	      "alternate"
+      LibraryVersion	      "1.449"
+      SourceBlock	      "dspsnks4/Signal To\nWorkspace"
+      SourceType	      "Signal To Workspace"
+      ShowPortLabels	      "FromPortIcon"
+      SystemSampleTime	      "-1"
+      FunctionWithSeparateData off
+      RTWMemSecFuncInitTerm   "Inherit from model"
+      RTWMemSecFuncExecute    "Inherit from model"
+      RTWMemSecDataConstants  "Inherit from model"
+      RTWMemSecDataInternal   "Inherit from model"
+      RTWMemSecDataParameters "Inherit from model"
+      VariableName	      "i_motor"
+      MaxDataPoints	      "1"
+      Decimation	      "1"
+      FrameMode		      "Concatenate frames (2-D array)"
+      FixptAsFi		      off
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "Signal To\nWorkspace2"
+      SID		      59
+      Ports		      [1]
+      Position		      [15, 263, 70, 297]
+      BlockMirror	      on
+      NamePlacement	      "alternate"
+      LibraryVersion	      "1.449"
+      SourceBlock	      "dspsnks4/Signal To\nWorkspace"
+      SourceType	      "Signal To Workspace"
+      ShowPortLabels	      "FromPortIcon"
+      SystemSampleTime	      "-1"
+      FunctionWithSeparateData off
+      RTWMemSecFuncInitTerm   "Inherit from model"
+      RTWMemSecFuncExecute    "Inherit from model"
+      RTWMemSecDataConstants  "Inherit from model"
+      RTWMemSecDataInternal   "Inherit from model"
+      RTWMemSecDataParameters "Inherit from model"
+      VariableName	      "v_motor"
+      MaxDataPoints	      "1"
+      Decimation	      "1"
+      FrameMode		      "Concatenate frames (2-D array)"
+      FixptAsFi		      off
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "Solver\nConfiguration"
+      SID		      25
+      Ports		      [0, 0, 0, 0, 0, 0, 1]
+      Position		      [350, 85, 395, 105]
+      LibraryVersion	      "1.1"
+      DialogController	      "NetworkEngine.DynNeUtilDlgSource"
+      SourceBlock	      "nesl_utility/Solver\nConfiguration"
+      SourceType	      "Solver\nConfiguration"
+      ShowPortLabels	      "none"
+      SystemSampleTime	      "-1"
+      FunctionWithSeparateData off
+      RTWMemSecFuncInitTerm   "Inherit from model"
+      RTWMemSecFuncExecute    "Inherit from model"
+      RTWMemSecDataConstants  "Inherit from model"
+      RTWMemSecDataInternal   "Inherit from model"
+      RTWMemSecDataParameters "Inherit from model"
+      PhysicalDomain	      "network_engine_domain"
+      LeftPortType	      "input"
+      RightPortType	      "generic"
+      SubClassName	      "solver"
+      Accelerate	      off
+      Profile		      off
+      Reg		      off
+      Der		      off
+      ResidualTolerance	      "1e-9"
+      MaxNonlinIter	      "12"
+      MaxModeIter	      "2"
+      DoFixedCost	      off
+      DoDC		      off
+      LinearAlgebra	      "Sparse"
+      LocalSolverSampleTime   ".001"
+      LocalSolverChoice	      "NE_BACKWARD_EULER_ADVANCER"
+      UseLocalSolver	      off
+    }
+    Block {
+      BlockType		      Scope
+      Name		      "Speed\n(rpm)"
+      SID		      26
+      Ports		      [1]
+      Position		      [635, 169, 665, 201]
+      ForegroundColor	      "blue"
+      Floating		      off
+      Location		      [5, 48, 1371, 727]
+      Open		      off
+      NumInputPorts	      "1"
+      List {
+	ListType		AxesTitles
+	axes1			"%<SignalLabel>"
+      }
+      YMin		      "-500"
+      YMax		      "4500"
+      SaveName		      "ScopeData3"
+      DataFormat	      "StructureWithTime"
+      LimitDataPoints	      off
+      SampleTime	      "0"
+    }
+    Block {
+      BlockType		      Scope
+      Name		      "V"
+      SID		      47
+      Ports		      [1]
+      Position		      [30, 184, 60, 216]
+      BlockMirror	      on
+      Floating		      off
+      Location		      [5, 48, 1371, 727]
+      Open		      off
+      NumInputPorts	      "1"
+      ZoomMode		      "yonly"
+      List {
+	ListType		AxesTitles
+	axes1			"%<SignalLabel>"
+      }
+      YMin		      "-100"
+      YMax		      "100"
+      SaveName		      "ScopeData1"
+      DataFormat	      "StructureWithTime"
+      SampleTime	      "0"
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "Voltage Sensor"
+      SID		      45
+      Ports		      [0, 0, 0, 0, 0, 1, 2]
+      Position		      [130, 145, 170, 185]
+      BlockRotation	      270
+      BlockMirror	      on
+      NamePlacement	      "alternate"
+      LibraryVersion	      "1.1"
+      DialogController	      "NetworkEngine.DynNeDlgSource"
+      SourceBlock	      "fl_lib/Electrical/Electrical Sensors/Voltage Sensor"
+      SourceType	      "Voltage Sensor"
+      ShowPortLabels	      "FromPortIcon"
+      SystemSampleTime	      "-1"
+      FunctionWithSeparateData off
+      RTWMemSecFuncInitTerm   "Inherit from model"
+      RTWMemSecFuncExecute    "Inherit from model"
+      RTWMemSecDataConstants  "Inherit from model"
+      RTWMemSecDataInternal   "Inherit from model"
+      RTWMemSecDataParameters "Inherit from model"
+      ClassName		      "voltage"
+      SchemaVersion	      "1"
+      i1_Log		      "off"
+      v1_Log		      "off"
+      LocalVarNames	      "|i1|v1"
+      LocalVarDescs	      "|i1|v1"
+      LocalVarLogging	      "[0 0]"
+    }
+    Line {
+      LineType		      "Connection"
+      SrcBlock		      "DC Motor"
+      SrcPort		      RConn2
+      Points		      [0, 0]
+      Branch {
+	ConnectType		"DEST_SRC"
+	DstBlock		"Mechanical\nRotational Reference"
+	DstPort			LConn1
+      }
+      Branch {
+	ConnectType		"DEST_SRC"
+	Points			[100, 0]
+	DstBlock		"Friction"
+	DstPort			RConn1
+      }
+    }
+    Line {
+      LineType		      "Connection"
+      Points		      [450, 140; 55, 0]
+      DstBlock		      "Ideal Rotational\nMotion Sensor"
+      DstPort		      LConn1
+      Branch {
+	ConnectType		"SRC_DEST"
+	SrcBlock		"DC Motor"
+	SrcPort			LConn2
+	Points			[0, -30; 100, 0]
+      }
+      Branch {
+	ConnectType		"SRC_SRC"
+	DstBlock		"Friction"
+	DstPort			LConn1
+      }
+      Branch {
+	ConnectType		"SRC_DEST"
+	SrcBlock		"Solver\nConfiguration"
+	SrcPort			RConn1
+	Points			[40, 0; 0, 45]
+      }
+    }
+    Line {
+      LineType		      "Connection"
+      SrcBlock		      "Current Sensor1"
+      SrcPort		      RConn2
+      Points		      [5, 0]
+      DstBlock		      "DC Motor"
+      DstPort		      LConn1
+    }
+    Line {
+      LineType		      "Connection"
+      SrcBlock		      "Current Sensor1"
+      SrcPort		      RConn1
+      DstBlock		      "PS-Simulink\nConverter 2"
+      DstPort		      LConn1
+    }
+    Line {
+      SrcBlock		      "PS-Simulink\nConverter 2"
+      SrcPort		      1
+      Points		      [-15, 0]
+      Branch {
+	DstBlock		"I"
+	DstPort			1
+      }
+      Branch {
+	Points			[0, -40]
+	DstBlock		"Signal To\nWorkspace1"
+	DstPort			1
+      }
+    }
+    Line {
+      LineType		      "Connection"
+      SrcBlock		      "Voltage Sensor"
+      SrcPort		      LConn1
+      Points		      [65, 0]
+      Branch {
+	ConnectType		"DEST_SRC"
+	DstBlock		"Current Sensor1"
+	DstPort			LConn1
+      }
+      Branch {
+	ConnectType		"DEST_SRC"
+	DstBlock		"Resistor"
+	DstPort			LConn1
+      }
+    }
+    Line {
+      SrcBlock		      "PS-Simulink\nConverter 1"
+      SrcPort		      1
+      Points		      [-5, 0]
+      Branch {
+	DstBlock		"V"
+	DstPort			1
+      }
+      Branch {
+	DstBlock		"Signal To\nWorkspace2"
+	DstPort			1
+      }
+    }
+    Line {
+      LineType		      "Connection"
+      Labels		      [1, 0]
+      SrcBlock		      "24V"
+      SrcPort		      RConn1
+      Points		      [0, -10]
+      Branch {
+	ConnectType		"DEST_SRC"
+	Points			[-55, 0]
+	DstBlock		"Voltage Sensor"
+	DstPort			RConn2
+      }
+      Branch {
+	ConnectType		"DEST_SRC"
+	DstBlock		"Electrical Reference2"
+	DstPort			LConn1
+      }
+    }
+    Line {
+      LineType		      "Connection"
+      SrcBlock		      "Electrical Reference1"
+      SrcPort		      LConn1
+      DstBlock		      "DC Motor"
+      DstPort		      RConn1
+    }
+    Line {
+      LineType		      "Connection"
+      SrcBlock		      "Voltage Sensor"
+      SrcPort		      RConn1
+      DstBlock		      "PS-Simulink\nConverter 1"
+      DstPort		      LConn1
+    }
+    Line {
+      LineType		      "Connection"
+      SrcBlock		      "Resistor"
+      SrcPort		      RConn1
+      DstBlock		      "24V"
+      DstPort		      LConn1
+    }
+    Line {
+      LineType		      "Connection"
+      SrcBlock		      "Ideal Rotational\nMotion Sensor"
+      SrcPort		      RConn2
+      Points		      [0, 15]
+      DstBlock		      "PS-Simulink\nConverter 3"
+      DstPort		      LConn1
+    }
+    Line {
+      LineType		      "Connection"
+      SrcBlock		      "Ideal Rotational\nMotion Sensor"
+      SrcPort		      RConn1
+      DstBlock		      "Mechanical\nRotational Reference1"
+      DstPort		      LConn1
+    }
+    Line {
+      SrcBlock		      "PS-Simulink\nConverter 3"
+      SrcPort		      1
+      Points		      [10, 0]
+      Branch {
+	Points			[0, -40]
+	DstBlock		"Speed\n(rpm)"
+	DstPort			1
+      }
+      Branch {
+	Points			[0, 30]
+	DstBlock		"Signal To\nWorkspace"
+	DstPort			1
+      }
+    }
+  }
+}

@@ -1,0 +1,25 @@
+%% Image Data
+image='ln.bmp';%8x7
+i=0;
+%t=zeros(10,10*6);
+for n=0:9
+    image(1)=char(n+48);    
+    for l=1:6
+        image(2)=char(l+96);%abcdef
+        i=i+1;
+        p(:,i)=double(reshape(imread(image),56,1));
+        t(1,i)=double(n);
+        %t(n+1,i)=double(n);
+    end
+end
+clear image i n l
+%% Backpropagation Learning
+net=newff(minmax(p),[6,,1],{'tansig','tansig','purelin'},'trainlm');
+
+net.trainParam.show = 500;
+net.trainParam.epochs = 2000;
+net.trainParam.goal = 1e-99;
+net.trainParam.min_grad = 1e-99;
+net.trainParam.lr = 0.05;
+
+net=train(net,p,t);

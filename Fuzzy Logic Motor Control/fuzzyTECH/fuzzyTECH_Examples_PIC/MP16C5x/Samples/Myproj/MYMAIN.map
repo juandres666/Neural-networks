@@ -1,0 +1,119 @@
+MPLINK 4.34, Linker
+Linker Map File - Created Sat Nov 28 18:01:00 2009
+
+                                 Section Info
+                  Section       Type    Address   Location Size(Bytes)
+                ---------  ---------  ---------  ---------  ---------
+                   .org_0       code   0x000000    program   0x000000
+                   .org_2       code   0x000000    program   0x000076
+                   .org_1       code   0x000080    program   0x00000a
+                   .org_3       code   0x000085    program   0x0001e2
+                   .org_4       code   0x0001ff    program   0x000002
+
+
+
+                              Program Memory Usage 
+                               Start         End      
+                           ---------   ---------      
+                            0x000000    0x00003a      
+                            0x000080    0x000175      
+                            0x0001ff    0x0001ff      
+            306 out of 517 program addresses used, program memory utilization is 59%
+
+
+
+                              Symbols - Sorted by Name
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                      Min   0x000092    program     static D:\Myproj\Min.asm        
+                       as   0x000141    program     static D:\Myproj\FLMSS.ASM      
+                case_fire   0x000173    program     static D:\Myproj\MYMAIN.ASM     
+             case_no_fire   0x000175    program     static D:\Myproj\MYMAIN.ASM     
+                cmp_flmss   0x000139    program     static D:\Myproj\FLMSS.ASM      
+                  cmp_min   0x0000a1    program     static D:\Myproj\Min.asm        
+                      com   0x0000c4    program     static D:\Myproj\com.asm        
+                 comp_min   0x0000af    program     static D:\Myproj\Min.asm        
+              compute_com   0x0000f5    program     static D:\Myproj\com.asm        
+                  div16_8   0x0000fa    program     static D:\Myproj\div16_8.asm    
+                  divLoop   0x0000fd    program     static D:\Myproj\div16_8.asm    
+                       ds   0x000153    program     static D:\Myproj\FLMSS.ASM      
+                  end_com   0x00010f    program     static D:\Myproj\com.asm        
+               end_myproj   0x000170    program     static D:\Myproj\myproj.asm     
+                    flmss   0x00003a    program     static D:\Myproj\myproj.asm     
+                   flmss_   0x00012b    program     static D:\Myproj\FLMSS.ASM      
+              flmss_start   0x00012b    program     static D:\Myproj\FLMSS.ASM      
+                 initloop   0x000118    program     static D:\Myproj\myproj.asm     
+               initmyproj   0x000038    program     static D:\Myproj\myproj.asm     
+              initmyproj_   0x000114    program     static D:\Myproj\myproj.asm     
+               ishift_com   0x0000e7    program     static D:\Myproj\com.asm        
+              ishift_com2   0x0000ed    program     static D:\Myproj\com.asm        
+                main_loop   0x000081    program     static D:\Myproj\MYMAIN.ASM     
+                  maxdone   0x000166    program     static D:\Myproj\FLMSS.ASM      
+                  mindone   0x000168    program     static D:\Myproj\FLMSS.ASM      
+                   mpy8_8   0x000039    program     static D:\Myproj\myproj.asm     
+                  mpy8_8_   0x00011d    program     static D:\Myproj\MPY8_8.ASM     
+                  mpyLoop   0x000122    program     static D:\Myproj\MPY8_8.ASM     
+                   mymain   0x000080    program     static D:\Myproj\MYMAIN.ASM     
+                   myproj   0x000085    program     static D:\Myproj\myproj.asm     
+              next_in_min   0x0000ad    program     static D:\Myproj\Min.asm        
+             next_out_min   0x0000bb    program     static D:\Myproj\Min.asm        
+                 no_carry   0x000106    program     static D:\Myproj\div16_8.asm    
+                   no_sub   0x000109    program     static D:\Myproj\div16_8.asm    
+                ready_com   0x0000e4    program     static D:\Myproj\com.asm        
+             rout_div_com   0x0000fa    program     static D:\Myproj\com.asm        
+                      rt0   0x00001d    program     static D:\Myproj\myproj.asm     
+                start_com   0x0000c9    program     static D:\Myproj\com.asm        
+           start_rule_min   0x000097    program     static D:\Myproj\Min.asm        
+                    store   0x000169    program     static D:\Myproj\FLMSS.ASM      
+                     tpts   0x000000    program     static D:\Myproj\myproj.asm     
+                     xcom   0x000019    program     static D:\Myproj\myproj.asm     
+
+
+
+                              Symbols - Sorted by Address
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                     tpts   0x000000    program     static D:\Myproj\myproj.asm     
+                     xcom   0x000019    program     static D:\Myproj\myproj.asm     
+                      rt0   0x00001d    program     static D:\Myproj\myproj.asm     
+               initmyproj   0x000038    program     static D:\Myproj\myproj.asm     
+                   mpy8_8   0x000039    program     static D:\Myproj\myproj.asm     
+                    flmss   0x00003a    program     static D:\Myproj\myproj.asm     
+                   mymain   0x000080    program     static D:\Myproj\MYMAIN.ASM     
+                main_loop   0x000081    program     static D:\Myproj\MYMAIN.ASM     
+                   myproj   0x000085    program     static D:\Myproj\myproj.asm     
+                      Min   0x000092    program     static D:\Myproj\Min.asm        
+           start_rule_min   0x000097    program     static D:\Myproj\Min.asm        
+                  cmp_min   0x0000a1    program     static D:\Myproj\Min.asm        
+              next_in_min   0x0000ad    program     static D:\Myproj\Min.asm        
+                 comp_min   0x0000af    program     static D:\Myproj\Min.asm        
+             next_out_min   0x0000bb    program     static D:\Myproj\Min.asm        
+                      com   0x0000c4    program     static D:\Myproj\com.asm        
+                start_com   0x0000c9    program     static D:\Myproj\com.asm        
+                ready_com   0x0000e4    program     static D:\Myproj\com.asm        
+               ishift_com   0x0000e7    program     static D:\Myproj\com.asm        
+              ishift_com2   0x0000ed    program     static D:\Myproj\com.asm        
+              compute_com   0x0000f5    program     static D:\Myproj\com.asm        
+                  div16_8   0x0000fa    program     static D:\Myproj\div16_8.asm    
+             rout_div_com   0x0000fa    program     static D:\Myproj\com.asm        
+                  divLoop   0x0000fd    program     static D:\Myproj\div16_8.asm    
+                 no_carry   0x000106    program     static D:\Myproj\div16_8.asm    
+                   no_sub   0x000109    program     static D:\Myproj\div16_8.asm    
+                  end_com   0x00010f    program     static D:\Myproj\com.asm        
+              initmyproj_   0x000114    program     static D:\Myproj\myproj.asm     
+                 initloop   0x000118    program     static D:\Myproj\myproj.asm     
+                  mpy8_8_   0x00011d    program     static D:\Myproj\MPY8_8.ASM     
+                  mpyLoop   0x000122    program     static D:\Myproj\MPY8_8.ASM     
+              flmss_start   0x00012b    program     static D:\Myproj\FLMSS.ASM      
+                   flmss_   0x00012b    program     static D:\Myproj\FLMSS.ASM      
+                cmp_flmss   0x000139    program     static D:\Myproj\FLMSS.ASM      
+                       as   0x000141    program     static D:\Myproj\FLMSS.ASM      
+                       ds   0x000153    program     static D:\Myproj\FLMSS.ASM      
+                  maxdone   0x000166    program     static D:\Myproj\FLMSS.ASM      
+                  mindone   0x000168    program     static D:\Myproj\FLMSS.ASM      
+                    store   0x000169    program     static D:\Myproj\FLMSS.ASM      
+               end_myproj   0x000170    program     static D:\Myproj\myproj.asm     
+                case_fire   0x000173    program     static D:\Myproj\MYMAIN.ASM     
+             case_no_fire   0x000175    program     static D:\Myproj\MYMAIN.ASM     
+
+

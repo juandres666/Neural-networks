@@ -1,0 +1,118 @@
+MPLINK 4.34, Linker
+Linker Map File - Created Mon Nov 30 05:13:19 2009
+
+                                 Section Info
+                  Section       Type    Address   Location Size(Bytes)
+                ---------  ---------  ---------  ---------  ---------
+                   .org_0       code   0x000000    program   0x000000
+                   .org_2       code   0x000000    program   0x000002
+                   .org_1       code   0x000100    program   0x000420
+    .config_2007_MYMAIN.O       code   0x002007    program   0x000002
+
+
+
+                              Program Memory Usage 
+                               Start         End      
+                           ---------   ---------      
+                            0x000000    0x000000      
+                            0x000100    0x00030f      
+                            0x002007    0x002007      
+            530 out of 2117 program addresses used, program memory utilization is 25%
+
+
+
+                              Symbols - Sorted by Name
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                      Min   0x000284    program     static D:\FC_Motor_16f871(4a)\Min.asm
+                     STOP   0x00010e    program     static D:\FC_Motor_16f871(4a)\MYMAIN.ASM
+                    STOP1   0x000114    program     static D:\FC_Motor_16f871(4a)\MYMAIN.ASM
+                       as   0x00024c    program     static D:\FC_Motor_16f871(4a)\FLMSS.ASM
+                case_fire   0x00011c    program     static D:\FC_Motor_16f871(4a)\MYMAIN.ASM
+             case_no_fire   0x00011f    program     static D:\FC_Motor_16f871(4a)\MYMAIN.ASM
+                cmp_flmss   0x000243    program     static D:\FC_Motor_16f871(4a)\FLMSS.ASM
+                  cmp_min   0x000290    program     static D:\FC_Motor_16f871(4a)\Min.asm
+                      com   0x0002b4    program     static D:\FC_Motor_16f871(4a)\COM.ASM
+                 comp_min   0x00029d    program     static D:\FC_Motor_16f871(4a)\Min.asm
+              compute_com   0x0002e5    program     static D:\FC_Motor_16f871(4a)\COM.ASM
+                  div16_8   0x0002fc    program     static D:\FC_Motor_16f871(4a)\DIV16_8.ASM
+                  divLoop   0x0002ff    program     static D:\FC_Motor_16f871(4a)\DIV16_8.ASM
+                       ds   0x00025f    program     static D:\FC_Motor_16f871(4a)\FLMSS.ASM
+                    flmss   0x000233    program     static D:\FC_Motor_16f871(4a)\FLMSS.ASM
+              flmss_start   0x000233    program     static D:\FC_Motor_16f871(4a)\FLMSS.ASM
+                 initloop   0x000209    program     static D:\FC_Motor_16f871(4a)\MOTORCON.asm
+             initmotorcon   0x000205    program     static D:\FC_Motor_16f871(4a)\MOTORCON.asm
+               ishift_com   0x0002d7    program     static D:\FC_Motor_16f871(4a)\COM.ASM
+              ishift_com2   0x0002dd    program     static D:\FC_Motor_16f871(4a)\COM.ASM
+                main_loop   0x00010c    program     static D:\FC_Motor_16f871(4a)\MYMAIN.ASM
+                  maxdone   0x000273    program     static D:\FC_Motor_16f871(4a)\FLMSS.ASM
+                  mindone   0x000275    program     static D:\FC_Motor_16f871(4a)\FLMSS.ASM
+                 motorcon   0x00020e    program     static D:\FC_Motor_16f871(4a)\MOTORCON.asm
+                   mpy8_8   0x0002ee    program     static D:\FC_Motor_16f871(4a)\MPY8_8.ASM
+                  mpyLoop   0x0002f3    program     static D:\FC_Motor_16f871(4a)\MPY8_8.ASM
+                   mymain   0x000100    program     static D:\FC_Motor_16f871(4a)\MYMAIN.ASM
+              next_in_min   0x00029b    program     static D:\FC_Motor_16f871(4a)\Min.asm
+             next_out_min   0x0002a8    program     static D:\FC_Motor_16f871(4a)\Min.asm
+                 no_carry   0x000308    program     static D:\FC_Motor_16f871(4a)\DIV16_8.ASM
+                   no_sub   0x00030b    program     static D:\FC_Motor_16f871(4a)\DIV16_8.ASM
+                ready_com   0x0002d4    program     static D:\FC_Motor_16f871(4a)\COM.ASM
+             rout_div_com   0x0002ea    program     static D:\FC_Motor_16f871(4a)\COM.ASM
+                      rt0   0x000155    program     static D:\FC_Motor_16f871(4a)\MOTORCON.asm
+               rt_routine   0x00027d    program     static D:\FC_Motor_16f871(4a)\Min.asm
+                start_com   0x0002b9    program     static D:\FC_Motor_16f871(4a)\COM.ASM
+           start_rule_min   0x000288    program     static D:\FC_Motor_16f871(4a)\Min.asm
+                    store   0x000276    program     static D:\FC_Motor_16f871(4a)\FLMSS.ASM
+                     tpts   0x000120    program     static D:\FC_Motor_16f871(4a)\MOTORCON.asm
+             tpts_routine   0x00022c    program     static D:\FC_Motor_16f871(4a)\FLMSS.ASM
+                     xcom   0x000150    program     static D:\FC_Motor_16f871(4a)\MOTORCON.asm
+             xcom_routine   0x0002ad    program     static D:\FC_Motor_16f871(4a)\COM.ASM
+
+
+
+                              Symbols - Sorted by Address
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                   mymain   0x000100    program     static D:\FC_Motor_16f871(4a)\MYMAIN.ASM
+                main_loop   0x00010c    program     static D:\FC_Motor_16f871(4a)\MYMAIN.ASM
+                     STOP   0x00010e    program     static D:\FC_Motor_16f871(4a)\MYMAIN.ASM
+                    STOP1   0x000114    program     static D:\FC_Motor_16f871(4a)\MYMAIN.ASM
+                case_fire   0x00011c    program     static D:\FC_Motor_16f871(4a)\MYMAIN.ASM
+             case_no_fire   0x00011f    program     static D:\FC_Motor_16f871(4a)\MYMAIN.ASM
+                     tpts   0x000120    program     static D:\FC_Motor_16f871(4a)\MOTORCON.asm
+                     xcom   0x000150    program     static D:\FC_Motor_16f871(4a)\MOTORCON.asm
+                      rt0   0x000155    program     static D:\FC_Motor_16f871(4a)\MOTORCON.asm
+             initmotorcon   0x000205    program     static D:\FC_Motor_16f871(4a)\MOTORCON.asm
+                 initloop   0x000209    program     static D:\FC_Motor_16f871(4a)\MOTORCON.asm
+                 motorcon   0x00020e    program     static D:\FC_Motor_16f871(4a)\MOTORCON.asm
+             tpts_routine   0x00022c    program     static D:\FC_Motor_16f871(4a)\FLMSS.ASM
+                    flmss   0x000233    program     static D:\FC_Motor_16f871(4a)\FLMSS.ASM
+              flmss_start   0x000233    program     static D:\FC_Motor_16f871(4a)\FLMSS.ASM
+                cmp_flmss   0x000243    program     static D:\FC_Motor_16f871(4a)\FLMSS.ASM
+                       as   0x00024c    program     static D:\FC_Motor_16f871(4a)\FLMSS.ASM
+                       ds   0x00025f    program     static D:\FC_Motor_16f871(4a)\FLMSS.ASM
+                  maxdone   0x000273    program     static D:\FC_Motor_16f871(4a)\FLMSS.ASM
+                  mindone   0x000275    program     static D:\FC_Motor_16f871(4a)\FLMSS.ASM
+                    store   0x000276    program     static D:\FC_Motor_16f871(4a)\FLMSS.ASM
+               rt_routine   0x00027d    program     static D:\FC_Motor_16f871(4a)\Min.asm
+                      Min   0x000284    program     static D:\FC_Motor_16f871(4a)\Min.asm
+           start_rule_min   0x000288    program     static D:\FC_Motor_16f871(4a)\Min.asm
+                  cmp_min   0x000290    program     static D:\FC_Motor_16f871(4a)\Min.asm
+              next_in_min   0x00029b    program     static D:\FC_Motor_16f871(4a)\Min.asm
+                 comp_min   0x00029d    program     static D:\FC_Motor_16f871(4a)\Min.asm
+             next_out_min   0x0002a8    program     static D:\FC_Motor_16f871(4a)\Min.asm
+             xcom_routine   0x0002ad    program     static D:\FC_Motor_16f871(4a)\COM.ASM
+                      com   0x0002b4    program     static D:\FC_Motor_16f871(4a)\COM.ASM
+                start_com   0x0002b9    program     static D:\FC_Motor_16f871(4a)\COM.ASM
+                ready_com   0x0002d4    program     static D:\FC_Motor_16f871(4a)\COM.ASM
+               ishift_com   0x0002d7    program     static D:\FC_Motor_16f871(4a)\COM.ASM
+              ishift_com2   0x0002dd    program     static D:\FC_Motor_16f871(4a)\COM.ASM
+              compute_com   0x0002e5    program     static D:\FC_Motor_16f871(4a)\COM.ASM
+             rout_div_com   0x0002ea    program     static D:\FC_Motor_16f871(4a)\COM.ASM
+                   mpy8_8   0x0002ee    program     static D:\FC_Motor_16f871(4a)\MPY8_8.ASM
+                  mpyLoop   0x0002f3    program     static D:\FC_Motor_16f871(4a)\MPY8_8.ASM
+                  div16_8   0x0002fc    program     static D:\FC_Motor_16f871(4a)\DIV16_8.ASM
+                  divLoop   0x0002ff    program     static D:\FC_Motor_16f871(4a)\DIV16_8.ASM
+                 no_carry   0x000308    program     static D:\FC_Motor_16f871(4a)\DIV16_8.ASM
+                   no_sub   0x00030b    program     static D:\FC_Motor_16f871(4a)\DIV16_8.ASM
+
+

@@ -1,0 +1,16 @@
+clc, close all;
+red=newp([-5 5;-5 5],1)
+p = [-5 -5 5 5;-5 5 -5 5]
+t=[0 0 0 1]
+a=sim(red,p)
+red=train(red,p,t);
+peso=red.iw{1}
+bias=red.b{1}
+sim(red,p)
+p=[-4 -4 4 4;-4 4 -3 4]
+sim(red,p)
+p=[-5 -5 4 5;-4 4 -5 4]
+sim(red,p)
+hold on
+plotpc(red.iw{1,1},red.b{1})
+plotpv(p,t)
